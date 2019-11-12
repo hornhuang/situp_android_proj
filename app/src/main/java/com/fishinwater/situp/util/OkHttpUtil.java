@@ -1,5 +1,6 @@
 package com.fishinwater.situp.util;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.fishinwater.situp.callback.MyBitmapCallback;
@@ -21,7 +22,7 @@ import okhttp3.Response;
  */
 public class OkHttpUtil {
 
-    private final String TAG = "OkHttpUtil";
+    private static final String TAG = "OkHttpUtil";
 
     // ----------------------------- POST -----------------------------
 
@@ -35,7 +36,7 @@ public class OkHttpUtil {
      * @return
      * @throws IOException
      */
-    public static String post(String url, String json, OkHttpClient client) throws IOException {
+    public static String uploadStringByPOST(String url, String json, OkHttpClient client) throws IOException {
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder()
                 .url(url)
@@ -49,12 +50,10 @@ public class OkHttpUtil {
     /**
      * 使用 ok_http_Utils 获得请求数据
      */
-    public void postDataByOkhttpUtils(MyStringCallback callback)
+    public static void getDataByPOST(String url, MyStringCallback callback)
     {
-        String url = "http://www.zhiyun-tech.com/App/Rider-M/changelog-zh.txt";
-        url="http://47.107.132.227/api/mysql/postifo?id=5&name=%22qaz%22&age=%22666%22";
         OkHttpUtils
-                .get()
+                .post()
                 .url(url)
                 .id(100)
                 .build()
@@ -69,7 +68,7 @@ public class OkHttpUtil {
      * @return
      * @throws IOException
      */
-    private String getUrl(String url, OkHttpClient client) throws IOException {//OkHttp方法不能再主线程中执行/*所以要间隔子线程，并在其中执行*/
+    public static String getStringByGET(String url, OkHttpClient client) throws IOException {//OkHttp方法不能再主线程中执行/*所以要间隔子线程，并在其中执行*/
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -82,23 +81,20 @@ public class OkHttpUtil {
     /**
      * 使用 ok_http_Utils 获得请求数据
      */
-    public void getDataByOkhttpUtils()
+    public static void getDataByGET(String url, MyStringCallback callback)
     {
-        String url = "http://www.391k.com/api/xapi.ashx/info.json?key=bd_hyrzjjfb4modhj&size=10&page=1";
-        url="http://47.107.132.227/";
         OkHttpUtils
                 .get()
                 .url(url)
                 .build()
-                .execute(new MyStringCallback());
+                .execute(callback);
     }
 
     /**
      * 使用 okHttp_Utils 下载大文件
      */
-    public void downloadFile(MyFileCallBack fileCallBack)
+    public static void getHugefileByGET(String url, MyFileCallBack fileCallBack)
     {
-        String url = "https://github.com/hongyangAndroid/okhttp-utils/blob/master/okhttputils-2_4_1.jar?raw=true";
         OkHttpUtils
                 .get()
                 .url(url)
@@ -110,14 +106,12 @@ public class OkHttpUtil {
      * 使用 okHttp 获取图片
      * @param
      */
-    public void getImage(MyBitmapCallback bitmapCallback)
+    public static void getImageByGET(String url, Context context, MyBitmapCallback bitmapCallback)
     {
-        // mText.setText("");
-        String url = "http://47.107.132.227/form";
         OkHttpUtils
                 .get()
                 .url(url)
-                .tag(this)
+                .tag(context)
                 .build()
                 //连接超时
                 .connTimeOut(20000)

@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import com.fishinwater.situp.R;
 import com.fishinwater.situp.login.model.ResistViewModel;
 
+/**
+ *
+ */
 public class ResistFragment extends Fragment {
 
     private ResistViewModel mViewModel;

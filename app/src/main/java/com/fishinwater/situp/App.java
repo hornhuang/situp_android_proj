@@ -1,6 +1,7 @@
 package com.fishinwater.situp;
 
 import android.app.Application;
+import android.content.Context;
 
 /**
  * @author fishinwater-1999
@@ -8,8 +9,17 @@ import android.app.Application;
  */
 public class App extends Application {
 
+    private static App instance;
+
     @Override
     public void onCreate() {
-        super.onCreate();
+        if (instance == null) {
+            super.onCreate();
+            instance = this;
+        }
+    }
+
+    public static Context getInstance() {
+        return instance;
     }
 }

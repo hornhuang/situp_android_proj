@@ -6,7 +6,7 @@ package com.fishinwater.situp.login.model;
  */
 public interface IBaseLog {
 
-    void login( IOnResultListener logResultListener );
+    void login(String userAccount, String mPassword, IOnResultListener logResultListener );
 
     void logout( IOnResultListener logResultListener );
 
