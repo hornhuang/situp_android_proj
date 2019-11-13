@@ -1,14 +1,12 @@
 package com.fishinwater.situp.login.presenter;
 
-import com.fishinwater.situp.login.fragment.IBaseFragment;
-import com.fishinwater.situp.login.model.IOnResultListener;
-import com.fishinwater.situp.login.view.IBaseLogActivity;
+import com.fishinwater.situp.login.fragment.IOnResultListener;
 
 /**
  * @author fishinwater-1999
  * @version 2019-11-12
  */
-public interface IBasePresenter<V extends IBaseFragment> {
+public interface IBasePresenter<V extends IOnResultListener> {
 
     /**
      * 绑定
@@ -18,7 +16,7 @@ public interface IBasePresenter<V extends IBaseFragment> {
 
     void detachView();
 
-    void resister(IOnResultListener resultListener);
+    void resister(String userName, String userPassword, IOnResultListener resultListener);
 
     void login(String userName, String userPassword, IOnResultListener resultListener);
 

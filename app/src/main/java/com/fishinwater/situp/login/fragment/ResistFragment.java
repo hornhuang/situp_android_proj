@@ -1,42 +1,99 @@
 package com.fishinwater.situp.login.fragment;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.fishinwater.situp.R;
-import com.fishinwater.situp.login.model.ResistViewModel;
+import com.fishinwater.situp.login.model.IBaseLog;
+import com.fishinwater.situp.login.model.LogViewModel;
+import com.fishinwater.situp.login.presenter.IBasePresenter;
+import com.fishinwater.situp.login.presenter.LogPresenter;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
+ * 注册界面
  *
+ * @author fishinwater-1999
  */
-public class ResistFragment extends Fragment {
+public class ResistFragment extends BaseFragment implements IOnResultListener {
 
-    private ResistViewModel mViewModel;
+    private IBaseLog mViewModel;
 
-    public static ResistFragment newInstance() {
-        return new ResistFragment();
-    }
+    @BindView(R.id.user_account)
+    EditText mAccountEdit;
+
+    @BindView(R.id.user_password)
+    EditText mPasswordEdit;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.resist_fragment, container, false);
+        View view = inflater.inflate(R.layout.resist_fragment, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(ResistViewModel.class);
-        // TODO: Use the ViewModel
+        if (mViewModel == null) {
+
+            mViewModel = new LogViewModel();
+        }
     }
 
+    @Override
+    public IOnResultListener createView() {
+        return this;
+    }
+
+    @Override
+    public IBasePresenter createProsenter() {
+        if (mViewModel == null) {
+            mViewModel = new LogViewModel();
+        }
+        return new LogPresenter(mViewModel);
+    }
+
+    @Override
+    public void onSucceed(String response) {
+        Toast.makeText(getActivity(), response+"注册成功", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onFailed(Exception error) {
+        Toast.makeText(getActivity(), "失败，原因：" + error.getMessage(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onNameWrong() {
+        Toast.makeText(getActivity(), "用户名错误", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onPasswordWrong() {
+        Toast.makeText(getActivity(), "密码错误", Toast.LENGTH_LONG).show();
+    }
+
+    @OnClick(R.id.resist)
+    public void resist(View v) {
+        getPresenter().resister(mAccountEdit.getText().toString(), mPasswordEdit.getText().toString(), this);
+    }
+
+    @Override
+    public void onDestroy() {
+        onDetach();
+        super.onDestroy();
+    }
 }

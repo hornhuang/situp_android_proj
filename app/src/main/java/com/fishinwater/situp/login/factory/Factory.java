@@ -3,7 +3,9 @@ package com.fishinwater.situp.login.factory;
 import androidx.annotation.NonNull;
 
 import com.fishinwater.situp.application.App;
-import com.fishinwater.situp.login.fragment.IBaseFragment;
+import com.fishinwater.situp.login.fragment.IOnResultListener;
+import com.fishinwater.situp.login.model.IBaseLog;
+import com.fishinwater.situp.login.presenter.IBasePresenter;
 import com.fishinwater.situp.util.PropertiesUtil;
 
 /**
@@ -17,9 +19,9 @@ public class Factory {
      * @param classPathname
      * @return
      */
-    public static IBaseFragment getFragmentInstance(@NonNull String classPathname) {
+    public static IOnResultListener getFragmentInstance(@NonNull String classPathname) {
         try {
-            return (IBaseFragment) Class.forName((String)PropertiesUtil.loadAssetsProperties(App.getInstance(),
+            return (IOnResultListener) Class.forName((String)PropertiesUtil.loadAssetsProperties(App.getInstance(),
                     PropertiesUtil.CLASS_PROPERTIES)
                     .get(classPathname))
                     .newInstance();
@@ -34,9 +36,9 @@ public class Factory {
      * @param classPathname
      * @return
      */
-    public static IBaseFragment getPresenterInstance(String classPathname) {
+    public static IBasePresenter getPresenterInstance(String classPathname) {
         try {
-            return (IBaseFragment) Class.forName((String)PropertiesUtil.loadAssetsProperties(App.getInstance(),
+            return (IBasePresenter) Class.forName((String)PropertiesUtil.loadAssetsProperties(App.getInstance(),
                     PropertiesUtil.CLASS_PROPERTIES)
                     .get(classPathname))
                     .newInstance();
@@ -51,9 +53,9 @@ public class Factory {
      * @param classPathname
      * @return
      */
-    public static IBaseFragment getActivityInstance(String classPathname) {
+    public static IOnResultListener getActivityInstance(String classPathname) {
         try {
-            return (IBaseFragment) Class.forName((String)PropertiesUtil.loadAssetsProperties(App.getInstance(),
+            return (IOnResultListener) Class.forName((String)PropertiesUtil.loadAssetsProperties(App.getInstance(),
                     PropertiesUtil.CLASS_PROPERTIES)
                     .get(classPathname))
                     .newInstance();
@@ -68,9 +70,9 @@ public class Factory {
      * @param classPathname
      * @return
      */
-    public static IBaseFragment getModelInstance(String classPathname) {
+    public static IBaseLog getModelInstance(String classPathname) {
         try {
-            return (IBaseFragment) Class.forName((String)PropertiesUtil.loadAssetsProperties(App.getInstance(),
+            return (IBaseLog) Class.forName((String)PropertiesUtil.loadAssetsProperties(App.getInstance(),
                     PropertiesUtil.CLASS_PROPERTIES)
                     .get(classPathname))
                     .newInstance();

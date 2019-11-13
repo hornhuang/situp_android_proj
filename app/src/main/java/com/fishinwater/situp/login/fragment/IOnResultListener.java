@@ -1,4 +1,6 @@
-package com.fishinwater.situp.login.model;
+package com.fishinwater.situp.login.fragment;
+
+import com.zhy.http.okhttp.callback.StringCallback;
 
 /**
  * @author fishinwater-1999
@@ -6,7 +8,7 @@ package com.fishinwater.situp.login.model;
  */
 public interface IOnResultListener {
 
-    void onSucceed();
+    void onSucceed(String response);
 
     void onFailed(Exception error);
 

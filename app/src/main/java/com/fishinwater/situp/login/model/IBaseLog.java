@@ -1,5 +1,7 @@
 package com.fishinwater.situp.login.model;
 
+import com.fishinwater.situp.login.fragment.IOnResultListener;
+
 /**
  * @author fishinwater-1999
  * @version 2019-11-12
@@ -8,8 +10,8 @@ public interface IBaseLog {
 
     void login(String userAccount, String mPassword, IOnResultListener logResultListener );
 
-    void logout( IOnResultListener logResultListener );
+    void resist(String userAccount, String mPassword, IOnResultListener logResultListener );
 
-    boolean isLogged();
+    void logout( IOnResultListener logResultListener );
 
 }
