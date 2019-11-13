@@ -2,7 +2,7 @@ package com.fishinwater.situp.login.factory;
 
 import androidx.annotation.NonNull;
 
-import com.fishinwater.situp.App;
+import com.fishinwater.situp.application.App;
 import com.fishinwater.situp.login.fragment.IBaseFragment;
 import com.fishinwater.situp.util.PropertiesUtil;
 

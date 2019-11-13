@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +24,15 @@ import com.fishinwater.situp.login.presenter.IBasePresenter;
 import com.fishinwater.situp.login.presenter.LogPresenter;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * @author fishinwater-1999
  */
 public class LoginFragment extends BaseFragment implements IBaseFragment, IOnResultListener {
+
+    private static final String TAG = "LoginFragment";
 
     @BindView(R.id.user_account)
     EditText mAccountEdit;
@@ -45,19 +49,22 @@ public class LoginFragment extends BaseFragment implements IBaseFragment, IOnRes
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.login_fragment, container, false);
+        View view = inflater.inflate(R.layout.login_fragment, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (mLogViewModel == null) {
-            mLogViewModel = ViewModelProviders.of(this).get(LogViewModel.class);
+            mLogViewModel = new LogViewModel();
         }
     }
 
     @OnClick(R.id.login)
     public void login(View view) {
+        mAccountEdit.setText("sfdsdfadfhhfkhsj");
         login(mAccountEdit.getText().toString(), mPasswordEdit.getText().toString());
     }
 
@@ -69,7 +76,7 @@ public class LoginFragment extends BaseFragment implements IBaseFragment, IOnRes
     @Override
     public IBasePresenter createProsenter() {
         if (mLogViewModel == null) {
-            mLogViewModel = ViewModelProviders.of(this).get(LogViewModel.class);
+            mLogViewModel = new LogViewModel();
         }
         return new LogPresenter(mLogViewModel);
     }
@@ -86,22 +93,26 @@ public class LoginFragment extends BaseFragment implements IBaseFragment, IOnRes
 
     @Override
     public void onSucceed() {
+        Log.d(TAG,"onSucceed");
         Toast.makeText(getActivity(), "succeed", Toast.LENGTH_LONG).show();
         getActivity().finish();
     }
 
     @Override
     public void onFailed(Exception error) {
+        Log.d(TAG,"onFailed");
         Toast.makeText(getActivity(), "onFailed", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onNameWrong() {
+        Log.d(TAG,"onNameWrong");
         Toast.makeText(getActivity(), "onNameWrong", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onPasswordWrong() {
+        Log.d(TAG,"onPasswordWrong");
         Toast.makeText(getActivity(), "onPasswordWrong", Toast.LENGTH_LONG).show();
     }
 

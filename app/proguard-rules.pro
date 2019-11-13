@@ -177,24 +177,7 @@
 -keep class java.lang.invoke.** {*;}
 -dontwarn java.lang.invoke.**
 
-#高徳地图
-#3D 地图
--keepclass com.amap.api.mapcore.**{*;}
--keepclass com.amap.api.maps.**{*;}
--keepclass com.autonavi.amap.mapcore.*{*;}
-#定位
--keepclass com.amap.api.location.**{*;}
--keepclass com.loc.**{*;}
--keepclass com.amap.api.fence.**{*;}
--keepclass com.autonavi.aps.amapapi.model.**{*;}
-# 搜索
--keepclass com.amap.api.services.**{*;}
-# 2D地图
--keepclass com.amap.api.maps2d.**{*;}
--keepclass com.amap.api.mapcore2d.**{*;}
-# 导航
--keepclass com.amap.api.navi.**{*;}
--keepclass com.autonavi.**{*;}
+
 
 
 #ButterKnife

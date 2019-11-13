@@ -26,7 +26,7 @@ public class LogActivity extends AppCompatActivity implements IBaseLogActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
         ButterKnife.bind(this);
-        replaceFragment((Fragment) Factory.getFragmentInstance("loginfragment"));
+        replaceFragment(new LoginFragment());
     }
 
     @Override

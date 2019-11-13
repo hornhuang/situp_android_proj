@@ -24,6 +24,7 @@ public class LogViewModel extends ViewModel implements IBaseLog{
         }catch (Exception e) {
             e.printStackTrace();
         }
+        logResultListener.onSucceed();
     }
 
     @Override

@@ -13,7 +13,7 @@ public class LogPresenter extends BasePresenter<IBaseFragment> {
 
     private IBaseLog logViewModel;
 
-    public LogPresenter(LogViewModel logViewModel) {
+    public LogPresenter(IBaseLog logViewModel) {
         this.logViewModel = logViewModel;
     }
 
