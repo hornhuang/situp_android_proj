@@ -70,10 +70,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         // 初始化 patch 文件路径
-        mPatchDir = getExternalCacheDir().getAbsolutePath() + "apatch";
+        mPatchDir = getExternalCacheDir().getAbsolutePath() + "/apatch/";
         // 创建文件夹，调用之后会在手机 /cache 下生成 /apatch 文件夹
         File file = new File(mPatchDir);
-        if (file == null || file.exists()) {
+        if (file == null || !file.exists()) {
             file.mkdir();
         }
 
