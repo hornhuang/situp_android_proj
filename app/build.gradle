@@ -1,5 +1,10 @@
 apply plugin: 'com.android.application'
 
+def javaVersion = JavaVersion.VERSION_1_8
+// ${buildDir} 代表 app/module 下的 build 文件夹
+// 如果创建成功的话，会直接在 build 目录下，创建一个 bakApk 文件夹，然后春芳我们的 oldApk
+def backPath = file("${buildDir}/bakApk")
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -8,13 +13,13 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
         // 签名打包
         release {
-            storeFile file("fiw.jks")
+            storeFile file("release.keystore")
             storePassword "123456"
             keyAlias "fiw"
             keyPassword "123456"
@@ -22,7 +27,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -46,7 +51,13 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     // AndFix 热修复
-    implementation 'com.alipay.euler:andfix:0.5.0@aar'
+    // implementation 'com.alipay.euler:andfix:0.5.0@aar'
+    // Tinker 热修复
+    // Tinker 的注解库  在生成 application 时使用     /* provided 库： 1. 只参与编译 2. 不参与打包 3. 从而减少 Apk 包的体积 */
+    compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}")
+    annotationProcessor("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}")
+    // tinker 的核心 SDK 库                         /* compile 作用：1. 不仅在编译时去使用。 2. 而且会把库打包到 apk 中 */
+    implementation("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}")
     // OkHttp-Utils
     implementation 'com.zhy:okhttputils:2.6.2'
     // OkHttp3
@@ -57,4 +68,70 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
     // Gson 服务器数据交互
     implementation 'com.google.code.gson:gson:2.8.6'
+    // Tinker 支持分包
+    implementation 'com.android.support:multidex:1.0.3'
+}
+
+// Tinker 只是在修改 APK bug 时才使用的，平时调试程序时并不需要
+// 所以我们设置一个'开关'，来控制 Tinker 的使用
+ext {
+    tinkerEnable = true
+    tinkerOldApkPath = "${backPath}/"
+    // tinkerID 与应用的 versionName 的值一样
+    tinkerID = "1.0.0"
+    // 下面两个，生成 apk 时会生成对应文件，然后在 '/' 后加上文件名即可
+    tinkerApplyMappingPath = "${bakPath}/"
+    tinkerApplyResourceMappingPath = "${bakPath}/"
+}
+
+def buildWithTinker() {
+    return ext.tinkerEnable
+}
+
+def getOldApkPath() {
+    return ext.tinkerOldApkPath
+}
+
+def getApplyMappingPath() {
+    return ext.tinkerApplyMappingPath
+}
+
+def getApplyResourceMappingPath() {
+    return ext.tinkerApplyResourceMappingPath
+}
+
+def getTinkerIdValue() {
+    return ext.tinkerID
+}
+
+if(buildWithTinker()) {
+    // 启用 Tinker
+    apply plugin: 'com.tencent.tinker.patch'
+
+    // 配置 Tinker 中的参数
+    tinkerPatch {
+        // 以方法形式配置，方便修改
+        // 指定 old apk 文件路径
+        oldApk = getOldApkPath()
+        // 在生成 patch 时，如果 Tinker 发出 warning 说明代码有问题
+        // 如果这里为 false ，则 tinker 发出 warring 后 tinker 自动结束
+        ignoreWarning = false
+        // 是否签名，需要使用，防止 patch 被人篡改
+        useSigh = true
+        // 指定是否启用 Tinker
+        tinkerEnable = buildWithTinker();
+
+        buildConfig {
+            // 传入 old.apk 打包时使用的混淆文件
+            // 因为 patch 也是需要混淆的
+            applyMapping = getApplyMappingPath()
+            // 指定 old.apk 使用的资源文件
+            applyResourceMapping = getApplyResourceMappingPath()
+            // 配置 TinkerID
+            tinkerId = getTinkerIdValue()
+            // 一般设为 false 他是在 app 使用 dex 时进行的一些操作
+            // 如果为 true 则会根据 dex 的分包，动态的生成 patch
+            keepDexApply = false
+        }
+    }
 }

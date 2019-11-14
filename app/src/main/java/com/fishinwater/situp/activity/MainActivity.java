@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fishinwater.situp.R;
-import com.fishinwater.situp.andfix.AndFixPatchManager;
 import com.fishinwater.situp.callback.MyStringCallback;
 import com.fishinwater.situp.classes.UserBean;
 import com.fishinwater.situp.login.view.LogActivity;
+import com.fishinwater.situp.tinker.TinkerManager;
+import com.fishinwater.situp.util.BugFixText;
 import com.fishinwater.situp.util.OkHttpUtil;
 import com.fishinwater.situp.util.PropertiesUtil;
 import com.google.gson.Gson;
@@ -41,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 服务器 测试
      */
-    private final String URL = "http://192.168.0.103///SitUp/LoginServlet";
+    private final String URL = "http://192.168.0.103/SitUp/LoginServlet";
 
     /**
      * Patch 文件，即补丁文件
      * 文件路径
      */
-    private final String FILE_END = ".apatch";
+    private final String FILE_END = ".apk";
 
     /**
      * Patch 文件存放路径
@@ -70,11 +72,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         // 初始化 patch 文件路径
-        mPatchDir = getExternalCacheDir().getAbsolutePath() + "/apatch/";
-        // 创建文件夹，调用之后会在手机 /cache 下生成 /apatch 文件夹
+        mPatchDir = getExternalCacheDir().getAbsolutePath() + "/tpatch/";
+        // 创建文件夹，调用之后会在手机 /cache 下生成 /tpatch 文件夹
         File file = new File(mPatchDir);
-        if (file == null || !file.exists()) {
-            file.mkdir();
+        if (!file.exists()) {
+            if (!file.mkdir()){
+                Log.d(TAG, "build failed");
+            }
         }
 
 //        startActivity(new Intent(this, LogActivity.class));
@@ -87,24 +91,24 @@ public class MainActivity extends AppCompatActivity {
      */
     @OnClick(R.id.download)
     public void createBug(View view) {
-        String s = null;
-        s.length();
+        Toast.makeText(this, "This is Bug String : " + BugFixText.BugString(), Toast.LENGTH_LONG).show();
     }
 
     /**
-     * 模拟 修复 Bug
-     * @param view
+     *
+     * @param v
      */
-    public void fixBug(View view) {
-        // 使用 AndFix 需要生成 "带签名" 的 apk ，签名方法详见 "app.gradle" 中
-        AndFixPatchManager.getInstance().addPatch(getPatchPath());
+    @OnClick(R.id.fix)
+    public void loadPatch(View v) {
+        TinkerManager.loadPatch(getPackageCodePath());
+        Toast.makeText(this, "已修复 Bug -> 文件存在：" + new File(getPatchName()).exists(), Toast.LENGTH_LONG).show();
     }
 
     /**
      * 构造 Patch 文件名
      */
-    private String getPatchPath() {
-        return mPatchDir.concat("mainActivity").concat(FILE_END);
+    private String getPatchName() {
+        return mPatchDir.concat("situp").concat(FILE_END);
     }
 
 
