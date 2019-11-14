@@ -27,9 +27,4 @@
         android:onClick="loadPatch"
         android:text="fix"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="asdayjdausdgyugyuguigugjuGuiguiguiguig异鬼谷鬼规格 i 个iuUii UI 与语言 cvc" />
-
 </LinearLayout>
