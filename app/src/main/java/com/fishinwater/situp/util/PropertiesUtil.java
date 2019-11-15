@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
 
+import com.fishinwater.situp.TinkerApplicationLike;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -30,12 +32,12 @@ public class PropertiesUtil {
      * 获得后调用范例 String IP = Utils.getNetConfigProperties().getProperty("IP");
      * @return Properties
      */
-    public static Properties loadAssetsProperties(Context context, String arg) {
+    public static Properties loadAssetsProperties(String arg) {
         Properties prop = null;
         prop = new Properties();
         //first load default properties
         try {
-            prop.load(context.getAssets().open(arg));
+            prop.load(TinkerApplicationLike.getInstance().getApplication().getApplicationContext().getAssets().open(arg));
         } catch (IOException e) {
             e.printStackTrace();
         }

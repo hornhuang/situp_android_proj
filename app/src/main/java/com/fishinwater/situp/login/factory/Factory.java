@@ -5,7 +5,6 @@ import androidx.annotation.NonNull;
 import com.fishinwater.situp.login.fragment.IOnResultListener;
 import com.fishinwater.situp.login.model.IBaseLog;
 import com.fishinwater.situp.login.presenter.IBasePresenter;
-import com.fishinwater.situp.tinker.CustomTinkerLike;
 import com.fishinwater.situp.util.PropertiesUtil;
 
 /**
@@ -21,7 +20,7 @@ public class Factory {
      */
     public static IOnResultListener getFragmentInstance(@NonNull String classPathname) {
         try {
-            return (IOnResultListener) Class.forName((String)PropertiesUtil.loadAssetsProperties(CustomTinkerLike.getInstance(),
+            return (IOnResultListener) Class.forName((String)PropertiesUtil.loadAssetsProperties(
                     PropertiesUtil.CLASS_PROPERTIES)
                     .get(classPathname))
                     .newInstance();
@@ -38,7 +37,7 @@ public class Factory {
      */
     public static IBasePresenter getPresenterInstance(String classPathname) {
         try {
-            return (IBasePresenter) Class.forName((String)PropertiesUtil.loadAssetsProperties(CustomTinkerLike.getInstance(),
+            return (IBasePresenter) Class.forName((String)PropertiesUtil.loadAssetsProperties(
                     PropertiesUtil.CLASS_PROPERTIES)
                     .get(classPathname))
                     .newInstance();
@@ -55,7 +54,7 @@ public class Factory {
      */
     public static IOnResultListener getActivityInstance(String classPathname) {
         try {
-            return (IOnResultListener) Class.forName((String)PropertiesUtil.loadAssetsProperties(CustomTinkerLike.getInstance(),
+            return (IOnResultListener) Class.forName((String)PropertiesUtil.loadAssetsProperties(
                     PropertiesUtil.CLASS_PROPERTIES)
                     .get(classPathname))
                     .newInstance();
@@ -72,7 +71,7 @@ public class Factory {
      */
     public static IBaseLog getModelInstance(String classPathname) {
         try {
-            return (IBaseLog) Class.forName((String)PropertiesUtil.loadAssetsProperties(CustomTinkerLike.getInstance(),
+            return (IBaseLog) Class.forName((String)PropertiesUtil.loadAssetsProperties(
                     PropertiesUtil.CLASS_PROPERTIES)
                     .get(classPathname))
                     .newInstance();

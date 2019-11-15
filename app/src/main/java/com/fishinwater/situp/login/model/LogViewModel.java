@@ -19,7 +19,7 @@ public class LogViewModel extends ViewModel implements IBaseLog{
     private final String LOG_IN_URL = "http://192.168.0.103/SitUp/LoginServlet";
 
     @Override
-    public void login(String userAccount, String mPassword, IOnResultListener logResultListener) {
+    public void login(String userAccount, String mPassword, final IOnResultListener logResultListener) {
         OkHttpUtil.sendDataByFormPOST(LOG_IN_URL,
                 userAccount,
                 mPassword,
@@ -38,7 +38,7 @@ public class LogViewModel extends ViewModel implements IBaseLog{
     }
 
     @Override
-    public void resist(String userAccount, String mPassword, IOnResultListener logResultListener) {
+    public void resist(String userAccount, String mPassword, final IOnResultListener logResultListener) {
         OkHttpUtil.sendDataByFormPOST(LOG_IN_URL,
                 userAccount,
                 mPassword,

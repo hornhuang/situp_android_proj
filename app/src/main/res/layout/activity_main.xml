@@ -7,24 +7,10 @@
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
-    <TextView
-        android:id="@+id/result_text"
+    <Button
+        android:id="@+id/btn"
+        android:text="点击按钮"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <Button
-        android:id="@+id/download"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="createBug"
-        android:text="download"/>
-
-    <Button
-        android:id="@+id/fix"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="loadPatch"
-        android:text="fix"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
