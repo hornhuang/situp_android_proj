@@ -7,11 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
 import com.fishinwater.situp.R;
-import com.fishinwater.situp.login.factory.Factory;
-import com.fishinwater.situp.login.fragment.BaseFragment;
 import com.fishinwater.situp.login.fragment.LoginFragment;
-import com.fishinwater.situp.login.fragment.ResistFragment;
-import com.fishinwater.situp.login.presenter.BasePresenter;
 
 import butterknife.ButterKnife;
 

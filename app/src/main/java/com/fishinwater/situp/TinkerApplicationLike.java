@@ -18,14 +18,18 @@ import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
 
 /**
+ * application类名。只能用字符串，这个MyApplication文件是不存在的，但可以在AndroidManifest.xml的application标签上使用（name）
+ *
  * Created by leo
  * on 2019/9/11.
  */
 @SuppressWarnings("unused")
-@DefaultLifeCycle(application = ".MyApplication",// application类名。只能用字符串，这个MyApplication文件是不存在的，但可以在AndroidManifest.xml的application标签上使用（name）
+@DefaultLifeCycle(application = ".MyApplication",
         flags = ShareConstants.TINKER_ENABLE_ALL,// tinkerFlags
-        loaderClass = "com.tencent.tinker.loader.TinkerLoader",//loaderClassName, 我们这里使用默认即可!（可不写）
-        loadVerifyFlag = false)//tinkerLoadVerifyFlag
+        // loaderClassName, 我们这里使用默认即可!（可不写）
+        loaderClass = "com.tencent.tinker.loader.TinkerLoader",
+        //tinkerLoadVerifyFlag
+        loadVerifyFlag = false)
 public class TinkerApplicationLike extends DefaultApplicationLike {
 
     private static final String TAG = "Tinker.SampleApplicationLike";

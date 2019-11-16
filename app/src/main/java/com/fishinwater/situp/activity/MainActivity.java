@@ -1,65 +1,101 @@
 package com.fishinwater.situp.activity;
 
-import android.Manifest;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.fishinwater.situp.R;
-import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.tencent.tinker.lib.tinker.TinkerInstaller;
+import com.fishinwater.situp.util.DataGeneratorUtil;
+import com.google.android.material.tabs.TabLayout;
 
-import java.io.File;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-import io.reactivex.functions.Consumer;
-
+/**
+ * 主页
+ *
+ * @author fishinwater-1999
+ */
 public class MainActivity extends AppCompatActivity {
 
-    private RxPermissions rxPermissions;
+    private final String TAG = "MainActivity";
+
+    private Fragment[] fragments;
+
+    @BindView(R.id.bottom_tab_layout)
+    public TabLayout mTabLayount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        rxPermissions = new RxPermissions(this);
-        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
-            @Override
-            public void accept(Boolean aBoolean) throws Exception {
-                if (aBoolean) {
+        ButterKnife.bind(this);
+        iniView();
+    }
 
-                    //        patch_signed_7zip.apk
-                    String path = "/sdcard/Tinker/";
-                    File dir = new File(path);
-                    if (!dir.exists()) {
-                        dir.mkdirs();
-                    }
-
-                    File file = new File(path, "patch_signed_7zip.apk");
-                    if (file.exists()) {
-                        if (file.length() > 0) {
-                            Log.e("我就想看看路径", file.getAbsolutePath());
-                            TinkerInstaller.onReceiveUpgradePatch(MainActivity.this, file.getAbsolutePath());
-                        }
-                    }
-
-                } else {
-                    Toast.makeText(MainActivity.this, "热修复技术需要用到此权限", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        }).isDisposed();
-
-
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "stupid", Toast.LENGTH_SHORT).show();
-            }
-        });
+    private void iniView() {
+        fragments   = DataGeneratorUtil.getFragments("your data to fragment");
+        mTabLayount.addOnTabSelectedListener(new MyTabSelectedListener());
+        for(int i = 0 ; i < fragments.length ; i ++) {
+            mTabLayount.addTab(mTabLayount.newTab().setCustomView(DataGeneratorUtil.getTabView(this, i)));
+        }
 
     }
+
+    class MyTabSelectedListener implements TabLayout.OnTabSelectedListener{
+
+        @Override
+        public void onTabSelected(TabLayout.Tab tab) {
+            try {
+                setSelectedFragment(tab.getPosition());
+                for (int i = 0 ; i < mTabLayount.getTabCount() ; i++) {
+                    View view = mTabLayount.getTabAt(i).getCustomView();
+                    ImageView img  = view.findViewById(R.id.tab_content_image);
+                    TextView title = view.findViewById(R.id.tab_context_title);
+                    if (tab.getPosition() == i) {
+                        Glide.with(MainActivity.this).load(DataGeneratorUtil.mTabPressed[i]).into(img);
+                        title.setTextColor(Color.GREEN);
+                    }else {
+                        Glide.with(MainActivity.this).load(DataGeneratorUtil.mTabUnPressed[i]).into(img);
+                        title.setTextColor(Color.GRAY);
+                    }
+                }
+            }catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onTabUnselected(TabLayout.Tab tab) {
+
+        }
+
+        @Override
+        public void onTabReselected(TabLayout.Tab tab) {
+
+        }
+
+        private void setSelectedFragment(int position) {
+            if (position < fragments.length) {
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.home_container, fragments[position]).commit();
+            }
+        }
+    }
+
+
 
 }

@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Situp</string>
+
+    <string name="main_playground">广场</string>
+    <string name="main_chart">概况</string>
+    <string name="main_plan">计划</string>
+    <string name="main_user">我的</string>
+
+    <string name="conclusion">总结</string>
+    <string name="new_day">开启下一天</string>
+
+    <string name="time_start">开始：</string>
+    <string name="time_end">结束：</string>
+    <string name="hour">时</string>
+    <string name="minutes">分</string>
+    <string name="time_divider">：</string>
+    <string name="plan_name">计划内容：</string>
+    <string name="dialog_btn_sure">确定</string>
+    <string name="dialog_btn_cancel">取消</string>
+
+    <string name="delete">删除</string>
+    <string name="in_coding">开发中</string>
 </resources>

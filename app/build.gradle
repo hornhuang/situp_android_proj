@@ -53,15 +53,21 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-    api("com.tencent.tinker:tinker-android-lib:1.9.14") { changing = true }
+    // material design
+    implementation 'com.google.android.material:material:1.0.0'
+    // Tinker 热修复
+    api("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
     // Maven local cannot handle transist dependencies.
-    implementation("com.tencent.tinker:tinker-android-loader:1.9.14") { changing = true }
-    annotationProcessor("com.tencent.tinker:tinker-android-anno:1.9.14") { changing = true }
-    compileOnly("com.tencent.tinker:tinker-android-anno:1.9.14") { changing = true }
+    implementation("com.tencent.tinker:tinker-android-loader:${TINKER_VERSION}") { changing = true }
+    annotationProcessor("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") {
+        changing = true
+    }
+    compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
     implementation "com.android.support:multidex:1.0.1"
 
     //这里是辅助
@@ -79,6 +85,9 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
     // Gson 服务器数据交互
     implementation 'com.google.code.gson:gson:2.8.6'
+    // Glide
+    implementation "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
+    annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
 }
 
 apply from: "tinker.gradle"

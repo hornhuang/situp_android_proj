@@ -1,4 +1,4 @@
-package com.fishinwater.situp.classes;
+package com.fishinwater.situp.classes.base;
 
 /**
  * @author fishinwater-1999
