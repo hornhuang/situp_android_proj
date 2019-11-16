@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     TextView title = view.findViewById(R.id.tab_context_title);
                     if (tab.getPosition() == i) {
                         Glide.with(MainActivity.this).load(DataGeneratorUtil.mTabPressed[i]).into(img);
-                        title.setTextColor(Color.GREEN);
+                        title.setTextColor(getResources().getColor(R.color.colorPrimary));
                     }else {
                         Glide.with(MainActivity.this).load(DataGeneratorUtil.mTabUnPressed[i]).into(img);
                         title.setTextColor(Color.GRAY);

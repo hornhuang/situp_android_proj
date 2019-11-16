@@ -20,9 +20,9 @@ import com.fishinwater.situp.square.SquareFragment;
  */
 public class DataGeneratorUtil {
 
-    public static int[] mTabUnPressed = {R.drawable.btn_nav_home_nomal, R.drawable.btn_nav_home_nomal, R.drawable.btn_nav_home_nomal, R.drawable.btn_nav_home_nomal};
+    public static int[] mTabUnPressed = {R.drawable.plan_ordinary, R.drawable.square_ordinary, R.drawable.situation_ordinary, R.drawable.home_ordinary};
 
-    public static int[] mTabPressed   = {R.drawable.btn_nav_home_press, R.drawable.btn_nav_home_press, R.drawable.btn_nav_home_press, R.drawable.btn_nav_home_press};
+    public static int[] mTabPressed   = {R.drawable.plan_press, R.drawable.square_press, R.drawable.situation_press, R.drawable.home_press};
 
     public static int[] mtabTitles = {R.string.main_plan, R.string.main_playground, R.string.main_chart, R.string.main_user };
 
