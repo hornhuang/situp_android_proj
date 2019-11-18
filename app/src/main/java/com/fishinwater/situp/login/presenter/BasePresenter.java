@@ -6,7 +6,7 @@ import com.fishinwater.situp.login.fragment.IOnResultListener;
  * @author fishinwater-1999
  * @version 2019-11-12
  */
-public abstract class BasePresenter<V extends IOnResultListener> implements IBasePresenter<V>{
+public abstract class BasePresenter<V extends IOnResultListener> implements IBasePresenter<V> {
 
     private V view;
 

@@ -3,8 +3,8 @@ apply plugin: 'com.android.application'
 def java_8 = JavaVersion.VERSION_1_8
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion COMLIER_SDK_VERSION.toInteger()
+    buildToolsVersion BUILD_TOOLS_VERSION
 
     dexOptions {
         //支持大型项目
@@ -13,12 +13,19 @@ android {
 
     defaultConfig {
         applicationId "com.fishinwater.situp"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion MIN_SDK_VERSION.toInteger()
+        targetSdkVersion TAR_SDK_VERSION.toInteger()
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+        // ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     compileOptions {
@@ -88,6 +95,17 @@ dependencies {
     // Glide
     implementation "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
     annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
+    implementation project(path: ':route')
+    implementation project(path: ':annotations')
+    annotationProcessor project(':annotations_complier')
+    implementation project(path: ':util')
+    // 登录模块 login
+    if (!LOGIN_IS_APPLICATION.toBoolean()) {
+        implementation project(':login')
+    }
+    // ARouter
+    implementation 'com.alibaba:arouter-api:1.5.0'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 }
 
 apply from: "tinker.gradle"

@@ -1,10 +1,10 @@
 package com.fishinwater.situp.login.view;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
-import android.os.Bundle;
 
 import com.fishinwater.situp.R;
 import com.fishinwater.situp.login.fragment.LoginFragment;

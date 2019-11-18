@@ -3,7 +3,7 @@ package com.fishinwater.situp.login.model;
 import androidx.lifecycle.ViewModel;
 
 import com.fishinwater.situp.login.fragment.IOnResultListener;
-import com.fishinwater.situp.util.OkHttpUtil;
+import com.fishinwater.util.OkHttpUtil;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;
@@ -12,7 +12,7 @@ import okhttp3.Call;
  * @author fishinwater-1999
  * @version 2019-11-12
  */
-public class LogViewModel extends ViewModel implements IBaseLog{
+public class LogViewModel extends ViewModel implements IBaseLog {
 
     private final String TAG = "LogViewModel";
 

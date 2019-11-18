@@ -24,12 +24,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fishinwater.situp.R;
-import com.fishinwater.situp.callback.MyStringCallback;
 import com.fishinwater.situp.classes.base.Day;
 import com.fishinwater.situp.classes.base.Plan;
 import com.fishinwater.situp.plan.Fragment.BaseFragment;
 import com.fishinwater.situp.plan.adapter.PlanAdapter;
-import com.fishinwater.situp.util.OkHttpUtil;
+import com.fishinwater.util.OkHttpUtil;
+import com.fishinwater.util.callback.MyStringCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;

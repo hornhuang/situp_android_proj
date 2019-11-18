@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fishinwater.situp.R;
 import com.fishinwater.situp.classes.base.Plan;
-import com.fishinwater.situp.util.PopupWindowUtil;
+import com.fishinwater.util.PopupWindowUtil;
 
 import java.util.List;
 

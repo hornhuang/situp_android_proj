@@ -8,6 +8,7 @@ import android.os.Build;
 
 import androidx.multidex.MultiDex;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.fishinwater.situp.tinker.Log.MyLogImp;
 import com.fishinwater.situp.tinker.util.SampleApplicationContext;
 import com.fishinwater.situp.tinker.util.TinkerManager;
@@ -72,6 +73,7 @@ public class TinkerApplicationLike extends DefaultApplicationLike {
         // 可以将之前自定义的Application中onCreate()方法所执行的操作搬到这里...
 
         mInstance = this;
+        ARouter.init(this.getApplication());
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)

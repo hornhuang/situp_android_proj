@@ -1,7 +1,7 @@
 package com.fishinwater.situp.login.presenter;
 
-import com.fishinwater.situp.login.model.IBaseLog;
 import com.fishinwater.situp.login.fragment.IOnResultListener;
+import com.fishinwater.situp.login.model.IBaseLog;
 
 /**
  * @author fishinwater-1999

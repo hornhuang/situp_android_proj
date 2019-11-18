@@ -8,10 +8,10 @@ import com.fishinwater.situp.login.fragment.IOnResultListener;
  */
 public interface IBaseLog {
 
-    void login(String userAccount, String mPassword, IOnResultListener logResultListener );
+    void login(String userAccount, String mPassword, IOnResultListener logResultListener);
 
-    void resist(String userAccount, String mPassword, IOnResultListener logResultListener );
+    void resist(String userAccount, String mPassword, IOnResultListener logResultListener);
 
-    void logout( IOnResultListener logResultListener );
+    void logout(IOnResultListener logResultListener);
 
 }
