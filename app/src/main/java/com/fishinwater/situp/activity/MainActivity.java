@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         iniView();
-        ARouter.getInstance().build("/test/1")
+        ARouter.getInstance().build("/login/login")
                 .withLong("key1", 666L)
                 .withString("key3", "888")
                 .navigation();

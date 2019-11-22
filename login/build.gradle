@@ -58,4 +58,11 @@ dependencies {
     // ARouter
     implementation 'com.alibaba:arouter-api:1.5.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+    // OkHttp3
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okio:okio:1.8.0'
+    // OkHttp-Utils
+    implementation 'com.zhy:okhttputils:2.6.2'
+
+    implementation project(path: ':util')
 }
