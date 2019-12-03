@@ -1,2 +1,2 @@
-include ':app', ':login222', ':util', ':annotations', ':annotations_complier', ':tinker', ':login'
+include ':app', ':login222', ':util', ':annotations', ':annotations_complier', ':tinker', ':login', ':plan'
 rootProject.name='Situp'

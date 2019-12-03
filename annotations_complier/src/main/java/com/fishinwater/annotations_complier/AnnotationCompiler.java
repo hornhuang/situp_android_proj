@@ -3,8 +3,11 @@ package com.fishinwater.annotations_complier;
 import com.fishinwater.annotations.BindPath;
 import com.google.auto.service.AutoService;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,6 +19,7 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
+import javax.tools.JavaFileObject;
 
 /**
  * 注解处理器
@@ -91,6 +95,41 @@ public class AnnotationCompiler extends AbstractProcessor {
             // 获取 key
             String key = path.value();
             String activityName = typeElement.getQualifiedName().toString();
+            map.put(key, activityName);
+        }
+        if (map.size() > 0) {
+            // 生成文件
+            // 由于名字不能相同，根据时间戳，创建文件名
+            String utilName = "ActivityUtil" + System.currentTimeMillis();
+            // 生成文件
+            // 创建源码目录，包名➕类名
+            Writer writer = null;
+            // 首先通过生成文件的对象 Filer 生成文件
+            // 改方法用于创建源码目录，所以要传入包名➕类名
+            JavaFileObject sourceFile = null;
+            try {
+                sourceFile = filer.createClassFile("com.fishinwater.util." + utilName);
+                writer = sourceFile.openWriter();
+                writer.write("package com.fishinwater.login;\n" +
+                        "\n" +
+                        "/**\n" +
+                        " * @author fishinwater-1999\n" +
+                        " * @version 2019-11-29\n" +
+                        " */\n" +
+                        "public class " + utilName + " implements IRouter {\n" +
+                        "    @Override\n" +
+                        "    public void putActivity() {");
+                //  根据 Map 获得内部操作
+                Iterator<String>  iterator = map.keySet().iterator();
+                while (iterator.hasNext()) {
+                    String key = iterator.next();
+                    String value = map.get(key);
+                    writer.write("");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
         return false;
     }

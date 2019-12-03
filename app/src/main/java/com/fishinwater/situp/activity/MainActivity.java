@@ -1,10 +1,7 @@
 package com.fishinwater.situp.activity;
 
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,8 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
+import com.fishinwater.plan.fragment.BlankFragment;
 import com.fishinwater.situp.R;
 import com.fishinwater.situp.util.DataGeneratorUtil;
 import com.google.android.material.tabs.TabLayout;
@@ -44,19 +41,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         iniView();
-        ARouter.getInstance().build("/login/login")
-                .withLong("key1", 666L)
-                .withString("key3", "888")
-                .navigation();
+//        ARouter.getInstance().build("/login/login")
+//                .withLong("key1", 666L)
+//                .withString("key3", "888")
+//                .navigation();
     }
 
     private void iniView() {
-        fragments   = DataGeneratorUtil.getFragments("your data to fragment");
-        mTabLayount.addOnTabSelectedListener(new MyTabSelectedListener());
-        for(int i = 0 ; i < fragments.length ; i ++) {
-            mTabLayount.addTab(mTabLayount.newTab().setCustomView(DataGeneratorUtil.getTabView(this, i)));
-        }
-
+//        fragments   = DataGeneratorUtil.getFragments("your data to fragment");
+//        mTabLayount.addOnTabSelectedListener(new MyTabSelectedListener());
+//        for(int i = 0 ; i < fragments.length ; i ++) {
+//            mTabLayount.addTab(mTabLayount.newTab().setCustomView(DataGeneratorUtil.getTabView(this, i)));
+//        }
+        Fragment fragment = new BlankFragment();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.home_container, fragment).commit();
     }
 
     class MyTabSelectedListener implements TabLayout.OnTabSelectedListener{
