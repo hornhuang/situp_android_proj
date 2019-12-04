@@ -27,9 +27,7 @@ import butterknife.ButterKnife;
  *
  * @author fishinwater-1999
  */
-public class MainActivity extends AppCompatActivity {
-
-    private final String TAG = "MainActivity";
+public class MainActivity extends BaseActivity {
 
     private Fragment[] fragments;
 
