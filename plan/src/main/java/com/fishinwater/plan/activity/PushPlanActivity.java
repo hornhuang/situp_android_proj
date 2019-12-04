@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.fishinwater.plan.R;
@@ -22,8 +23,8 @@ public class PushPlanActivity extends BaseActivity {
     }
 
     public static void actionStart(Activity activity) {
-        Intent intent = new Intent(activity, PushPlanActivity.class);
+        Intent intent = new Intent();
+        intent.setClass(activity, PushPlanActivity.class);
         activity.startActivity(intent);
     }
-
 }

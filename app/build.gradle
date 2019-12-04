@@ -107,7 +107,6 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
     implementation project(path: ':tinker')
     implementation project(path: ':plan')
-    implementation project(path: ':login')
 }
 
 apply from: "tinker.gradle"

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.fishinwater.plan.fragment.BlankFragment;
 import com.fishinwater.situp.R;
@@ -48,15 +49,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void iniView() {
-//        fragments   = DataGeneratorUtil.getFragments("your data to fragment");
-//        mTabLayount.addOnTabSelectedListener(new MyTabSelectedListener());
-//        for(int i = 0 ; i < fragments.length ; i ++) {
-//            mTabLayount.addTab(mTabLayount.newTab().setCustomView(DataGeneratorUtil.getTabView(this, i)));
-//        }
-        Fragment fragment = new BlankFragment();
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.home_container, fragment).commit();
+        fragments   = DataGeneratorUtil.getFragments("your data to fragment");
+        mTabLayount.addOnTabSelectedListener(new MyTabSelectedListener());
+        for(int i = 0 ; i < fragments.length ; i ++) {
+            mTabLayount.addTab(mTabLayount.newTab().setCustomView(DataGeneratorUtil.getTabView(this, i)));
+        }
     }
 
     class MyTabSelectedListener implements TabLayout.OnTabSelectedListener{

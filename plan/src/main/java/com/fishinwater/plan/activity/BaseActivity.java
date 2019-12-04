@@ -14,4 +14,6 @@ import com.fishinwater.plan.util.CallerClassGetter;
  */
 public class BaseActivity extends AppCompatActivity {
 
+
+
 }
