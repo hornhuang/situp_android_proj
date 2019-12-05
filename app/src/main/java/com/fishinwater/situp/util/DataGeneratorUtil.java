@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.fishinwater.plan.fragment.PlanFragment;
 import com.fishinwater.situp.R;
-import com.fishinwater.situp.plan.PlanFragment;
 import com.fishinwater.situp.square.SquareFragment;
 
 /**

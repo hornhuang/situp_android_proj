@@ -19,8 +19,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.fishinwater.plan.R;
 import com.fishinwater.plan.classes.base.Plan;
+import com.fishinwater.util.PopupWindowUtil;
 
 import java.util.List;
 
@@ -50,7 +53,6 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list_plan, viewGroup, false);
-        ButterKnife.bind(view);
         return new ViewHolder(view);
     }
 
@@ -145,11 +147,11 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         View.OnClickListener menuItemOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (v.getId()){
-                    case R.id.menu_item1:
-                        showDeleteDialog(plan);
-                        break;
+                int id = v.getId();
+                if (id == R.id.menu_item1) {
+                    showDeleteDialog(plan);
                 }
+
                 if (mPopupWindow != null) {
                     mPopupWindow.dismiss();
                 }

@@ -17,10 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.fishinwater.plan.R;
+import com.fishinwater.plan.classes.base.Day;
+import com.fishinwater.plan.classes.base.Plan;
 import com.fishinwater.plan.fragment.Fragment.BaseFragment;
+import com.fishinwater.plan.fragment.adapter.PlanAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,46 +38,33 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener {
 
     private boolean pageFlag = false;
 
-    private Unbinder unbinder;
-
     /** 主界面
      *
      */
-
-    @BindView(R.id.refresh)
     SwipeRefreshLayout refreshLayout;
 
-    @BindView(R.id.linearlayout)
     LinearLayout linearlayout;
 
-    @BindView(R.id.recycler)
     RecyclerView recyclerView;
 
-    @BindView(R.id.conclusion)
     TextView conclusion;
 
-    @BindView(R.id.save_change)
     Button save;
 
-    @BindView(R.id.fab)
     FloatingActionButton mAddFab;
 
     /** 隐藏页面
      *
      *  内容：昨天
      */
-
-    @BindView(R.id.yes_page)
     RelativeLayout holdView;
 
-    @BindView(R.id.yes_conclusion)
     TextView mYesConclusion;
 
-    @BindView(R.id.yes_bac)
     ImageView mYesBackground;
 
-    /** RecyclerView
-     *
+    /**
+     * RecyclerView
      * @param savedInstanceState
      */
     private Day day, yesDay;
@@ -104,18 +97,28 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.plan_fragment, container, false);
-        unbinder = ButterKnife.bind(this, view);
         /**
          * 关闭初始化
          * 作废该方法
          */
-        iniViews();
+        iniViews(view);
         iniRecycler();
         // load();
         return view;
     }
 
-    private void iniViews(){
+    private void iniViews(View view){
+        refreshLayout = view.findViewById(R.id.refresh);
+        linearlayout = view.findViewById(R.id.linearlayout);
+        recyclerView = view.findViewById(R.id.recycler);
+        conclusion = view.findViewById(R.id.conclusion);
+        save = view.findViewById(R.id.save_change);
+        mAddFab = view.findViewById(R.id.fab);
+
+        holdView = view.findViewById(R.id.yes_page);
+        mYesConclusion = view.findViewById(R.id.yes_conclusion);
+        mYesBackground = view.findViewById(R.id.yes_bac);
+
         setHasOptionsMenu(true);
 
         save.setOnClickListener(this);
@@ -250,20 +253,16 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id) {
-            case R.id.save_change:
-                //pushNewDay();
-                break;
-            case R.id.fab:
-                dialogShow();
-                break;
-            case R.id.conclusion:
-                if (day == null){
+        if (id == R.id.save_change) {
+            //pushNewDay();
+        }else  if (id == R.id.fab) {
+            dialogShow();
+        }else  if (id == R.id.conclusion) {
+            if (day == null){
                 //    save();
-                }else {
-                    showEditDialog();
-                }
-                break;
+            }else {
+                showEditDialog();
+            }
         }
     }
 
@@ -291,20 +290,20 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener {
      * @param p
      */
     private void savePlan(Plan p){
-        OkHttpUtil.getDataByGET("http://192.168.0.103/SitUp/AddPlan?id=2&event=ceshishuju&startTime=2019-11-14%2011-30&endTime=2019-11-14%2011-35&quality=30", new MyStringCallback(){
-            @Override
-            public void onResponse(String response, int id) {
-                super.onResponse(response, id);
-                Toast.makeText(getActivity(), "添加数据成功", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                super.onError(call, e, id);
-                Log.d(TAG, e.getMessage() + " id -> " + id);
-                Toast.makeText(getActivity(), "创建数据失败：" + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        OkHttpUtil.getDataByGET("http://192.168.0.103/SitUp/AddPlan?id=2&event=ceshishuju&startTime=2019-11-14%2011-30&endTime=2019-11-14%2011-35&quality=30", new MyStringCallback(){
+//            @Override
+//            public void onResponse(String response, int id) {
+//                super.onResponse(response, id);
+//                Toast.makeText(getActivity(), "添加数据成功", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onError(Call call, Exception e, int id) {
+//                super.onError(call, e, id);
+//                Log.d(TAG, e.getMessage() + " id -> " + id);
+//                Toast.makeText(getActivity(), "创建数据失败：" + e.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 //
 //    public void updatePlan(Plan p){
@@ -458,7 +457,6 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unbinder.unbind();// 重置绑定
     }
 
     public List<Plan> getPlanList() {

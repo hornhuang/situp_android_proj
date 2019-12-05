@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 
+def java_8 = JavaVersion.VERSION_1_8
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -22,6 +24,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility java_8
+        targetCompatibility java_8
+    }
+
 }
 
 dependencies {
@@ -34,4 +41,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    // material design
+    implementation 'com.google.android.material:material:1.0.0'
+    // OkHttp-Utils
+    implementation 'com.zhy:okhttputils:2.6.2'
+    implementation project(path: ':util')
 }
