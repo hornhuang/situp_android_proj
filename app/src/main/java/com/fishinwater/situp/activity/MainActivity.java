@@ -2,6 +2,7 @@ package com.fishinwater.situp.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,9 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
-import com.fishinwater.plan.fragment.BlankFragment;
 import com.fishinwater.situp.R;
 import com.fishinwater.situp.util.DataGeneratorUtil;
 import com.google.android.material.tabs.TabLayout;
@@ -24,7 +23,6 @@ import butterknife.ButterKnife;
 
 /**
  * 主页
- *
  * @author fishinwater-1999
  */
 public class MainActivity extends BaseActivity {
@@ -54,36 +52,56 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    enum TabStatus {
+        /**
+         * 选中
+         */
+        SELECTED,
+        /**
+         * 未选中
+         */
+        UNSELECT
+    }
+
     class MyTabSelectedListener implements TabLayout.OnTabSelectedListener{
 
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
-            try {
-                setSelectedFragment(tab.getPosition());
-                for (int i = 0 ; i < mTabLayount.getTabCount() ; i++) {
-                    View view = mTabLayount.getTabAt(i).getCustomView();
-                    ImageView img  = view.findViewById(R.id.tab_content_image);
-                    TextView title = view.findViewById(R.id.tab_context_title);
-                    if (tab.getPosition() == i) {
-                        Glide.with(MainActivity.this).load(DataGeneratorUtil.mTabPressed[i]).into(img);
-                        title.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    }else {
-                        Glide.with(MainActivity.this).load(DataGeneratorUtil.mTabUnPressed[i]).into(img);
-                        title.setTextColor(Color.GRAY);
-                    }
-                }
-            }catch (NullPointerException e) {
-                e.printStackTrace();
-            }
+            setTabColor(tab, TabStatus.SELECTED);
         }
 
         @Override
         public void onTabUnselected(TabLayout.Tab tab) {
-
+            setTabColor(tab, TabStatus.UNSELECT);
         }
 
         @Override
         public void onTabReselected(TabLayout.Tab tab) {
+            Log.d(TAG, "onTabReselected----" + tab.getPosition());
+            // just like double click
+            // you can do nothing or refresh here
+        }
+
+        private void setTabColor(TabLayout.Tab tab, TabStatus status) {
+            int position = tab.getPosition();
+            View view = mTabLayount.getTabAt(tab.getPosition()).getCustomView();
+            assert view != null;
+            ImageView img  = view.findViewById(R.id.tab_content_image);
+            TextView title = view.findViewById(R.id.tab_context_title);
+            switch (status) {
+                case SELECTED:
+                    title.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    Glide.with(MainActivity.this).load(DataGeneratorUtil.mTabPressed[position]).into(img);
+                    setSelectedFragment(position);
+                    break;
+                case UNSELECT:
+                    Glide.with(MainActivity.this).load(DataGeneratorUtil.mTabUnPressed[position]).into(img);
+                    title.setTextColor(Color.GRAY);
+                    break;
+                default:
+                    break;
+            }
+
 
         }
 
