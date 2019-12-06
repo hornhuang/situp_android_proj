@@ -9,7 +9,9 @@ import com.fishinwater.plan.classes.base.UserBean;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author fishinwater-1999
@@ -51,8 +53,8 @@ public class SitUpUser implements IObject{
     public static UserBean getLocalUser(Context context) {
         UserBean userBean = new UserBean();
         SharedPreferences preferences = context.getSharedPreferences(USER_IFO, Context.MODE_PRIVATE);
-        int userId = preferences.getInt(USER_ID, -1);
-        if (userId == -1) {
+        UUID userId = UUID.fromString(preferences.getString(USER_ID, ""));
+        if (userId.toString().length() == 0) {
             return userBean;
         }
         userBean.setId(userId);

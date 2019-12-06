@@ -1,8 +1,9 @@
-package com.fishinwater.plan.fragment;
+package com.fishinwater.plan.fragment.Fragment;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,15 +24,17 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.fishinwater.plan.R;
 import com.fishinwater.plan.classes.base.Day;
 import com.fishinwater.plan.classes.base.Plan;
-import com.fishinwater.plan.fragment.Fragment.BaseFragment;
+import com.fishinwater.plan.classes.base.UserBean;
 import com.fishinwater.plan.fragment.adapter.PlanAdapter;
+import com.fishinwater.plan.fragment.presenter.Presenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
-public class PlanFragment extends BaseFragment implements View.OnClickListener {
+public class PlanFragment extends BaseFragment implements View.OnClickListener, IFragmentView<Plan> {
 
     private final String TAG = "PlanFragment";
 
@@ -248,13 +250,14 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener {
         recyclerView.setLayoutManager(manager);
         planAdapter = new PlanAdapter(planList, getActivity(), this);
         recyclerView.setAdapter(planAdapter);
+        presenter.getPlans(new UserBean());
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.save_change) {
-            //pushNewDay();
+            pushNewDay();
         }else  if (id == R.id.fab) {
             dialogShow();
         }else  if (id == R.id.conclusion) {
@@ -270,7 +273,8 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener {
      * 提交空 Day
      * 开启新的一天
      */
-//    private void pushNewDay(){
+    private void pushNewDay(){
+
 //        new Day().save(new SaveListener<String>() {
 //            @Override
 //            public void done(String objectId, BmobException e) {
@@ -281,8 +285,8 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener {
 //                }
 //            }
 //        });
-//    }
-//
+    }
+
 
     /**
      * 保存计划内容到服务器
@@ -290,6 +294,7 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener {
      * @param p
      */
     private void savePlan(Plan p){
+        presenter.addPlan(p);
 //        OkHttpUtil.getDataByGET("http://192.168.0.103/SitUp/AddPlan?id=2&event=ceshishuju&startTime=2019-11-14%2011-30&endTime=2019-11-14%2011-35&quality=30", new MyStringCallback(){
 //            @Override
 //            public void onResponse(String response, int id) {
@@ -305,77 +310,6 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener {
 //            }
 //        });
     }
-//
-//    public void updatePlan(Plan p){
-//        p.update(p.getId(), new UpdateListener() {
-//
-//            @Override
-//            public void done(BmobException e) {
-//                if(e==null){
-//                    Toast.makeText(getActivity(), "更新成功:", Toast.LENGTH_SHORT).show();
-//                }else{
-//
-//                }
-//            }
-//
-//        });
-//    }
-//
-//    private void save(){
-//        day = new Day();
-//        day.setCreateDate(new Date());
-//        List<String> planIds = new ArrayList<>();
-//        for (Plan plan : planList){
-//            planIds.add(plan.getId());
-//        }
-//        day.setPlanList(planIds);
-//        day.setConclusion(conclusion.getText().toString());
-//        int degree = 0;
-//        for (Plan plan : planList){
-//            degree += plan.getDegree();
-//        }
-//        degree /= planList.size();
-//        day.setDegree(degree);
-//        day.save(new SaveListener<String>() {
-//            @Override
-//            public void done(String objectId, BmobException e) {
-//                if(e==null){
-//                    toast("Day :"+objectId);
-//                }else{
-//                    toast("创建数据失败：" + e.getMessage());
-//                }
-//            }
-//        });
-//    }
-//
-//    public void upDate(){
-//        day.setCreateDate(new Date());
-//        List<String> planIds = new ArrayList<>();
-//        for (Plan plan : planList){
-//            planIds.add(plan.getId());
-//        }
-//        day.setPlanList(planIds);
-//        day.setConclusion(conclusion.getText().toString());
-//        int degree = 0;
-//        for (Plan plan : planList){
-//            degree += plan.getDegree();
-//        }
-//        degree /= planList.size();
-//        day.setDegree(degree);
-//        day.update(day.getObjectId(), new UpdateListener() {
-//
-//            @Override
-//            public void done(BmobException e) {
-//                if(e==null){
-//                    toast("更新成功:");
-//                }else{
-//                    toast("更新失败：" + e.getMessage());
-//                    Log.d(TAG, "更新失败" + e.toString());
-//                }
-//            }
-//
-//        });
-//    }
 
     /**
      * 提交计划 Dialog
@@ -399,12 +333,12 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener {
         fromMinutes.setInputType(EditorInfo.TYPE_CLASS_PHONE);
         toHour.setInputType(EditorInfo.TYPE_CLASS_PHONE);
         toMinutes.setInputType(EditorInfo.TYPE_CLASS_PHONE);
-        // builer.setView(v);//这里如果使用builer.setView(v)，自定义布局只会覆盖title和button之间的那部分
+        //这里如果使用builer.setView(v)，自定义布局只会覆盖title和button之间的那部分
         final Dialog dialog = builder.create();
         dialog.show();
         //自定义布局应该在这里添加，要在dialog.show()的后面
         dialog.getWindow().setContentView(view);
-        // dialog.getWindow().setGravity(Gravity.CENTER);//可以设置显示的位置
+        //可以设置显示的位置
         btn_sure.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -420,13 +354,7 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener {
             }
         });
 
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                dialog.dismiss();
-            }
-        });
+        btn_cancel.setOnClickListener(arg0 -> dialog.dismiss());
 
         dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -459,7 +387,55 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener {
         super.onDestroy();
     }
 
+    @Override
+    protected void onBind() {
+        presenter = new Presenter(this);
+    }
+
+    @Override
+    protected void unBind() {
+        presenter = null;
+    }
+
     public List<Plan> getPlanList() {
         return planList;
+    }
+
+    @Override
+    public void onSucceed(List<Plan> planList) {
+        this.planList.clear();
+        this.planList.addAll(planList);
+        planAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onSucceed(String succeedMessage) {
+        toast(succeedMessage);
+    }
+
+    @Override
+    public void onSucceed(Plan plan) {
+        planList.remove(plan);
+        planAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onSucceed(Plan plan, int position) {
+        planList.set(position, plan);
+        planAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFailure(String errMessage) {
+        new Exception("errMessage").printStackTrace();
+        toast(errMessage);
+    }
+
+    @Override
+    public UserBean getUserIfo() {
+        SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        UserBean userBean = new UserBean();
+        userBean.setId(UUID.fromString(preferences.getString("user_id", "")));
+        return userBean;
     }
 }

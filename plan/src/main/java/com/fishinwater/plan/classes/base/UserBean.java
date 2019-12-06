@@ -1,12 +1,14 @@
 package com.fishinwater.plan.classes.base;
 
+import java.util.UUID;
+
 /**
  * @author fishinwater-1999
  * @version 2019-11-12
  */
 public class UserBean {
 
-    private int id;
+    private UUID id;
 
     private String name;
 
@@ -15,11 +17,11 @@ public class UserBean {
     public UserBean() {
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

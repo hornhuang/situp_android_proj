@@ -2,7 +2,6 @@ package com.fishinwater.plan.fragment.adapter;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,11 +17,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fishinwater.plan.R;
 import com.fishinwater.plan.classes.base.Plan;
+import com.fishinwater.plan.fragment.Fragment.PlanFragment;
 import com.fishinwater.util.PopupWindowUtil;
 
 import java.util.List;
@@ -41,9 +40,9 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
 
     private Activity context;
 
-    private Fragment fragment;
+    private PlanFragment fragment;
 
-    public PlanAdapter(List<Plan> mList, Activity context, Fragment fragment){
+    public PlanAdapter(List<Plan> mList, Activity context, PlanFragment fragment){
         this.mList    = mList;
         this.context  = context;
         this.fragment = fragment;
@@ -68,7 +67,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         viewHolder.name.setText(plan.getName());
         final ImageView img = viewHolder.degree;
         setImg(img, plan);
-        viewHolder.itemView.setOnClickListener(v -> showProgressDialog(img, plan));
+        viewHolder.itemView.setOnClickListener(v -> showProgressDialog(img, plan, i));
         viewHolder.itemView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -95,7 +94,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
      * 自定义布局
      * 由于设定计划完成进度
      */
-    private void showProgressDialog(final ImageView img, final Plan plan) {
+    private void showProgressDialog(final ImageView img, final Plan plan, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         View v = inflater.inflate(R.layout.dialog_reset_degree, null);
@@ -114,21 +113,23 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
             public void onClick(View v) {
                 plan.setDegree(mseekbar.getProgress());
                 plan.setCompleted(true);
-                // ((PlanFragment)fragment).updatePlan(plan);
+                fragment.getPresenter().updatePlan(plan, position);
                 setImg(img, plan);
                 dialog.dismiss();
             }
         });
 
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
+        btn_cancel.setOnClickListener((View arg0) -> {
                 dialog.dismiss();
             }
-        });
+        );
     }
 
+    /**
+     * 弹出对话框
+     * @param anchorView
+     * @param plan
+     */
     private void showPopupWindow(View anchorView, Plan plan) {
         View contentView = getPopupWindowContentView(plan);
         mPopupWindow = new PopupWindow(contentView,
@@ -140,6 +141,11 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         mPopupWindow.showAtLocation(anchorView, Gravity.TOP | Gravity.START, windowPos[0], windowPos[1]);
     }
 
+    /**
+     * 初始化对话框布局
+     * @param plan
+     * @return
+     */
     private View getPopupWindowContentView(final Plan plan) {
         // 一个自定义的布局，作为显示的内容
         int layoutId = R.layout.popup_content_layout;   // 布局ID
@@ -175,41 +181,22 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         normalDialog.setTitle("提示");
         normalDialog.setMessage("你确定要删除本计划?");
         normalDialog.setPositiveButton("确定",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        deletePlan(plan);
-                    }
+                (dialog, which) -> {
+                    fragment.getPresenter().deletePlan(plan);
                 });
         normalDialog.setNegativeButton("关闭",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //...To-do
-                    }
+                (dialog, which) -> {
+                    //...To-do
                 });
         // 显示
         normalDialog.show();
     }
 
-    private void  deletePlan(final Plan plan){
-//        plan.delete(new UpdateListener() {
-//
-//            @Override
-//            public void done(BmobException e) {
-//                if(e==null){
-//                    Toast.makeText(context, "已删除", Toast.LENGTH_SHORT).show();
-//                    ((PlanFragment) fragment).getPlanList().remove(plan);
-//                    ((PlanFragment) fragment).upDate();
-//                    notifyDataSetChanged();
-//                }else{
-//
-//                }
-//            }
-//
-//        });
-    }
-
+    /**
+     *
+     * @param Img
+     * @param plan
+     */
     private void setImg(ImageView Img, Plan plan) {
         Log.d(TAG, plan.isCompleted()+"");
         if (plan.isCompleted()){
