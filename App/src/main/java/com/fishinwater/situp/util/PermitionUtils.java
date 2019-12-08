@@ -1,14 +1,11 @@
 package com.fishinwater.situp.util;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.fishinwater.situp.activity.MainActivity;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
 

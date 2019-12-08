@@ -6,7 +6,7 @@ import com.fishinwater.plan.callback.PlanCallback;
 import com.fishinwater.plan.callback.PlansCallBack;
 import com.fishinwater.plan.classes.base.Plan;
 import com.fishinwater.plan.classes.base.UserBean;
-import com.fishinwater.util.URLUtils;
+import com.fishinwater.base.URLUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 

@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fishinwater.plan.R;
 import com.fishinwater.plan.classes.base.Plan;
 import com.fishinwater.plan.fragment.Fragment.PlanFragment;
-import com.fishinwater.util.PopupWindowUtil;
+import com.fishinwater.base.PopupWindowUtil;
 
 import java.util.List;
 

@@ -15,7 +15,7 @@ android {
         minSdkVersion MIN_SDK_VERSION.toInteger()
         targetSdkVersion TAR_SDK_VERSION.toInteger()
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // ARouter

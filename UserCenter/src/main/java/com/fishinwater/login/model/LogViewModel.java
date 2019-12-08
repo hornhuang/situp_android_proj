@@ -3,7 +3,7 @@ package com.fishinwater.login.model;
 import androidx.lifecycle.ViewModel;
 
 import com.fishinwater.login.fragment.IOnResultListener;
-import com.fishinwater.util.OkHttpUtil;
+import com.fishinwater.base.OkHttpUtil;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;

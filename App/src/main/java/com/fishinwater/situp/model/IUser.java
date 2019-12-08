@@ -1,7 +1,7 @@
 package com.fishinwater.situp.model;
 
 import com.fishinwater.situp.classes.base.UserBean;
-import com.fishinwater.util.callback.MyStringCallback;
+import com.fishinwater.base.callback.MyStringCallback;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 /**

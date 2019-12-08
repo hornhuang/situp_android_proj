@@ -29,7 +29,7 @@ import com.tencent.tinker.loader.shareutil.ShareConstants;
         flags = ShareConstants.TINKER_ENABLE_ALL,// tinkerFlags
         // loaderClassName, 我们这里使用默认即可!（可不写）
         loaderClass = "com.tencent.tinker.loader.TinkerLoader",
-        //tinkerLoadVerifyFlag
+        // tinkerLoadVerifyFlag
         loadVerifyFlag = false)
 public class TinkerApplicationLike extends DefaultApplicationLike {
 

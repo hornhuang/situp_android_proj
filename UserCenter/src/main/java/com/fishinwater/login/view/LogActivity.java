@@ -15,7 +15,7 @@ import com.fishinwater.login.fragment.LoginFragment;
  *
  * @author fishinwater-1999
  */
-@Route(path = "/login/login")
+@Route(path = "/UserCenter/login")
 public class LogActivity extends AppCompatActivity implements IBaseLogActivity {
 
     @Override
