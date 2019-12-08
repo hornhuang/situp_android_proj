@@ -6,9 +6,15 @@ import com.fishinwater.plan.callback.PlanCallback;
 import com.fishinwater.plan.callback.PlansCallBack;
 import com.fishinwater.plan.classes.base.Plan;
 import com.fishinwater.plan.classes.base.UserBean;
+import com.fishinwater.util.URLUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.Callback;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class PlanViewModel extends ViewModel {
 
@@ -39,6 +45,26 @@ public class PlanViewModel extends ViewModel {
     }
 
     public void addPlan(Plan plan, PlanCallback<Plan> planCallback) {
+        OkHttpUtils.post()
+                .url(URLUtils.PLAN_INSERT)
+                .addParams("", "")
+                .build().execute(new Callback() {
+
+            @Override
+            public Object parseNetworkResponse(Response response, int id) throws Exception {
+                return null;
+            }
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                planCallback.onFailed(e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Object response, int id) {
+
+            }
+        });
 
         planCallback.onSucceed(null);
 
@@ -49,6 +75,7 @@ public class PlanViewModel extends ViewModel {
     }
 
     public void deletePlan(Plan plan, PlanCallback<Plan> planCallback) {
+
         planCallback.onSucceed(null);
     }
 }

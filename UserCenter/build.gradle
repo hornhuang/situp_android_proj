@@ -64,5 +64,5 @@ dependencies {
     // OkHttp-Utils
     implementation 'com.zhy:okhttputils:2.6.2'
 
-    implementation project(path: ':util')
+    implementation project(path: ':BaseLibrary')
 }
