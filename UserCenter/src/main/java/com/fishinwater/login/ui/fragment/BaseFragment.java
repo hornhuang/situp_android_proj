@@ -1,11 +1,18 @@
-package com.fishinwater.login.fragment;
+package com.fishinwater.login.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.Bindable;
 import androidx.fragment.app.Fragment;
 
+import com.fishinwater.login.callback.ILogCallback;
 import com.fishinwater.login.presenter.IBasePresenter;
+import com.fishinwater.login.ui.activity.LogActivity;
+
+import java.lang.ref.WeakReference;
 
 /**
  * @author fishinwater-1999
@@ -23,6 +30,8 @@ public abstract class BaseFragment<V extends IOnResultListener, P extends IBaseP
      */
     private P mBaseResister;
 
+    private LogActivity logActivity;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +41,20 @@ public abstract class BaseFragment<V extends IOnResultListener, P extends IBaseP
         if (mBaseResister == null) {
             mBaseResister = createProsenter();
         }
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        logActivity = (LogActivity) context;
+    }
+
+    public LogActivity getLogActivity() {
+        return logActivity;
+    }
+
+    public void setLogActivity(LogActivity logActivity) {
+        this.logActivity = logActivity;
     }
 
     public abstract V createView();

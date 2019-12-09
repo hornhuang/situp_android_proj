@@ -1,36 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".login.fragment.ResistFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <EditText
-        android:id="@+id/user_account"
+    <data>
+        <variable
+            name="logCallback"
+            type="com.fishinwater.login.ui.activity.LogActivity" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:hint="用户名" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/user_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:hint="密码" />
+        <EditText
+            android:id="@+id/user_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:hint="用户名" />
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:onClick="resist"
-        android:text="登录"/>
+        <EditText
+            android:id="@+id/user_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:hint="请输入密码" />
 
-    <Button
-        android:id="@+id/resist"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:text="注册"/>
+        <EditText
+            android:id="@+id/user_password_again"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:hint="请确认密码" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:onClick="@{logCallback.login}"
+            android:text="登录" />
+
+        <Button
+            android:id="@+id/resist"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:onClick="resist"
+            android:text="注册" />
+
+    </LinearLayout>
+</layout>

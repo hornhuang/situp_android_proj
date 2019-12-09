@@ -1,4 +1,4 @@
-package com.fishinwater.login.fragment;
+package com.fishinwater.login.ui.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,11 +10,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 
 import com.fishinwater.login.R;
+import com.fishinwater.login.callback.ILogCallback;
+import com.fishinwater.login.databinding.LoginFragmentBinding;
 import com.fishinwater.login.model.LogViewModel;
 import com.fishinwater.login.presenter.IBasePresenter;
 import com.fishinwater.login.presenter.LogPresenter;
+
+import java.lang.ref.WeakReference;
 
 /**
  * @author fishinwater-1999
@@ -32,7 +37,9 @@ public class LoginFragment extends BaseFragment implements IOnResultListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.login_fragment, container, false);
+        LoginFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.login_fragment, container, false);
+        View view = binding.getRoot();
+        binding.setLogCallback(getLogActivity());
         iniView(view);
         return view;
     }

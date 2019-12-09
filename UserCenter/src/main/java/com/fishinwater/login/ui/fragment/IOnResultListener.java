@@ -1,4 +1,4 @@
-package com.fishinwater.login.fragment;
+package com.fishinwater.login.ui.fragment;
 
 /**
  * @author fishinwater-1999

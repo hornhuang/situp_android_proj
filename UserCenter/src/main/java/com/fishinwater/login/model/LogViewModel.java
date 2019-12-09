@@ -2,7 +2,7 @@ package com.fishinwater.login.model;
 
 import androidx.lifecycle.ViewModel;
 
-import com.fishinwater.login.fragment.IOnResultListener;
+import com.fishinwater.login.ui.fragment.IOnResultListener;
 import com.fishinwater.base.OkHttpUtil;
 import com.zhy.http.okhttp.callback.StringCallback;
 

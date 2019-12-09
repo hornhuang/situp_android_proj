@@ -33,6 +33,7 @@ android {
         }
     }
 
+    // 配置 Manifest
     sourceSets {
         main {
             if (LOGIN_IS_APPLICATION.toBoolean()) {
@@ -43,6 +44,9 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
 
 }
 
@@ -65,4 +69,5 @@ dependencies {
     implementation 'com.zhy:okhttputils:2.6.2'
 
     implementation project(path: ':BaseLibrary')
+    implementation project(path: ':Provider')
 }

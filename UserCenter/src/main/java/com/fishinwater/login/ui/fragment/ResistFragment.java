@@ -1,4 +1,4 @@
-package com.fishinwater.login.fragment;
+package com.fishinwater.login.ui.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,8 +9,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 
 import com.fishinwater.login.R;
+import com.fishinwater.login.databinding.ResistFragmentBinding;
 import com.fishinwater.login.model.IBaseLog;
 import com.fishinwater.login.model.LogViewModel;
 import com.fishinwater.login.presenter.IBasePresenter;
@@ -32,7 +34,9 @@ public class ResistFragment extends BaseFragment implements IOnResultListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.resist_fragment, container, false);
+        ResistFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.resist_fragment, container, false);
+        binding.setLogCallback(getLogActivity());
+        View view = binding.getRoot();
         iniView(view);
         return view;
     }

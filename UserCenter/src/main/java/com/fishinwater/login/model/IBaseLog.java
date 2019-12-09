@@ -1,6 +1,6 @@
 package com.fishinwater.login.model;
 
-import com.fishinwater.login.fragment.IOnResultListener;
+import com.fishinwater.login.ui.fragment.IOnResultListener;
 
 /**
  * @author fishinwater-1999

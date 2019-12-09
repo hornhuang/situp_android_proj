@@ -3,7 +3,7 @@
     package="com.fishinwater.login">
 
     <application>
-        <activity android:name=".view.LogActivity">
+        <activity android:name=".ui.activity.LogActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
