@@ -1,6 +1,9 @@
 # FIWKeepApp
 a app like keep
 
+- Provider 依赖于 BaseLibrary
+- 其他模块依赖于 Provider
+
 # LICENSE
 MIT License
 
