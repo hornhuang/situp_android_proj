@@ -1,10 +1,6 @@
 package com.fishinwater.situp.factory;
 
 import androidx.annotation.NonNull;
-
-import com.fishinwater.login.fragment.IOnResultListener;
-import com.fishinwater.login.model.IBaseLog;
-import com.fishinwater.login.presenter.IBasePresenter;
 import com.fishinwater.situp.util.PropertiesUtil;
 
 /**

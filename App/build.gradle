@@ -95,18 +95,19 @@ dependencies {
     // Glide
     implementation "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
     annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
-    implementation project(path: ':annotations')
-    annotationProcessor project(':annotations_complier')
-    implementation project(path: ':BaseLibrary')
+    // ARouter
+    implementation 'com.alibaba:arouter-api:1.5.0'
     // 登录模块 login
     if (!LOGIN_IS_APPLICATION.toBoolean()) {
         implementation project(':UserCenter')
     }
-    // ARouter
-    implementation 'com.alibaba:arouter-api:1.5.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+    implementation project(path: ':annotations')
+    annotationProcessor project(':annotations_complier')
+    implementation project(path: ':Provider')
+    implementation project(path: ':BaseLibrary')
     implementation project(path: ':tinker')
-    implementation project(path: ':PlanCenter')
+    implementation project(path: ':planCenter')
 }
 
 apply from: "tinker.gradle"
