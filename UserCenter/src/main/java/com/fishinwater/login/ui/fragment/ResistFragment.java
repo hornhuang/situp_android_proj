@@ -27,9 +27,9 @@ public class ResistFragment extends BaseFragment implements IOnResultListener {
 
     private IBaseLog mViewModel;
 
-    EditText mAccountEdit;
+    private EditText mAccountEdit;
 
-    EditText mPasswordEdit;
+    private EditText mPasswordEdit;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -38,6 +38,12 @@ public class ResistFragment extends BaseFragment implements IOnResultListener {
         binding.setLogCallback(getLogActivity());
         View view = binding.getRoot();
         iniView(view);
+        binding.resist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resist(v);
+            }
+        });
         return view;
     }
 
@@ -50,7 +56,6 @@ public class ResistFragment extends BaseFragment implements IOnResultListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (mViewModel == null) {
-
             mViewModel = new LogViewModel();
         }
     }
@@ -70,7 +75,8 @@ public class ResistFragment extends BaseFragment implements IOnResultListener {
 
     @Override
     public void onSucceed(String response) {
-        Toast.makeText(getActivity(), response+"注册成功", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), response + "注册成功，请登录", Toast.LENGTH_LONG).show();
+        getLogActivity().login(this.getView());
     }
 
     @Override

@@ -6,6 +6,9 @@
         <variable
             name="logCallback"
             type="com.fishinwater.login.ui.activity.LogActivity" />
+        <variable
+            name="fragment"
+            type="com.fishinwater.login.ui.fragment.LoginFragment" />
     </data>
 
     <LinearLayout
@@ -31,7 +34,7 @@
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:onClick="login"
+            android:onClick="@{fragment.login}"
             android:text="登录" />
 
         <Button

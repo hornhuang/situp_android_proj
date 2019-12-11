@@ -40,6 +40,7 @@ public class LoginFragment extends BaseFragment implements IOnResultListener {
         LoginFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.login_fragment, container, false);
         View view = binding.getRoot();
         binding.setLogCallback(getLogActivity());
+        binding.setFragment(this);
         iniView(view);
         return view;
     }
@@ -58,7 +59,10 @@ public class LoginFragment extends BaseFragment implements IOnResultListener {
     }
 
     public void login(View v) {
-        getPresenter().login(mAccountEdit.getText().toString(), mPasswordEdit.getText().toString(), this);
+        getPresenter().login(
+                mAccountEdit.getText().toString(),
+                mPasswordEdit.getText().toString(),
+                this);
     }
 
     @Override
@@ -76,9 +80,8 @@ public class LoginFragment extends BaseFragment implements IOnResultListener {
 
     @Override
     public void onSucceed(String response) {
-        Log.d(TAG,"onSucceed");
         Toast.makeText(getActivity(), response, Toast.LENGTH_LONG).show();
-        getActivity().finish();
+        getLogActivity().finish();
     }
 
     @Override
