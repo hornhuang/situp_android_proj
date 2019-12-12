@@ -28,22 +28,64 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api 'androidx.appcompat:appcompat:1.1.0'
+    api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //这里是辅助
-    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    api 'com.github.tbruyelle:rxpermissions:0.10.2'
     // RxJava
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.13'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'io.reactivex.rxjava2:rxjava:2.2.13'
     // OkHttp-Utils
-    implementation 'com.zhy:okhttputils:2.6.2'
+    api 'com.zhy:okhttputils:2.6.2'
     // OkHttp3
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'com.squareup.okio:okio:1.8.0'
+    api 'com.squareup.okhttp3:okhttp:3.10.0'
+    api 'com.squareup.okio:okio:1.8.0'
     // Butter Knife
-    implementation 'com.jakewharton:butterknife:10.2.0'
+    api 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
     // Gson 服务器数据交互
-    implementation 'com.alibaba:fastjson:1.2.61'
-    implementation 'com.google.code.gson:gson:2.8.6'
+    api 'com.alibaba:fastjson:1.2.61'
+    api 'com.google.code.gson:gson:2.8.6'
+
+
+
+    // material design
+    api 'com.google.android.material:material:1.0.0'
+    // Tinker 热修复
+    api("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
+    // Maven local cannot handle transist dependencies.
+    api("com.tencent.tinker:tinker-android-loader:${TINKER_VERSION}") { changing = true }
+    annotationProcessor("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") {
+        changing = true
+    }
+    compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
+    api "com.android.support:multidex:1.0.1"
+
+    //这里是辅助
+    api 'com.github.tbruyelle:rxpermissions:0.10.2'
+    // RxJava
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'io.reactivex.rxjava2:rxjava:2.2.13'
+    // OkHttp-Utils
+    api 'com.zhy:okhttputils:2.6.2'
+    // OkHttp3
+    api 'com.squareup.okhttp3:okhttp:3.10.0'
+    api 'com.squareup.okio:okio:1.8.0'
+    // Butter Knife
+    api 'com.jakewharton:butterknife:10.2.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+    // Gson 服务器数据交互
+    api 'com.google.code.gson:gson:2.8.6'
+    // Glide
+    api "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
+    annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
+    // ARouter
+    api 'com.alibaba:arouter-api:1.5.0'
 }

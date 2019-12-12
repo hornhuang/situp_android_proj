@@ -12,5 +12,5 @@ public class UrlUtil {
 
     public static final String RESIST_URL = "http://"+ IPv4 +":8080/SitUpWebServer/adduser";
 
-
+    public static final String PUBLISH_POST = "http://"+ IPv4 +":8080/SitUpWebServer/addpost";
 }
