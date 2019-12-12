@@ -15,6 +15,12 @@ public class SharedPreferencesUtil {
      * value: JSON String
      */
     public static String USER_KEY = "user";
+    /**
+     * 用于判断 Day 对象
+     * 如果今天的 TODAY_DATE - value 与所存值不同
+     * 则更新，并提交新的 DAY 对象
+     */
+    public static String TODAY_DATE = "today_date";
 
     public static void putString(Activity context, String key, String value) {
         SharedPreferences.Editor editor = getPreferenceEditor(context);
