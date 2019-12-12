@@ -1,5 +1,7 @@
 package com.fishinwater.base.common;
 
+import android.content.SharedPreferences;
+
 /**
  * @author fishinwater-1999
  * @version 2019-12-11

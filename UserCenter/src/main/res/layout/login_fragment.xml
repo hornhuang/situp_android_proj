@@ -35,6 +35,9 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:onClick="@{fragment.login}"
+            android:background="@color/colorPrimary"
+            android:layout_margin="@dimen/btn_margin"
+            android:textSize="@dimen/btn_text_size"
             android:text="登录" />
 
         <Button
@@ -42,6 +45,9 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:onClick="@{logCallback.resist}"
+            android:background="@color/colorPrimary"
+            android:layout_margin="@dimen/btn_margin"
+            android:textSize="@dimen/btn_text_size"
             android:text="注册" />
 
     </LinearLayout>

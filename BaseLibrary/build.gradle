@@ -44,5 +44,6 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
     // Gson 服务器数据交互
+    implementation 'com.alibaba:fastjson:1.2.61'
     implementation 'com.google.code.gson:gson:2.8.6'
 }

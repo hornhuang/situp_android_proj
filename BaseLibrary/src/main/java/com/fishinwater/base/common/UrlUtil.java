@@ -6,11 +6,11 @@ package com.fishinwater.base.common;
  */
 public class UrlUtil {
 
-    private static final String IPv4 = "192.168.0.104";
+    private static final String IPv4 = "47.107.132.227";
 
     public static final String LOGIN_URL = "http://"+ IPv4 +":8080/SitUpWebServer/login";
 
-    public static final String RESIST_URL = "http://"+ IPv4 +":8080/SitUpWebServer/regist";
+    public static final String RESIST_URL = "http://"+ IPv4 +":8080/SitUpWebServer/adduser";
 
 
 }

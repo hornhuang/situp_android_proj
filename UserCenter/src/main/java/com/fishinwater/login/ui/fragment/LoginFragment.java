@@ -12,6 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.fishinwater.base.common.SharedPreferencesUtil;
+import com.fishinwater.base.data.protocol.UserBean;
 import com.fishinwater.login.R;
 import com.fishinwater.login.callback.ILogCallback;
 import com.fishinwater.login.databinding.LoginFragmentBinding;
@@ -81,6 +85,7 @@ public class LoginFragment extends BaseFragment implements IOnResultListener {
     @Override
     public void onSucceed(String response) {
         Toast.makeText(getActivity(), response, Toast.LENGTH_LONG).show();
+        SharedPreferencesUtil.putString(getActivity(), SharedPreferencesUtil.USER_KEY, response);
         getLogActivity().finish();
     }
 

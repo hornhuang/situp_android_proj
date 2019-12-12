@@ -1,5 +1,7 @@
 package com.fishinwater.situp.classes;
 
+import android.widget.LinearLayout;
+
 import java.util.List;
 
 /**
