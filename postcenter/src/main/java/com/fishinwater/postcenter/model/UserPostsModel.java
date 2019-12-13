@@ -49,4 +49,22 @@ public class UserPostsModel {
                     }
                 });
     }
+
+    public void getUserCollections(String user_id, final StringCallback callback) {
+        OkHttpUtils.post()
+                .url(ApiUtils.GET_USER_COLLECT_POSTS)
+                .addParams("user_id", user_id)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        callback.onError(call, e, id);
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        callback.onResponse(response, id);
+                    }
+                });
+    }
 }

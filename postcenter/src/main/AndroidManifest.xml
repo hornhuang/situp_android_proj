@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".ui.activity.UserFavoritePostsActivity"></activity>
+        <activity android:name=".ui.activity.UserCollectPostsActivity"></activity>
+        <activity android:name=".ui.activity.UserFavoritePostsActivity" />
         <activity android:name=".ui.activity.UserPostsActivity" />
         <activity android:name=".ui.activity.PostPageActivity" />
         <activity android:name=".ui.activity.PublishPostActivity" />

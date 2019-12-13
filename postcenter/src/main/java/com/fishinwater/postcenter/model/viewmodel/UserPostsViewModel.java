@@ -118,4 +118,47 @@ public class UserPostsViewModel extends PostBean {
 
                 });
     }
+
+    public void getUserCollectPosts(String user_id, final MyObjCallback<PostBean> callback) {
+        model.getUserCollections(user_id,
+                new StringCallback() {
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        callback.onFailed(e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Toast.makeText(mContext, response, Toast.LENGTH_LONG).show();
+                        Consumer<String> consumer = new Consumer<String>() {
+                            @Override
+                            public void accept(String s) throws Exception {
+                                postModel.get(s, new StringCallback() {
+                                    @Override
+                                    public void onError(Call call, Exception e, int id) {
+                                        callback.onFailed(e.getMessage());
+                                    }
+
+                                    @Override
+                                    public void onResponse(String response, int id) {
+                                        callback.onSucceed(JSONUtils.StringToObj(PostBean.class, response));
+                                    }
+                                });
+                            }
+                        };
+                        Disposable disposable = Observable.fromIterable(JSONUtils.jsonStrtoList(FavoriteBean.class, response))
+                                .subscribeOn(Schedulers.newThread())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .map(new Function<FavoriteBean, String>() {
+                                    @Override
+                                    public String apply(FavoriteBean favoriteBean) throws Exception {
+                                        return favoriteBean.getPost_id();
+                                    }
+                                })
+                                .subscribe(consumer);
+                    }
+
+                });
+    }
 }
