@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="postviewmodel"
+            type="com.fishinwater.postcenter.model.viewmodel.UserPostsViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/item_filed_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{postviewmodel.post_title}"
+            android:maxLines="2"/>
+
+        <TextView
+            android:id="@+id/item_filed_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{postviewmodel.post_content}"
+            android:maxLines="2"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#303030" />
+
+    </LinearLayout>
+
+</layout>
