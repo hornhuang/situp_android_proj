@@ -12,6 +12,6 @@ public class PostPageModel extends PostBean implements BaseModel<IBaseCallback> 
 
     @Override
     public void getData(String objId, IBaseCallback callback) {
-        callback.failed("PostPageModel");
+
     }
 }

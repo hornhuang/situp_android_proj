@@ -7,8 +7,8 @@ android {
 
     defaultConfig {
         applicationId "com.fishinwater.postcenter"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion MIN_SDK_VERSION.toInteger()
+        targetSdkVersion TAR_SDK_VERSION.toInteger()
         versionCode 1
         versionName "1.0"
 

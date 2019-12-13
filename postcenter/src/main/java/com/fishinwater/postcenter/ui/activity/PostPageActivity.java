@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +21,7 @@ public class PostPageActivity extends BaseActivity {
 
     private PostPageViewModel viewModel;
 
-    private String POST_ID = "post_id";
+    private static String POST_ID = "post_id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +39,10 @@ public class PostPageActivity extends BaseActivity {
         Toast.makeText(this, "PostPageActivity", Toast.LENGTH_SHORT).show();
     }
 
-    public void anctionStart(Activity activity, String postId) {
+    public static void anctionStart(Context context, String postId) {
         Intent intent = new Intent();
-        intent.setClass(activity, PostPageActivity.class);
+        intent.setClass(context, PostPageActivity.class);
         intent.putExtra(POST_ID, postId);
-        activity.startActivity(intent);
+        context.startActivity(intent);
     }
 }

@@ -34,4 +34,22 @@ public class PostModel {
                 });
     }
 
+    public void get(String post_id, final StringCallback callback) {
+        OkHttpUtils.post()
+                .url(ApiUtils.GET_POST_BY_ID)
+                .addParams("post_id", post_id)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        callback.onError(call, e, id);
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        callback.onResponse(response, id);
+                    }
+                });
+    }
+
 }

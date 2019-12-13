@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fishinwater.base.ui.base.BaseCustomViewModel;
 import com.fishinwater.base.ui.base.BaseViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,10 +19,17 @@ public class PostRecyclerViewAdapter<T extends BaseCustomViewModel> extends Recy
 
     private List<T> mItems;
 
-    public PostRecyclerViewAdapter() { }
+    public PostRecyclerViewAdapter() {
+        setData(new ArrayList<T>());
+    }
 
-    public void setData(List<T> items) {
+    private void setData(List<T> items) {
         mItems = items;
+        notifyDataSetChanged();
+    }
+
+    public void addData(T obj) {
+        mItems.add(obj);
         notifyDataSetChanged();
     }
 

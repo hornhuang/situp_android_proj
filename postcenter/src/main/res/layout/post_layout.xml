@@ -3,8 +3,8 @@
 
     <data>
         <variable
-            name="postviewmodel"
-            type="com.fishinwater.postcenter.model.viewmodel.UserPostsViewModel" />
+            name="postbean"
+            type="com.fishinwater.base.data.protocol.PostBean" />
 
     </data>
 
@@ -17,14 +17,14 @@
             android:id="@+id/item_filed_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{postviewmodel.post_title}"
+            android:text="@{postbean.post_title}"
             android:maxLines="2"/>
 
         <TextView
             android:id="@+id/item_filed_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{postviewmodel.post_content}"
+            android:text="@{postbean.post_content}"
             android:maxLines="2"/>
 
         <View
