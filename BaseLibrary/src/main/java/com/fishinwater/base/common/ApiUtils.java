@@ -18,6 +18,8 @@ public class ApiUtils {
 
     public static final String PUBLISH_POST = "http://"+ IPv4 +":8080/SitUpWebServer/addpost";
 
+    public static final String GET_USER_POSTS = "http://"+ IPv4 +":8080/SitUpWebServer/getuserposts";
+
     // ============  PLAN ==============
 
     public static final String PLAN_INSERT = "http://"+ IPv4 +":8080/SitUpWebServer/addpost";
