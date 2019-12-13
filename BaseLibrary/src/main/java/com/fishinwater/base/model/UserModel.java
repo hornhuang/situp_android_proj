@@ -1,9 +1,7 @@
 package com.fishinwater.base.model;
 
-import android.app.Application;
-
 import com.fishinwater.base.callback.IBaseCallback;
-import com.fishinwater.base.data.protocol.User;
+import com.fishinwater.base.data.protocol.UserBean;
 
 /**
  * @author fishinwater-1999
@@ -11,7 +9,7 @@ import com.fishinwater.base.data.protocol.User;
  */
 public class UserModel {
 
-    public void getData(String userId, IBaseCallback<User> callback) {
+    public void getData(String userId, IBaseCallback<UserBean> callback) {
         callback.failed("UserModel");
     }
 
