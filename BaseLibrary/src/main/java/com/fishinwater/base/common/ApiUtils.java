@@ -22,6 +22,8 @@ public class ApiUtils {
 
     public static final String GET_USER_POSTS = "http://"+ IPv4 +":8080/SitUpWebServer/getuserposts";
 
+    public static final String GET_USER_FAVORITE_POSTS = "http://"+ IPv4 +":8080/SitUpWebServer/getuserfavorite";
+
     // ============  PLAN ==============
 
     public static final String PLAN_INSERT = "http://"+ IPv4 +":8080/SitUpWebServer/addpost";

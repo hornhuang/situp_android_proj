@@ -7,11 +7,15 @@ import androidx.databinding.Bindable;
 import androidx.databinding.library.baseAdapters.BR;
 
 import com.fishinwater.base.callback.IBaseCallback;
+import com.fishinwater.base.common.JSONUtils;
 import com.fishinwater.base.data.protocol.PostBean;
 import com.fishinwater.base.data.protocol.UserBean;
 import com.fishinwater.base.model.BaseViewModel;
 import com.fishinwater.base.model.UserModel;
-import com.fishinwater.postcenter.model.PostPageModel;
+import com.fishinwater.postcenter.model.PostModel;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import okhttp3.Call;
 
 /**
  * @author fishinwater-1999
@@ -29,24 +33,26 @@ public class PostPageViewModel extends BaseViewModel {
 
     private UserModel userModel;
 
-    private PostPageModel postPageModel;
+    private PostModel postModel;
 
     public PostPageViewModel(Application application) {
         super(application);
         this.userModel = new UserModel();
-        this.postPageModel = new PostPageModel();
+        this.postModel = new PostModel();
     }
 
     public void getData(String postId) {
-        postPageModel.getData("", new IBaseCallback<PostBean>() {
+        postModel.get(postId, new StringCallback() {
             @Override
-            public void onSucceed(PostBean obj) {
-                getUser("");
+            public void onError(Call call, Exception e, int id) {
+                Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void failed(String err) {
-                Toast.makeText(getApplication(), "PostPageViewModel", Toast.LENGTH_SHORT).show();
+            public void onResponse(String response, int id) {
+                PostBean postBean = JSONUtils.StringToObj(PostBean.class, response);
+                setPostTitle(postBean.getPost_title());
+                setPostContent(postBean.getPost_content());
             }
         });
     }
