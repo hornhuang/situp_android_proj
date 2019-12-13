@@ -16,7 +16,7 @@ android {
         minSdkVersion MIN_SDK_VERSION.toInteger()
         targetSdkVersion TAR_SDK_VERSION.toInteger()
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -75,9 +75,9 @@ dependencies {
     if (!LOGIN_IS_APPLICATION.toBoolean()) {
         implementation project(':UserCenter')
     }
-    if (!LOGIN_IS_APPLICATION.toBoolean()) {
-        implementation project(':PostCenter')
-    }
+//    if (!LOGIN_IS_APPLICATION.toBoolean()) {
+//        implementation project(':PostCenter')
+//    }
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
     implementation project(path: ':annotations')
     annotationProcessor project(':annotations_complier')

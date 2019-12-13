@@ -5,15 +5,10 @@ import android.util.Log;
 import androidx.lifecycle.ViewModel;
 
 import com.fishinwater.base.common.ResponseUtil;
-import com.fishinwater.base.common.UrlUtil;
-import com.fishinwater.base.data.protocol.User;
-import com.fishinwater.login.JsonUtils;
+import com.fishinwater.base.common.ApiUtils;
 import com.fishinwater.login.ui.fragment.IOnResultListener;
-import com.fishinwater.base.OkHttpUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-
-import java.util.ArrayList;
 
 import okhttp3.Call;
 
@@ -28,7 +23,7 @@ public class LogViewModel extends ViewModel implements IBaseLog {
     @Override
     public void login(String userAccount, String mPassword, final IOnResultListener logResultListener) {
         OkHttpUtils.post()
-                .url(UrlUtil.LOGIN_URL)
+                .url(ApiUtils.LOGIN_URL)
                 .addParams("username", userAccount)
                 .addParams("password", mPassword)
                 .build()
@@ -55,7 +50,7 @@ public class LogViewModel extends ViewModel implements IBaseLog {
     @Override
     public void resist(String userAccount, String mPassword, final IOnResultListener logResultListener) {
         OkHttpUtils.post()
-                .url(UrlUtil.RESIST_URL)
+                .url(ApiUtils.RESIST_URL)
                 .addParams("username", userAccount)
                 .addParams("password", mPassword)
                 .build()

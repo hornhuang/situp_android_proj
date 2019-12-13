@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.fishinwater.situp.R;
 import com.fishinwater.situp.util.DataGeneratorUtil;
@@ -37,10 +38,10 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         iniView();
-//        ARouter.getInstance().build("/login/login")
-//                .withLong("key1", 666L)
-//                .withString("key3", "888")
-//                .navigation();
+        ARouter.getInstance().build("/UserCenter/login")
+                .withLong("key1", 666L)
+                .withString("key3", "888")
+                .navigation();
     }
 
     private void iniView() {
