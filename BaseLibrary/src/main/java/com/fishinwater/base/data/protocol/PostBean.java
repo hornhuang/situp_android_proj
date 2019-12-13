@@ -1,10 +1,12 @@
 package com.fishinwater.base.data.protocol;
 
+import com.fishinwater.base.ui.base.BaseCustomViewModel;
+
 /**
  * @author fishinwater-1999
  * @version 2019-12-12
  */
-public class PostBean {
+public class PostBean extends BaseCustomViewModel {
 
     private String post_id;
 

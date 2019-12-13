@@ -32,4 +32,8 @@ public class JSONUtils {
         return jString;
     }
 
+    public static <T> T StringToObj(Class<T> clazz, String obj) {
+        return JSON.parseObject(obj, clazz);
+    }
+
 }
