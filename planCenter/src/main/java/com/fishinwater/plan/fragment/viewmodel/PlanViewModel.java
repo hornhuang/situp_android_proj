@@ -2,11 +2,11 @@ package com.fishinwater.plan.fragment.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 
+import com.fishinwater.base.common.ApiUtils;
 import com.fishinwater.plan.callback.PlanCallback;
 import com.fishinwater.plan.callback.PlansCallBack;
 import com.fishinwater.plan.classes.base.Plan;
 import com.fishinwater.plan.classes.base.UserBean;
-import com.fishinwater.base.URLUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -46,7 +46,7 @@ public class PlanViewModel extends ViewModel {
 
     public void addPlan(Plan plan, PlanCallback<Plan> planCallback) {
         OkHttpUtils.post()
-                .url(URLUtils.PLAN_INSERT)
+                .url(ApiUtils.PLAN_INSERT)
                 .addParams("", "")
                 .build().execute(new Callback() {
 
