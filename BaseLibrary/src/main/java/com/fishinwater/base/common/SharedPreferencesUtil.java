@@ -16,6 +16,10 @@ public class SharedPreferencesUtil {
      */
     public static String USER_KEY = "user";
     /**
+     * value: @likes: 2019-12-15
+     */
+    public static String CURRENT_DAY = "day";
+    /**
      * 用于判断 Day 对象
      * 如果今天的 TODAY_DATE - value 与所存值不同
      * 则更新，并提交新的 DAY 对象

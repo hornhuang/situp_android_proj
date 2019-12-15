@@ -22,6 +22,8 @@ public class ApiUtils {
 
     public static final String DELETE_PLAN = "http://"+ IPv4 +":8080/SitUpWebServer/deleteplan";
 
+    public static final String GET_PLAN = "http://"+ IPv4 +":8080/SitUpWebServer/getplan";
+
     // ============  Post ==============
 
     public static final String GET_POST_BY_ID = "http://"+ IPv4 +":8080/SitUpWebServer/getpost";
@@ -34,7 +36,11 @@ public class ApiUtils {
 
     public static final String GET_USER_COLLECT_POSTS = "http://"+ IPv4 +":8080/SitUpWebServer/getusercollections";
 
-    // ============  PLAN ==============
+    // ============  DAY  ==============
 
-    public static final String PLAN_INSERT = "http://"+ IPv4 +":8080/SitUpWebServer/addpost";
+    public static final String PUBLISH_DAY = "http://"+ IPv4 +":8080/SitUpWebServer/addday";
+
+    public static final String GET_DAY = "http://"+ IPv4 +":8080/SitUpWebServer/getday";
+
+
 }
