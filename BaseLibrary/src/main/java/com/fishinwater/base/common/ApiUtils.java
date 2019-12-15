@@ -18,6 +18,10 @@ public class ApiUtils {
 
     public static final String PUBLISH_PLAN = "http://"+ IPv4 +":8080/SitUpWebServer/AddPlan";
 
+    public static final String UPDATA_PLAN = "http://"+ IPv4 +":8080/SitUpWebServer/updateplan";
+
+    public static final String DELETE_PLAN = "http://"+ IPv4 +":8080/SitUpWebServer/deleteplan";
+
     // ============  Post ==============
 
     public static final String GET_POST_BY_ID = "http://"+ IPv4 +":8080/SitUpWebServer/getpost";
