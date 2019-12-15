@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.fragment.app.Fragment;
@@ -14,12 +15,20 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
+import com.fishinwater.base.common.DateUtils;
+import com.fishinwater.base.common.SharedPreferencesUtil;
+import com.fishinwater.base.model.DayModel;
 import com.fishinwater.situp.R;
 import com.fishinwater.situp.util.DataGeneratorUtil;
 import com.google.android.material.tabs.TabLayout;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * 主页
@@ -42,6 +51,23 @@ public class MainActivity extends BaseActivity {
 //                .withLong("key1", 666L)
 //                .withString("key3", "888")
 //                .navigation();
+        iniDay();
+        iniUser();
+    }
+
+    private void iniUser() {
+        if ("".equals(SharedPreferencesUtil.getString(this, SharedPreferencesUtil.USER_KEY))) {
+            SharedPreferencesUtil.putString(this, SharedPreferencesUtil.USER_KEY, "445417a0-560c-40c9-aeeb-bab98f501be1");
+        }
+    }
+
+    private void iniDay() {
+        if (DateUtils.getDayDateStr()
+                .equals(SharedPreferencesUtil.getString(this, SharedPreferencesUtil.CURRENT_DAY))) {
+            new DayModel().publishDay(
+                    SharedPreferencesUtil.getString(this, SharedPreferencesUtil.USER_KEY),this);
+        }
+
     }
 
     private void iniView() {

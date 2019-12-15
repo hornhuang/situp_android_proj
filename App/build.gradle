@@ -16,7 +16,7 @@ android {
         minSdkVersion MIN_SDK_VERSION.toInteger()
         targetSdkVersion TAR_SDK_VERSION.toInteger()
         versionCode 1
-        versionName "1.0.1"
+        versionName "1.0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
