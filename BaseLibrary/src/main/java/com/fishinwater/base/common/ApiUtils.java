@@ -8,11 +8,15 @@ public class ApiUtils {
 
     private static final String IPv4 = "47.107.132.227";
 
-    // ============  User =============
+    // ============  User ==============
 
     public static final String LOGIN_URL = "http://"+ IPv4 +":8080/SitUpWebServer/login";
 
     public static final String RESIST_URL = "http://"+ IPv4 +":8080/SitUpWebServer/adduser";
+
+    // ============  Plan ==============
+
+    public static final String PUBLISH_PLAN = "http://"+ IPv4 +":8080/SitUpWebServer/AddPlan";
 
     // ============  Post ==============
 

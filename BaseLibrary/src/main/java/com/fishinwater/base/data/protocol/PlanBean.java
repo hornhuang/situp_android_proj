@@ -7,12 +7,12 @@ package com.fishinwater.base.data.protocol;
 public class PlanBean {
 
     private String plan_id;
-    private String plan_title;
-    private String plan_content;
+    private String plan_title = "";
+    private String plan_content = "";
     private String plan_start_date;
     private String plan_end_date;
     private String plan_date;
-    private String plan_score;
+    private String plan_score = "0";
 
     public PlanBean() {
         super();
