@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.fishinwater.base.callback.IBaseCallback;
 import com.fishinwater.plan.fragment.presenter.IBasePresenter;
 
 /**

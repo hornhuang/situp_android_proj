@@ -32,9 +32,9 @@ public interface IFragmentView<T>  {
 
     /**
      * 成功返回计划列表
-     * @param planList
+     * @param plan
      */
-    void onSucceed(List<T> planList);
+    void onGetSucceed(T plan);
 
     /**
      * 失败返回失败信息

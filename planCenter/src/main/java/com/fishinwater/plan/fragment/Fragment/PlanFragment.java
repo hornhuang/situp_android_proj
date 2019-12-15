@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +16,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.fishinwater.base.callback.IBaseCallback;
+import com.fishinwater.base.common.SharedPreferencesUtil;
 import com.fishinwater.base.data.protocol.PlanBean;
 import com.fishinwater.base.data.protocol.UserBean;
 import com.fishinwater.plan.R;
@@ -35,7 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-public class PlanFragment extends BaseFragment implements View.OnClickListener, IFragmentView<PlanBean> {
+public class PlanFragment extends BaseFragment implements View.OnClickListener, IFragmentView<PlanBean>{
 
     /** 主界面
      *
@@ -136,7 +140,11 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
      * 从服务器下载今天计划
      */
     private void load() {
-        // presenter.getPlans("");
+        Log.d("123123", "dfsdff");
+        Log.d("123123", (presenter == null) + "");
+         presenter.getPlans(SharedPreferencesUtil.getString(getActivity(), SharedPreferencesUtil.USER_KEY ),
+                 SharedPreferencesUtil.getString(getActivity(), SharedPreferencesUtil.TODAY_DATE ),
+                 this);
     }
 
     /**
@@ -158,7 +166,7 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
         recyclerView.setLayoutManager(manager);
         planAdapter = new PlanAdapter(planList, getActivity(), this);
         recyclerView.setAdapter(planAdapter);
-        presenter.getPlans(new UserBean());
+        load();
     }
 
     @Override
@@ -287,9 +295,8 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     @Override
-    public void onSucceed(List<PlanBean> planList) {
-        this.planList.clear();
-        this.planList.addAll(planList);
+    public void onGetSucceed(PlanBean plan) {
+        this.planList.add(plan);
         planAdapter.notifyDataSetChanged();
     }
 

@@ -1,6 +1,9 @@
 package com.fishinwater.plan.fragment.presenter;
 
+import com.fishinwater.base.data.protocol.PlanBean;
 import com.fishinwater.base.data.protocol.UserBean;
+import com.fishinwater.plan.fragment.Fragment.IFragmentView;
+import com.fishinwater.plan.fragment.Fragment.PlanFragment;
 
 /**
  * @author fishinwater-1999
@@ -9,9 +12,10 @@ import com.fishinwater.base.data.protocol.UserBean;
 public interface IBasePresenter<T>  {
     /**
      * 获得当天所有计划
-     * @param user
+     * @param user_id
+     * @param callback
      */
-    void getPlans(UserBean user);
+    void getPlans(String user_id, String day_date,  IFragmentView<T> callback);
 
     /**
      *
@@ -36,5 +40,4 @@ public interface IBasePresenter<T>  {
      * @param plan
      */
     void deletePlan(T plan);
-
 }
