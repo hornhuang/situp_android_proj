@@ -1,21 +1,15 @@
 package com.fishinwater.plan.callback;
 
-import java.util.Collection;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 /**
  * @author fishinwater-1999
- * @version 2019-12-06
+ * @version 2019-12-15
  */
-public interface PlanCallback<T>  {
-    /**
-     * 成功回调
-     * @param collection
-     */
-    void onSucceed(T collection);
+public interface PlanCallback<T> {
 
-    /**
-     * 失败回调
-     * @param errMessage
-     */
-    void onFailed(String errMessage);
+    void onSucceed(T... response);
+
+    void onFailed(String err);
+
 }

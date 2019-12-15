@@ -8,8 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.fishinwater.plan.fragment.presenter.IBasePresenter;
-import com.fishinwater.plan.fragment.presenter.Presenter;
-import com.fishinwater.plan.fragment.viewmodel.PlanViewModel;
 
 /**
  * @author fishinwater-1999

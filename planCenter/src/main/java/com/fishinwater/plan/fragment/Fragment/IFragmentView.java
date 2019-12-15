@@ -1,7 +1,8 @@
 package com.fishinwater.plan.fragment.Fragment;
 
+import com.fishinwater.base.data.protocol.PlanBean;
+import com.fishinwater.base.data.protocol.UserBean;
 import com.fishinwater.plan.classes.base.Plan;
-import com.fishinwater.plan.classes.base.UserBean;
 
 import java.util.List;
 
@@ -20,14 +21,14 @@ public interface IFragmentView<T>  {
      * 成功
      * @param plan 操作的计划项
      */
-    void onSucceed(Plan plan);
+    void onSucceed(PlanBean plan);
 
     /**
      * 成功
      * @param plan 操作的计划项
      * @param position plan 的位置
      */
-    void onSucceed(Plan plan, int position);
+    void onSucceed(PlanBean plan, int position);
 
     /**
      * 成功返回计划列表

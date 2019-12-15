@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fishinwater.base.data.protocol.PlanBean;
 import com.fishinwater.plan.R;
 import com.fishinwater.plan.classes.base.Plan;
 import com.fishinwater.plan.fragment.Fragment.PlanFragment;
@@ -36,13 +37,13 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
 
     private final int PASSLINE = 80;
 
-    private List<Plan> mList;
+    private List<PlanBean> mList;
 
     private Activity context;
 
     private PlanFragment fragment;
 
-    public PlanAdapter(List<Plan> mList, Activity context, PlanFragment fragment){
+    public PlanAdapter(List<PlanBean> mList, Activity context, PlanFragment fragment){
         this.mList    = mList;
         this.context  = context;
         this.fragment = fragment;
@@ -57,14 +58,14 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        final Plan plan = mList.get(i);
-        if (plan.getFrom() != null) {
-            viewHolder.from.setText(plan.getFrom()[0] + " : " + plan.getFrom()[1]);
+        final PlanBean plan = mList.get(i);
+        if (plan.getPlan_start_date() != null) {
+            viewHolder.from.setText(plan.getPlan_start_date()+ " : " + plan.getPlan_start_date());
         }
-        if (plan.getTo()   != null) {
-            viewHolder.to.setText(plan.getTo()[0] + " : " + plan.getTo()[1]);
+        if (plan.getPlan_end_date()   != null) {
+            viewHolder.to.setText(plan.getPlan_end_date() + " : " + plan.getPlan_end_date());
         }
-        viewHolder.name.setText(plan.getName());
+        viewHolder.name.setText(plan.getPlan_title());
         final ImageView img = viewHolder.degree;
         setImg(img, plan);
         viewHolder.itemView.setOnClickListener(v -> showProgressDialog(img, plan, i));
@@ -94,25 +95,25 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
      * 自定义布局
      * 由于设定计划完成进度
      */
-    private void showProgressDialog(final ImageView img, final Plan plan, int position) {
+    private void showProgressDialog(final ImageView img, final PlanBean plan, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         View v = inflater.inflate(R.layout.dialog_reset_degree, null);
         final SeekBar mseekbar  = v.findViewById(R.id.seekbar);
-        mseekbar.setProgress(plan.getDegree());
+        mseekbar.setProgress(Integer.parseInt(plan.getPlan_score()));
         Button btn_sure   = v.findViewById(R.id.dialog_btn_sure);
         Button btn_cancel = v.findViewById(R.id.dialog_btn_cancel);
         // builer.setView(v);//这里如果使用builer.setView(v)，自定义布局只会覆盖title和button之间的那部分
         final Dialog dialog = builder.create();
         dialog.show();
-        dialog.getWindow().setContentView(v);//自定义布局应该在这里添加，要在dialog.show()的后面
+        //自定义布局应该在这里添加，要在dialog.show()的后面
+        dialog.getWindow().setContentView(v);
         // dialog.getWindow().setGravity(Gravity.CENTER);//可以设置显示的位置
         btn_sure.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                plan.setDegree(mseekbar.getProgress());
-                plan.setCompleted(true);
+                plan.setPlan_score(mseekbar.getProgress() + "");
                 fragment.getPresenter().updatePlan(plan, position);
                 setImg(img, plan);
                 dialog.dismiss();
@@ -130,7 +131,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
      * @param anchorView
      * @param plan
      */
-    private void showPopupWindow(View anchorView, Plan plan) {
+    private void showPopupWindow(View anchorView, PlanBean plan) {
         View contentView = getPopupWindowContentView(plan);
         mPopupWindow = new PopupWindow(contentView,
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -146,7 +147,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
      * @param plan
      * @return
      */
-    private View getPopupWindowContentView(final Plan plan) {
+    private View getPopupWindowContentView(final PlanBean plan) {
         // 一个自定义的布局，作为显示的内容
         int layoutId = R.layout.popup_content_layout;   // 布局ID
         View contentView = LayoutInflater.from(context).inflate(layoutId, null);
@@ -174,7 +175,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
      * @setMessage 设置对话框消息提示
      * setXXX方法返回Dialog对象，因此可以链式设置属性
      */
-    private void showDeleteDialog(final Plan plan){
+    private void showDeleteDialog(final PlanBean plan){
         final AlertDialog.Builder normalDialog =
                 new AlertDialog.Builder(context);
         normalDialog.setIcon(R.drawable.write_pen);
@@ -197,10 +198,9 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
      * @param Img
      * @param plan
      */
-    private void setImg(ImageView Img, Plan plan) {
-        Log.d(TAG, plan.isCompleted()+"");
-        if (plan.isCompleted()){
-            int degree = plan.getDegree();
+    private void setImg(ImageView Img, PlanBean plan) {
+        if (Integer.parseInt(plan.getPlan_score()) != 0){
+            int degree = Integer.parseInt(plan.getPlan_score());
             if ( degree > PASSLINE || degree == PASSLINE ){
                 Img.setImageResource(R.drawable.completed);
             }else{

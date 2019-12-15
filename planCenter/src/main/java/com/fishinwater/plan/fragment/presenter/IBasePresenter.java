@@ -1,9 +1,6 @@
 package com.fishinwater.plan.fragment.presenter;
 
-import com.fishinwater.plan.classes.base.Plan;
-import com.fishinwater.plan.classes.base.UserBean;
-
-import java.util.List;
+import com.fishinwater.base.data.protocol.UserBean;
 
 /**
  * @author fishinwater-1999

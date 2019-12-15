@@ -1,35 +1,50 @@
 package com.fishinwater.plan.fragment.presenter;
 
+import androidx.annotation.NonNull;
+
+import com.fishinwater.base.data.protocol.PlanBean;
+import com.fishinwater.base.data.protocol.UserBean;
 import com.fishinwater.plan.callback.PlanCallback;
 import com.fishinwater.plan.callback.PlansCallBack;
 import com.fishinwater.plan.classes.base.Plan;
-import com.fishinwater.plan.classes.base.UserBean;
 import com.fishinwater.plan.fragment.Fragment.IFragmentView;
-import com.fishinwater.plan.fragment.viewmodel.PlanViewModel;
+import com.fishinwater.plan.fragment.model.DeletePlanModel;
+import com.fishinwater.plan.fragment.model.GetPlanViewModel;
+import com.fishinwater.plan.fragment.model.PublishPlanModel;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.List;
+
+import okhttp3.Call;
 
 /**
  * @author fishinwater-1999
  * @version 2019-12-06
  */
-public class Presenter implements IBasePresenter<Plan>{
+public class Presenter implements IBasePresenter<PlanBean>{
 
     private IFragmentView fragmentView;
-    private PlanViewModel model;
+
+    private PublishPlanModel publishPlanModel;
+
+    private GetPlanViewModel getPlanViewModel;
+
+    private DeletePlanModel deletePlanModel;
 
     public Presenter(IFragmentView fragmentView) {
         this.fragmentView = fragmentView;
-        this.model = new PlanViewModel();
+        this.publishPlanModel = new PublishPlanModel();
+        this.getPlanViewModel = new GetPlanViewModel();
+        this.deletePlanModel = new DeletePlanModel();
     }
 
 
     @Override
     public void getPlans(UserBean user) {
-        model.postPlanList(user, new PlansCallBack<Plan>() {
+        getPlanViewModel.getPlans(user, new PlansCallBack<String>() {
 
             @Override
-            public void onSucceed(List<Plan> list) {
+            public void onSucceed(List<String> list) {
                 fragmentView.onSucceed(list);
 
             }
@@ -43,9 +58,9 @@ public class Presenter implements IBasePresenter<Plan>{
 
     @Override
     public void getPlan(UserBean user) {
-        model.postPlan(user, new PlanCallback<Plan>() {
+        getPlanViewModel.getPlan(user, new PlanCallback<String>() {
             @Override
-            public void onSucceed(Plan collection) {
+            public void onSucceed(String... collection) {
 
             }
 
@@ -57,41 +72,43 @@ public class Presenter implements IBasePresenter<Plan>{
     }
 
     @Override
-    public void addPlan(Plan plan) {
-        model.addPlan(plan, new PlanCallback<Plan>() {
+    public void addPlan(@NonNull PlanBean plan) {
+        publishPlanModel.addPlan(plan, new StringCallback() {
             @Override
-            public void onSucceed(Plan collection) {
-                fragmentView.onSucceed("succeed Message");
+            public void onError(Call call, Exception e, int id) {
+                fragmentView.onFailure(e.getMessage() + "onError");
             }
 
             @Override
-            public void onFailed(String errMessage) {
+            public void onResponse(String response, int id) {
+                fragmentView.onSucceed(response + "-- add Plan succeed Message");
+            }
+
+        });
+    }
+
+    @Override
+    public void updatePlan(PlanBean plan, int position) {
+        publishPlanModel.updatePlan(plan, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
                 fragmentView.onFailure("succeedMessage");
             }
-        });
-    }
 
-    @Override
-    public void updatePlan(Plan plan, int position) {
-        model.updatePlan(plan, new PlanCallback<Plan>() {
             @Override
-            public void onSucceed(Plan plan) {
+            public void onResponse(String response, int id) {
                 fragmentView.onSucceed(plan);
                 fragmentView.onSucceed("updatePlan Message");
             }
 
-            @Override
-            public void onFailed(String errMessage) {
-                fragmentView.onFailure("succeedMessage");
-            }
         });
     }
 
     @Override
-    public void deletePlan(Plan plan) {
-        model.deletePlan(plan, new PlanCallback<Plan>() {
+    public void deletePlan(PlanBean plan) {
+        deletePlanModel.deletePlan(plan, new PlanCallback<String>() {
             @Override
-            public void onSucceed(Plan collection) {
+            public void onSucceed(String... collection) {
                 fragmentView.onSucceed(plan);
                 fragmentView.onSucceed("删除成功");
             }
