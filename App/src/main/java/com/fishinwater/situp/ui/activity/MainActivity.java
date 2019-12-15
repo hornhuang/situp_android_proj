@@ -38,10 +38,10 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         iniView();
-        ARouter.getInstance().build("/UserCenter/login")
-                .withLong("key1", 666L)
-                .withString("key3", "888")
-                .navigation();
+//        ARouter.getInstance().build("/UserCenter/login")
+//                .withLong("key1", 666L)
+//                .withString("key3", "888")
+//                .navigation();
     }
 
     private void iniView() {
