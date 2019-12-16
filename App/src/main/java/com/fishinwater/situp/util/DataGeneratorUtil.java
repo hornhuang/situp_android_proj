@@ -11,7 +11,9 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.fishinwater.plan.fragment.Fragment.PlanFragment;
 import com.fishinwater.situp.R;
-import com.fishinwater.situp.square.SquareFragment;
+import com.fishinwater.situp.ui.fragment.ChartFragment;
+import com.fishinwater.situp.ui.fragment.MineFragment;
+import com.fishinwater.situp.ui.fragment.SquareFragment;
 
 /**
  * @author fishinwater-1999
@@ -29,8 +31,8 @@ public class DataGeneratorUtil {
         Fragment[] fragments = new Fragment[4];
         fragments[0] = PlanFragment.newInstance(from);
         fragments[1] = SquareFragment.newInstance(from);
-        fragments[2] = SquareFragment.newInstance(from);
-        fragments[3] = SquareFragment.newInstance(from);
+        fragments[2] = ChartFragment.newInstance(from);
+        fragments[3] = MineFragment.newInstance(from);
         return fragments;
     }
 

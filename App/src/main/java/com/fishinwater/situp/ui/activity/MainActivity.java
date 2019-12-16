@@ -46,13 +46,13 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        iniDay();
+        iniUser();
         iniView();
 //        ARouter.getInstance().build("/UserCenter/login")
 //                .withLong("key1", 666L)
 //                .withString("key3", "888")
 //                .navigation();
-        iniDay();
-        iniUser();
     }
 
     private void iniUser() {
@@ -62,7 +62,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void iniDay() {
-        if (DateUtils.getDayDateStr()
+        if (!DateUtils.getDayDateStr()
                 .equals(SharedPreferencesUtil.getString(this, SharedPreferencesUtil.CURRENT_DAY))) {
             new DayModel().publishDay(
                     SharedPreferencesUtil.getString(this, SharedPreferencesUtil.USER_KEY),this);

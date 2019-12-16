@@ -20,4 +20,8 @@
 
     <string name="delete">删除</string>
     <string name="in_coding">开发中</string>
+
+    <string name="mine_posts">我的动态</string>
+    <string name="mine_favorite">我的点赞</string>
+    <string name="mine_collection">我的收藏</string>
 </resources>

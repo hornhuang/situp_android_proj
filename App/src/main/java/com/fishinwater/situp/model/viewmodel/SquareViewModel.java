@@ -1,4 +1,4 @@
-package com.fishinwater.situp.square;
+package com.fishinwater.situp.model.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 

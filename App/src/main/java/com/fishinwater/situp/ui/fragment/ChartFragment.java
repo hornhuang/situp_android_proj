@@ -1,4 +1,4 @@
-package com.fishinwater.situp.square;
+package com.fishinwater.situp.ui.fragment;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -13,25 +13,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fishinwater.situp.R;
+import com.fishinwater.situp.model.viewmodel.ChartViewModel;
 
-public class SquareFragment extends Fragment {
+public class ChartFragment extends Fragment {
 
-    private SquareViewModel mViewModel;
+    private ChartViewModel mViewModel;
 
-    public static SquareFragment newInstance(String from) {
-        return new SquareFragment();
+    public static ChartFragment newInstance(String from) {
+        return new ChartFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.square_fragment, container, false);
+        return inflater.inflate(R.layout.chart_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(SquareViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(ChartViewModel.class);
         // TODO: Use the ViewModel
     }
 
