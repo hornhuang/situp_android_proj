@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.os.Bundle;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.fishinwater.base.callback.MyObjCallback;
 import com.fishinwater.base.data.protocol.PostBean;
 import com.fishinwater.base.rx.BaseActivity;
@@ -14,6 +15,7 @@ import com.fishinwater.postcenter.databinding.ActivityUserPostsBinding;
 import com.fishinwater.postcenter.model.viewmodel.UserPostsViewModel;
 import com.fishinwater.postcenter.ui.recycler.PostRecyclerViewAdapter;
 
+@Route(path = "/post/user_posts")
 public class UserPostsActivity extends BaseActivity implements MyObjCallback<PostBean> {
 
     ActivityUserPostsBinding binding;
