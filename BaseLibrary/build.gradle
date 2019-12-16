@@ -13,6 +13,13 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+
+        // ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -37,7 +44,19 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    //这里是辅助
+    // material design
+    api 'com.google.android.material:material:1.0.0'
+    // Tinker 热修复
+    api("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
+    // Maven local cannot handle transist dependencies.
+    api("com.tencent.tinker:tinker-android-loader:${TINKER_VERSION}") { changing = true }
+    annotationProcessor("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") {
+        changing = true
+    }
+    compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
+    api "com.android.support:multidex:1.0.1"
+
+    // 权限申请辅助
     api 'com.github.tbruyelle:rxpermissions:0.10.2'
     // RxJava
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
@@ -53,42 +72,10 @@ dependencies {
     // Gson 服务器数据交互
     api 'com.alibaba:fastjson:1.2.61'
     api 'com.google.code.gson:gson:2.8.6'
-
-
-
-    // material design
-    api 'com.google.android.material:material:1.0.0'
-    // Tinker 热修复
-    api("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
-    // Maven local cannot handle transist dependencies.
-    api("com.tencent.tinker:tinker-android-loader:${TINKER_VERSION}") { changing = true }
-    annotationProcessor("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") {
-        changing = true
-    }
-    compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
-    api "com.android.support:multidex:1.0.1"
-
-    //这里是辅助
-    api 'com.github.tbruyelle:rxpermissions:0.10.2'
-    // RxJava
-    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    api 'io.reactivex.rxjava2:rxjava:2.2.13'
-    // OkHttp-Utils
-    api 'com.zhy:okhttputils:2.6.2'
-    // OkHttp3
-    api 'com.squareup.okhttp3:okhttp:3.10.0'
-    api 'com.squareup.okio:okio:1.8.0'
-    // Butter Knife
-    api 'com.jakewharton:butterknife:10.2.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
-    // Gson 服务器数据交互
-    api 'com.google.code.gson:gson:2.8.6'
     // Glide
     api "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
     annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
     // ARouter
     api 'com.alibaba:arouter-api:1.5.0'
-    // RxJava
-    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    api 'io.reactivex.rxjava2:rxjava:2.2.13'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 }

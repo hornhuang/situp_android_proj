@@ -15,7 +15,7 @@ android {
         minSdkVersion MIN_SDK_VERSION.toInteger()
         targetSdkVersion TAR_SDK_VERSION.toInteger()
         versionCode 1
-        versionName "1.0.2"
+        versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // ARouter
@@ -52,25 +52,13 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(path: ':annotations')
     implementation project(path: ':annotations_complier')
     // ARouter
-    implementation 'com.alibaba:arouter-api:1.5.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
-    // OkHttp3
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'com.squareup.okio:okio:1.8.0'
-    // OkHttp-Utils
-    implementation 'com.zhy:okhttputils:2.6.2'
-    // alibaba fastjson
-    // implementation 'com.alibaba:fastjson:1.2.61'
-    implementation 'com.alibaba:fastjson:1.1.71.android'
 
-    implementation project(path: ':BaseLibrary')
     implementation project(path: ':Provider')
 }

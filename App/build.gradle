@@ -75,16 +75,14 @@ dependencies {
     }
     compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
-    // Glide
-    annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
 
     // 登录模块 login
     if (!LOGIN_IS_APPLICATION.toBoolean()) {
         implementation project(':UserCenter')
     }
-//    if (!LOGIN_IS_APPLICATION.toBoolean()) {
-//        implementation project(':PostCenter')
-//    }
+    if (!LOGIN_IS_APPLICATION.toBoolean()) {
+        implementation project(':postCenter')
+    }
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
     implementation project(path: ':annotations')
     annotationProcessor project(':annotations_complier')

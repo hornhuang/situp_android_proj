@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         if (LOGIN_IS_APPLICATION.toBoolean()) {
-            applicationId "com.fishinwater.login"
+            applicationId "com.fishinwater.postcenter"
         }
         minSdkVersion MIN_SDK_VERSION.toInteger()
         targetSdkVersion TAR_SDK_VERSION.toInteger()
