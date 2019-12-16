@@ -41,7 +41,7 @@ public class PostPageViewModel extends BaseViewModel {
         this.postModel = new PostModel();
     }
 
-    public void getData(String postId) {
+    public void getData(final String postId) {
         postModel.get(postId, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -53,15 +53,18 @@ public class PostPageViewModel extends BaseViewModel {
                 PostBean postBean = JSONUtils.StringToObj(PostBean.class, response);
                 setPostTitle(postBean.getPost_title());
                 setPostContent(postBean.getPost_content());
+                // getUser(postBean.getUser_id());
             }
         });
     }
 
     private void getUser(String uId) {
-        userModel.getData(uId, new IBaseCallback<UserBean>() {
+        userModel.getData(uId, new IBaseCallback<String>() {
             @Override
-            public void onSucceed(UserBean obj) {
-
+            public void onSucceed(String obj) {
+                UserBean userBean = JSONUtils.StringToObj(UserBean.class, obj);
+                setUserName(userBean.getUser_name());
+                setUserIntroduce(userBean.getUser_introduction());
             }
 
             @Override

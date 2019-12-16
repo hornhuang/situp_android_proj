@@ -52,4 +52,22 @@ public class PostModel {
                 });
     }
 
+    public void getAllPosts(int page, final StringCallback callback) {
+        OkHttpUtils.post()
+                .url(ApiUtils.GET_ALL_POSTS)
+                .addParams("page", page + "")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        callback.onError(call, e, id);
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        callback.onResponse(response, id);
+                    }
+                });
+    }
+
 }

@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.bumptech.glide.Glide;
+import com.fishinwater.base.common.DrawableUtils;
 import com.fishinwater.base.rx.BaseActivity;
 import com.fishinwater.postcenter.R;
 import com.fishinwater.postcenter.databinding.ActivityPostPageBinding;
@@ -34,6 +36,17 @@ public class PostPageActivity extends BaseActivity {
 
         String postId = getIntent().getStringExtra(POST_ID);
         viewModel.getData(postId);
+
+        iniPic();
+    }
+
+    private void iniPic() {
+        Glide.with(this)
+                .load(DrawableUtils.UN_FAVORITE_PIC)
+                .into(binding.favorite);
+        Glide.with(this)
+                .load(DrawableUtils.UN_COLLECT_PIC)
+                .into(binding.collect);
     }
 
     @Override
