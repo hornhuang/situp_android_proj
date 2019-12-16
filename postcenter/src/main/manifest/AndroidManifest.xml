@@ -3,19 +3,12 @@
     package="com.fishinwater.postcenter">
 
     <application>
-        <activity android:name=".ui.activity.UserCollectPostsActivity"></activity>
+        <activity android:name=".ui.activity.UserCollectPostsActivity" />
         <activity android:name=".ui.activity.UserFavoritePostsActivity" />
         <activity android:name=".ui.activity.UserPostsActivity" />
         <activity android:name=".ui.activity.PostPageActivity" />
         <activity android:name=".ui.activity.PublishPostActivity" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity"  />
     </application>
 
 </manifest>

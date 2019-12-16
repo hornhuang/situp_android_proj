@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.fishinwater.base.callback.IBaseCallback;
+import com.fishinwater.base.common.RouteUtils;
 import com.fishinwater.base.data.protocol.PostBean;
 import com.fishinwater.postcenter.R;
 import com.fishinwater.postcenter.databinding.ActivityUserPostsBinding;
@@ -23,7 +25,7 @@ import com.fishinwater.postcenter.ui.recycler.PostRecyclerViewAdapter;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;
-
+@Route(path = RouteUtils.SquareFragment)
 public class SquareFragment extends Fragment implements IBaseCallback<PostBean> {
 
     SquareFragmentBinding binding;

@@ -13,12 +13,13 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.fishinwater.base.common.DrawableUtils;
+import com.fishinwater.base.common.RouteUtils;
 import com.fishinwater.base.rx.BaseActivity;
 import com.fishinwater.postcenter.R;
 import com.fishinwater.postcenter.databinding.ActivityPostPageBinding;
 import com.fishinwater.postcenter.model.viewmodel.PostPageViewModel;
 
-@Route(path = "/post/postpage")
+@Route(path = RouteUtils.PostPageActivity)
 public class PostPageActivity extends BaseActivity {
 
     ActivityPostPageBinding binding;

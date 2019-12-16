@@ -6,12 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.fishinwater.base.common.RouteUtils;
 import com.fishinwater.base.rx.BaseActivity;
 import com.fishinwater.postcenter.R;
 import com.fishinwater.postcenter.databinding.ActivityPublishPostBinding;
 import com.fishinwater.postcenter.model.viewmodel.PostViewModel;
 
-@Route(path = "/post/publishpost")
+@Route(path = RouteUtils.PublishPostActivity)
 public class PublishPostActivity extends BaseActivity {
 
     ActivityPublishPostBinding binding;

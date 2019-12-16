@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.fishinwater.base.common.RouteUtils;
 import com.fishinwater.login.R;
 import com.fishinwater.login.callback.ILogCallback;
 import com.fishinwater.login.ui.fragment.LoginFragment;
@@ -18,7 +19,7 @@ import com.fishinwater.login.ui.fragment.ResistFragment;
  *
  * @author fishinwater-1999
  */
-@Route(path = "/usercenter/login")
+@Route(path = RouteUtils.LogActivity)
 public class LogActivity extends AppCompatActivity implements IBaseActivity, ILogCallback {
 
     @Override
