@@ -74,19 +74,22 @@ public class Presenter implements IBasePresenter<PlanBean>{
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.d("123123",response);
                                 callback.onGetSucceed(JSONUtils.StringToObj(PlanBean.class, response));
                             }
                         });
                     }
                 };
                 DayBean bean = JSONUtils.StringToObj(DayBean.class, response);
-                List<String> planIdList = JSONUtils.jsonStrtoList(String.class, bean.getDay_plans());
-                Log.d("123123",planIdList.size()+"");
-                Observable.fromIterable(planIdList)
-                        .subscribeOn(Schedulers.newThread())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(consumer);
+                if (bean.getDay_plans() != null && bean.getDay_plans().length() != 0) {
+                    List<String> planIdList = JSONUtils.jsonStrtoList(String.class, bean.getDay_plans());
+                    Observable.fromIterable(planIdList)
+                            .subscribeOn(Schedulers.newThread())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(consumer);
+                } else {
+                    callback.onFailure("今天还没有计划");
+                }
+
             }
         });
     }

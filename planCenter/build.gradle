@@ -29,6 +29,9 @@ android {
         targetCompatibility java_8
     }
 
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
