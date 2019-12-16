@@ -7,8 +7,10 @@ import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.fishinwater.login.R;
 
+@Route(path = "/usercenter/userposts")
 public class UserPostsActivity extends AppCompatActivity {
 
     @Override

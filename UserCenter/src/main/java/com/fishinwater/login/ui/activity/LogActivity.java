@@ -18,7 +18,7 @@ import com.fishinwater.login.ui.fragment.ResistFragment;
  *
  * @author fishinwater-1999
  */
-@Route(path = "/login/login")
+@Route(path = "/usercenter/login")
 public class LogActivity extends AppCompatActivity implements IBaseActivity, ILogCallback {
 
     @Override
