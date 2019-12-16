@@ -36,6 +36,8 @@ public class ApiUtils {
 
     public static final String GET_USER_COLLECT_POSTS = "http://"+ IPv4 +":8080/SitUpWebServer/getusercollections";
 
+    public static final String GET_ALL_POSTS = "http://"+ IPv4 +":8080/SitUpWebServer/getpostsbypage";
+
     // ============  DAY  ==============
 
     public static final String PUBLISH_DAY = "http://"+ IPv4 +":8080/SitUpWebServer/addday";
