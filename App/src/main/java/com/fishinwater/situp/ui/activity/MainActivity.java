@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.fishinwater.base.common.DateUtils;
+import com.fishinwater.base.common.RouteUtils;
 import com.fishinwater.base.common.SharedPreferencesUtil;
 import com.fishinwater.base.model.DayModel;
 import com.fishinwater.situp.R;
@@ -49,10 +50,8 @@ public class MainActivity extends BaseActivity {
         iniDay();
         iniUser();
         iniView();
-//        ARouter.getInstance().build("/UserCenter/login")
-//                .withLong("key1", 666L)
-//                .withString("key3", "888")
-//                .navigation();
+        ARouter.getInstance().build(RouteUtils.LogActivity)
+                .navigation();
     }
 
     private void iniUser() {

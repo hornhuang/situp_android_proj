@@ -16,7 +16,7 @@ android {
         minSdkVersion MIN_SDK_VERSION.toInteger()
         targetSdkVersion TAR_SDK_VERSION.toInteger()
         versionCode 1
-        versionName "1.0.4"
+        versionName "1.0.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -76,12 +76,13 @@ dependencies {
     compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
 
-    // 登录模块 login
+    // 用户模块 login
     if (!LOGIN_IS_APPLICATION.toBoolean()) {
         implementation project(':UserCenter')
     }
+    // 帖子模块 login
     if (!LOGIN_IS_APPLICATION.toBoolean()) {
-        implementation project(':postCenter')
+        implementation project(':postcenter')
     }
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
     implementation project(path: ':annotations')
@@ -89,6 +90,10 @@ dependencies {
     implementation project(path: ':Provider')
     implementation project(path: ':tinker')
     implementation project(path: ':planCenter')
+
+    // ARouter
+    implementation 'com.alibaba:arouter-api:1.5.0'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 }
 
 apply from: "tinker.gradle"

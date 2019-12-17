@@ -8,7 +8,9 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
+import com.fishinwater.base.common.RouteUtils;
 import com.fishinwater.plan.fragment.Fragment.PlanFragment;
 import com.fishinwater.situp.R;
 import com.fishinwater.situp.ui.fragment.ChartFragment;
@@ -29,7 +31,7 @@ public class DataGeneratorUtil {
     public static Fragment[] getFragments(String from) {
         Fragment[] fragments = new Fragment[4];
         fragments[0] = PlanFragment.newInstance(from);
-        fragments[1] = ChartFragment.newInstance(from);
+        fragments[1] = (Fragment) ARouter.getInstance().build(RouteUtils.SquareFragment).navigation();
         fragments[2] = ChartFragment.newInstance(from);
         fragments[3] = MineFragment.newInstance(from);
         return fragments;
