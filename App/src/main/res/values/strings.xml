@@ -24,4 +24,8 @@
     <string name="mine_posts">我的动态</string>
     <string name="mine_favorite">我的点赞</string>
     <string name="mine_collection">我的收藏</string>
+
+    <!--    User Center-->
+    <string name="favorite">点赞</string>
+    <string name="collect">收藏</string>
 </resources>

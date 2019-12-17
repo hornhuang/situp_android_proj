@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <dimen name="user_name">20sp</dimen>
-
-    <dimen name="user_introduce">17sp</dimen>
-
-</resources>
