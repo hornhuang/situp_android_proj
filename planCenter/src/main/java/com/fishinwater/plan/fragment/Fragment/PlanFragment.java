@@ -16,29 +16,35 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.fishinwater.base.callback.IBaseCallback;
-import com.fishinwater.base.common.SharedPreferencesUtil;
+import com.fishinwater.base.common.DateUtils;
+import com.fishinwater.base.common.JSONUtils;
+import com.fishinwater.base.common.RouteUtils;
+import com.fishinwater.base.common.preferences.SharedPreferencesUtil;
+import com.fishinwater.base.data.protocol.DayBean;
 import com.fishinwater.base.data.protocol.PlanBean;
 import com.fishinwater.base.data.protocol.UserBean;
+import com.fishinwater.base.model.DayModel;
 import com.fishinwater.plan.R;
-import com.fishinwater.plan.classes.base.Day;
-import com.fishinwater.plan.classes.base.Plan;
 import com.fishinwater.plan.fragment.adapter.PlanAdapter;
 import com.fishinwater.plan.fragment.presenter.Presenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
+import okhttp3.Call;
+
+@Route(path = RouteUtils.PlanFragment)
 public class PlanFragment extends BaseFragment implements View.OnClickListener, IFragmentView<PlanBean>{
 
     /** 主界面
@@ -49,10 +55,7 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
     LinearLayout linearlayout;
 
     RecyclerView recyclerView;
-
     TextView conclusion;
-
-    Button save;
 
     FloatingActionButton mAddFab;
 
@@ -70,7 +73,6 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
      * RecyclerView
      * @param savedInstanceState
      */
-    private Day day, yesDay;
 
     private List<PlanBean> planList;
 
@@ -82,13 +84,13 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
     /**
      * 拷贝自 day -> planList
      */
-    private List<String> planIds;
-
     private PlanAdapter planAdapter;
 
     public static PlanFragment newInstance(String from) {
         return new PlanFragment();
     }
+
+    DayModel mDayModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,14 +101,14 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.plan_fragment, container, false);
+        View view = inflater.inflate(R.layout.plans_fragment, container, false);
+        mDayModel = new DayModel();
         /**
          * 关闭初始化
          * 作废该方法
          */
         iniViews(view);
         iniRecycler();
-        load();
         return view;
     }
 
@@ -115,7 +117,6 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
         linearlayout = view.findViewById(R.id.linearlayout);
         recyclerView = view.findViewById(R.id.recycler);
         conclusion = view.findViewById(R.id.conclusion);
-        save = view.findViewById(R.id.save_change);
         mAddFab = view.findViewById(R.id.fab);
 
         holdView = view.findViewById(R.id.yes_page);
@@ -124,10 +125,10 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
 
         setHasOptionsMenu(true);
 
-        save.setOnClickListener(this);
         mAddFab.setOnClickListener(this);
         conclusion.setOnClickListener(this);
         refreshLayout.setOnRefreshListener(() -> {
+            refreshLayout.setRefreshing(true);
             planList.clear();
             load();
         });
@@ -140,18 +141,9 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
      * 从服务器下载今天计划
      */
     private void load() {
-        Log.d("123123", "dfsdff");
-        Log.d("123123", (presenter == null) + "");
-         presenter.getPlans(SharedPreferencesUtil.getString(getActivity(), SharedPreferencesUtil.USER_KEY ),
-                 SharedPreferencesUtil.getString(getActivity(), SharedPreferencesUtil.TODAY_DATE ),
-                 this);
-    }
-
-    /**
-     * 查询计划
-     */
-    private void getPlan(String objectId) {
-
+        presenter.getPlans(SharedPreferencesUtil.getString(getActivity(), SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.USER_ID),
+             SharedPreferencesUtil.getString(getActivity(), SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.TODAY_DATE ),
+             this);
     }
 
     private void iniRecycler(){
@@ -172,26 +164,11 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.save_change) {
-            pushNewDay();
-        }else  if (id == R.id.fab) {
+        if (id == R.id.fab) {
             dialogShow();
         }else  if (id == R.id.conclusion) {
-            if (day == null){
-                //    save();
-            }else {
-                showEditDialog();
-            }
+            showEditDialog();
         }
-    }
-
-    /**
-     * 提交空 Day
-     * 开启新的一天
-     */
-    private void pushNewDay(){
-
-
     }
 
     /**
@@ -201,7 +178,6 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
      */
     private void savePlan(PlanBean p){
         presenter.addPlan(p);
-
     }
 
     /**
@@ -232,20 +208,14 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
         //自定义布局应该在这里添加，要在dialog.show()的后面
         dialog.getWindow().setContentView(view);
         //可以设置显示的位置
-        btn_sure.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
+        btn_sure.setOnClickListener(v -> {
                 PlanBean plan = new PlanBean();
                 plan.setPlan_start_date(fromHour.getText().toString() + ":" + fromMinutes.getText().toString());
                 plan.setPlan_end_date(toHour.getText().toString() + ":" + toMinutes.getText().toString());
                 plan.setPlan_title(planName.getText().toString());
-                planList.add(plan);
-                planAdapter.notifyDataSetChanged();
                 savePlan(plan);
                 dialog.dismiss();
-            }
-        });
+            });
 
         btn_cancel.setOnClickListener(arg0 -> dialog.dismiss());
 
@@ -266,7 +236,6 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
                 .setPositiveButton("确定", (dialog1, which) -> {
                     String input = et.getText().toString();
                     conclusion.setText(input);
-                    day.setConclusion(input);
                     //upDate();
                 })
                 .setNegativeButton("取消", null)
@@ -290,29 +259,49 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
         presenter = null;
     }
 
-    public List<PlanBean> getPlanList() {
-        return planList;
-    }
-
     @Override
     public void onGetSucceed(PlanBean plan) {
+        if (plan == null) {
+            return;
+        }
         this.planList.add(plan);
         planAdapter.notifyDataSetChanged();
+        String user_id = SharedPreferencesUtil.getString( getActivity(),
+                SharedPreferencesUtil.PRE_NAME_SITUP,
+                SharedPreferencesUtil.USER_ID);
+        String day_date = DateUtils.getDayDateStr();
+        mDayModel.updateDay(user_id, day_date, planList, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                refreshLayout.setRefreshing(false);
+
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                refreshLayout.setRefreshing(false);
+
+            }
+        });
+        refreshLayout.setRefreshing(false);
     }
 
     @Override
     public void onSucceed(String succeedMessage) {
+        refreshLayout.setRefreshing(false);
         toast(succeedMessage);
     }
 
     @Override
     public void onSucceed(PlanBean plan) {
+        refreshLayout.setRefreshing(false);
         planList.remove(plan);
         planAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onSucceed(PlanBean plan, int position) {
+        refreshLayout.setRefreshing(false);
         planList.set(position, plan);
         planAdapter.notifyDataSetChanged();
     }
@@ -321,6 +310,19 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
     public void onFailure(String errMessage) {
         new Exception("errMessage").printStackTrace();
         toast(errMessage);
+        if (errMessage != null && errMessage.contains("{")) {
+            new DayModel().publishDay(SharedPreferencesUtil.getString(getActivity(), SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.USER_ID), new IBaseCallback<String>() {
+                @Override
+                public void onSucceed(String obj) {
+                    SharedPreferencesUtil.putString(getActivity(), SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.CURRENT_DAY, DateUtils.getDayDateStr());
+                }
+
+                @Override
+                public void failed(String err) {
+
+                }
+            });
+        }
     }
 
     @Override

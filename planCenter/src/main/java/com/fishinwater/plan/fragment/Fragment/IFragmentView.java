@@ -2,7 +2,6 @@ package com.fishinwater.plan.fragment.Fragment;
 
 import com.fishinwater.base.data.protocol.PlanBean;
 import com.fishinwater.base.data.protocol.UserBean;
-import com.fishinwater.plan.classes.base.Plan;
 
 import java.util.List;
 

@@ -43,7 +43,7 @@ public class PublishPlanModel extends ViewModel {
         // plan_start_date=qwe&plan_end_date=qwe&plan_score=0
         OkHttpUtils.post()
                 .url(ApiUtils.UPDATA_PLAN)
-                .addParams("plan_id", "b99d40bd-195a-4ab7-8e2a-762b87922462")
+                .addParams("plan_id", "" + plan.getPlan_id())
                 .addParams("plan_title", "" + plan.getPlan_title())
                 .addParams("plan_content", "" + plan.getPlan_content())
                 .addParams("plan_date", "" + plan.getPlan_date())

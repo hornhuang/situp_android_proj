@@ -5,15 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.fishinwater.base.common.RouteUtils;
+import com.fishinwater.base.ui.base.BaseActivity;
 import com.fishinwater.plan.R;
-import com.fishinwater.plan.util.CallerClassGetter;
 
 /**
  * @author fishinwater-1999
  */
+@Route(path = RouteUtils.PushPlanActivity)
 public class PushPlanActivity extends BaseActivity {
 
     @Override

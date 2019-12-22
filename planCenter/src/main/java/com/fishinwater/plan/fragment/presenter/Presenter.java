@@ -1,25 +1,23 @@
 package com.fishinwater.plan.fragment.presenter;
 
+import android.app.Activity;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.fishinwater.base.common.JSONUtils;
+import com.fishinwater.base.common.preferences.SharedPreferencesUtil;
 import com.fishinwater.base.data.protocol.DayBean;
 import com.fishinwater.base.data.protocol.PlanBean;
-import com.fishinwater.base.data.protocol.PostBean;
 import com.fishinwater.base.data.protocol.UserBean;
 import com.fishinwater.base.model.DayModel;
 import com.fishinwater.plan.callback.PlanCallback;
-import com.fishinwater.plan.callback.PlansCallBack;
-import com.fishinwater.plan.classes.base.Plan;
 import com.fishinwater.plan.fragment.Fragment.IFragmentView;
 import com.fishinwater.plan.fragment.model.DeletePlanModel;
 import com.fishinwater.plan.fragment.model.GetPlanViewModel;
 import com.fishinwater.plan.fragment.model.PublishPlanModel;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -63,40 +61,37 @@ public class Presenter implements IBasePresenter<PlanBean>{
 
             @Override
             public void onResponse(String response, int id) {
-                Consumer<String> consumer = new Consumer<String>() {
-                    @Override
-                    public void accept(String s) throws Exception {
-                        getPlanViewModel.getPlan(s, new StringCallback() {
-                            @Override
-                            public void onError(Call call, Exception e, int id) {
-                                callback.onFailure(e.getMessage());
-                            }
-
-                            @Override
-                            public void onResponse(String response, int id) {
-                                callback.onGetSucceed(JSONUtils.StringToObj(PlanBean.class, response));
-                            }
-                        });
-                    }
-                };
+                if (!response.contains("{")) {
+                    callback.onFailure("{");
+                    return;
+                }
                 DayBean bean = JSONUtils.StringToObj(DayBean.class, response);
                 if (bean.getDay_plans() != null && bean.getDay_plans().length() != 0) {
                     List<String> planIdList = JSONUtils.jsonStrtoList(String.class, bean.getDay_plans());
                     Observable.fromIterable(planIdList)
                             .subscribeOn(Schedulers.newThread())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(consumer);
+                            .subscribe(s -> getPlanViewModel.getPlan(s, new StringCallback() {
+                                @Override
+                                public void onError(Call call, Exception e, int id1) {
+                                    callback.onFailure(e.getMessage());
+                                }
+
+                                @Override
+                                public void onResponse(String response1, int id1) {
+                                    callback.onGetSucceed(JSONUtils.StringToObj(PlanBean.class, response1));
+                                }
+                            }));
                 } else {
                     callback.onFailure("今天还没有计划");
                 }
-
             }
         });
     }
 
     @Override
-    public void getPlan(UserBean user) {
-        getPlanViewModel.getPlan("", new StringCallback() {
+    public void getPlan(String plan_id) {
+        getPlanViewModel.getPlan(plan_id, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 
@@ -104,7 +99,7 @@ public class Presenter implements IBasePresenter<PlanBean>{
 
             @Override
             public void onResponse(String response, int id) {
-
+                fragmentView.onGetSucceed(JSONUtils.StringToObj(PlanBean.class, response));
             }
         });
     }
@@ -119,7 +114,21 @@ public class Presenter implements IBasePresenter<PlanBean>{
 
             @Override
             public void onResponse(String response, int id) {
-                fragmentView.onSucceed(response + "-- add Plan succeed Message");
+                String[] s = response.split("\n");
+                for (String str : s) {
+                    if (str.length() == 0) {
+                        continue;
+                    }
+                    String[] strings = str.split(" ");
+                    for (String string : strings) {
+                        if (string.length() != 0) {
+                            response = string;
+                        }
+                    }
+                }
+                plan.setPlan_id(response);
+                fragmentView.onGetSucceed(plan);
+                fragmentView.onSucceed(JSONUtils.objToString(plan));
             }
 
         });
@@ -136,7 +145,7 @@ public class Presenter implements IBasePresenter<PlanBean>{
             @Override
             public void onResponse(String response, int id) {
                 fragmentView.onSucceed(plan);
-                fragmentView.onSucceed(response + "updatePlan Message");
+                fragmentView.onSucceed(response);
             }
 
         });

@@ -1,4 +1,8 @@
-apply plugin: 'com.android.library'
+if (PLAN_IS_APPLICATION.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 
 def java_8 = JavaVersion.VERSION_1_8
 
@@ -8,13 +12,23 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 29
+        if (PLAN_IS_APPLICATION.toBoolean()) {
+            applicationId "com.fishinwater.plan"
+        }
+        minSdkVersion MIN_SDK_VERSION.toInteger()
+        targetSdkVersion TAR_SDK_VERSION.toInteger()
         versionCode 1
-        versionName "1.0.1"
+        versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+
+        // ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -29,6 +43,17 @@ android {
         targetCompatibility java_8
     }
 
+    // 配置 Manifest
+    sourceSets {
+        main {
+            if (PLAN_IS_APPLICATION.toBoolean()) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+            }
+        }
+    }
+
     dataBinding {
         enabled = true
     }
@@ -37,19 +62,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    // material design
-    implementation 'com.google.android.material:material:1.0.0'
-    // OkHttp-Utils
-    implementation 'com.zhy:okhttputils:2.6.2'
-    // OkHttp3
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'com.squareup.okio:okio:1.8.0'
-    implementation project(path: ':BaseLibrary')
+    // ARouter
+    implementation 'com.alibaba:arouter-api:1.5.0'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
+    implementation project(path: ':Provider')
 }

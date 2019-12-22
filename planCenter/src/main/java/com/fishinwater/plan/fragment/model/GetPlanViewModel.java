@@ -1,12 +1,7 @@
 package com.fishinwater.plan.fragment.model;
 
-import com.fishinwater.base.OkHttpUtil;
 import com.fishinwater.base.common.ApiUtils;
-import com.fishinwater.base.common.JSONUtils;
-import com.fishinwater.base.data.protocol.UserBean;
-import com.fishinwater.plan.callback.PlanCallback;
 import com.fishinwater.plan.callback.PlansCallBack;
-import com.fishinwater.plan.classes.base.Plan;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -27,6 +22,8 @@ public class GetPlanViewModel {
                 .url(ApiUtils.GET_PLAN)
                 .addParams("plan_id", plan_id)
                 .build()
+                .connTimeOut(3000)
+                .readTimeOut(3000)
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {

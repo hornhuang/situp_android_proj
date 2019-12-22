@@ -3,7 +3,6 @@ package com.fishinwater.plan.fragment.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,15 +20,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fishinwater.base.data.protocol.PlanBean;
 import com.fishinwater.plan.R;
-import com.fishinwater.plan.classes.base.Plan;
 import com.fishinwater.plan.fragment.Fragment.PlanFragment;
 import com.fishinwater.base.PopupWindowUtil;
 
 import java.util.List;
 
 public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
-
-    private String TAG = "PlanAdapter";
 
     private int x, y;
 
@@ -84,7 +80,6 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Log.d(TAG, "onLongClick");
                 showPopupWindow(finalConvertView, plan);
                 return false;
             }
@@ -103,20 +98,21 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         mseekbar.setProgress(Integer.parseInt(plan.getPlan_score()));
         Button btn_sure   = v.findViewById(R.id.dialog_btn_sure);
         Button btn_cancel = v.findViewById(R.id.dialog_btn_cancel);
-        // builer.setView(v);//这里如果使用builer.setView(v)，自定义布局只会覆盖title和button之间的那部分
+        // builer.setView(v);// 这里如果使用builer.setView(v)，自定义布局只会覆盖title和button之间的那部分
         final Dialog dialog = builder.create();
         dialog.show();
         //自定义布局应该在这里添加，要在dialog.show()的后面
         dialog.getWindow().setContentView(v);
         // dialog.getWindow().setGravity(Gravity.CENTER);//可以设置显示的位置
         btn_sure.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 plan.setPlan_score(mseekbar.getProgress() + "");
                 fragment.getPresenter().updatePlan(plan, position);
                 setImg(img, plan);
                 dialog.dismiss();
+                mList.add(plan);
+                notifyDataSetChanged();
             }
         });
 
@@ -149,7 +145,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
      */
     private View getPopupWindowContentView(final PlanBean plan) {
         // 一个自定义的布局，作为显示的内容
-        int layoutId = R.layout.popup_content_layout;   // 布局ID
+        // 布局ID
+        int layoutId = R.layout.popup_content_layout;
         View contentView = LayoutInflater.from(context).inflate(layoutId, null);
         View.OnClickListener menuItemOnClickListener = new View.OnClickListener() {
             @Override

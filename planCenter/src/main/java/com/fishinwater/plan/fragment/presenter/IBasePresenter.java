@@ -19,9 +19,9 @@ public interface IBasePresenter<T>  {
 
     /**
      *
-     * @param user
+     * @param plan_id
      */
-    void getPlan(UserBean user);
+    void getPlan(String plan_id);
 
     /**
      *
