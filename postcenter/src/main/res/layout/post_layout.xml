@@ -1,43 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
 
-    <data>
+    <data >
         <variable
-            name="postbean"
-            type="com.fishinwater.base.data.protocol.PostBean" />
+            name="postviewModel"
+            type="com.fishinwater.postcenter.model.viewmodel.PostViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/user_img"
+            android:layout_width="@dimen/pic_size"
+            android:layout_height="@dimen/pic_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="@dimen/pic_padding"
+            imageUrl="@{postviewModel.profileViewModel.imageUrl}"/>
+
+        <TextView
+            android:id="@+id/item_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/post_item_text_padding"
+            android:paddingEnd="@dimen/post_item_text_padding"
+            android:padding="@dimen/post_item_text_padding"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/user_img"
+            android:text="@{postviewModel.userBean.user_name}"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/post_item_content"
+            android:maxLines="1"/>
+
         <TextView
             android:id="@+id/item_filed_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="2"
             android:padding="@dimen/post_item_text_padding"
-            android:text="@{postbean.post_title}"
+            app:layout_constraintTop_toBottomOf="@id/item_user_name"
+            app:layout_constraintLeft_toRightOf="@id/user_img"
+            android:text="@{postviewModel.postBean.post_title}"
             android:textColor="@android:color/black"
             android:textSize="@dimen/post_item_title" />
 
         <TextView
             android:id="@+id/item_filed_content"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/post_item_text_padding"
             android:paddingEnd="@dimen/post_item_text_padding"
             android:paddingBottom="@dimen/post_item_text_padding"
-            android:text="@{postbean.post_content}"
+            app:layout_constraintTop_toBottomOf="@id/item_filed_title"
+            app:layout_constraintLeft_toRightOf="@id/user_img"
+            android:text="@{postviewModel.postBean.post_content}"
             android:textSize="@dimen/post_item_content"
             android:maxLines="3"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/post_item_divider"
-            android:background="@color/text_divider" />
+            android:background="@color/text_divider"
+            app:layout_constraintTop_toBottomOf="@id/item_filed_content" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

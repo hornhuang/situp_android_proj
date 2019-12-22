@@ -25,30 +25,44 @@
             android:orientation="vertical"
             tools:context=".ui.activity.PostPageActivity">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <ImageView
+                    android:id="@+id/user_img"
+                    android:layout_width="@dimen/pic_size"
+                    android:layout_height="@dimen/pic_size"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    circleImageUrl="@{pageviewmodel.profileViewModel.imageUrl}"/>
+
                 <TextView
                     android:id="@+id/user_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@id/user_img"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:textSize="@dimen/post_page_user_name"
                     android:text="@={pageviewmodel.userName}"/>
 
                 <TextView
                     android:id="@+id/user_password"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@id/user_img"
+                    app:layout_constraintTop_toBottomOf="@id/user_name"
                     android:text="@={pageviewmodel.userIntroduce}"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="@dimen/post_page_user_introduce" />
+                    android:textSize="@dimen/post_page_user_introduce_small" />
 
                 <TextView
                     android:id="@+id/post_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/user_password"
                     android:text="@={pageviewmodel.postTitle}"
                     android:padding="@dimen/post_item_text_padding"
                     android:textColor="@android:color/black"
@@ -59,6 +73,8 @@
                     android:id="@+id/post_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/post_title"
                     android:textSize="@dimen/post_item_content"
                     android:text="@={pageviewmodel.postContent}"
                     android:paddingStart="@dimen/post_item_text_padding"
@@ -67,9 +83,11 @@
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="?actionBarSize" />
+                    android:layout_height="?actionBarSize"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/post_content" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
 
@@ -84,15 +102,17 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="@dimen/pic_padding"
-                android:scaleType="fitXY"/>
+                android:layout_margin="@dimen/pic_size"
+                android:scaleType="fitXY"
+                android:onClick="@{()->pageviewmodel.favorite()}"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:gravity="center"
-                android:text="@string/favorite"/>
+                android:text="@string/favorite"
+                android:onClick="@{()->pageviewmodel.favorite()}"/>
 
             <ImageView
                 android:id="@+id/collect"
@@ -100,14 +120,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="@dimen/pic_padding"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:onClick="@{()->pageviewmodel.collect()}"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:gravity="center"
-                android:text="@string/collect"/>
+                android:text="@string/collect"
+                android:onClick="@{()->pageviewmodel.collect()}"/>
 
         </LinearLayout>
 

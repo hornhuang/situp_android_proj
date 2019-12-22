@@ -8,7 +8,7 @@
         <activity android:name=".ui.activity.UserPostsActivity" />
         <activity android:name=".ui.activity.PostPageActivity" />
         <activity android:name=".ui.activity.PublishPostActivity" />
-        <activity android:name=".MainActivity"  />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

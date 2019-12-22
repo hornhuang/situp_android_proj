@@ -10,7 +10,9 @@
     <dimen name="post_page_content">24sp</dimen>
     <dimen name="post_page_user_name">25sp</dimen>
     <dimen name="post_page_user_introduce">20sp</dimen>
+    <dimen name="post_page_user_introduce_small">20sp</dimen>
 
+    <dimen name="pic_size">70sp</dimen>
     <dimen name="pic_padding">12sp</dimen>
 
 </resources>

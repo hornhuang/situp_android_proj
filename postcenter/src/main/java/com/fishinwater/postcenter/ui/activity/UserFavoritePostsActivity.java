@@ -1,6 +1,5 @@
 package com.fishinwater.postcenter.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -13,35 +12,37 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.fishinwater.base.callback.MyObjCallback;
 import com.fishinwater.base.common.RouteUtils;
-import com.fishinwater.base.data.protocol.PostBean;
+import com.fishinwater.base.common.preferences.SharedPreferencesUtil;
 import com.fishinwater.base.rx.BaseActivity;
 import com.fishinwater.postcenter.R;
 import com.fishinwater.postcenter.databinding.ActivityUserPostsBinding;
+import com.fishinwater.postcenter.model.viewmodel.PostViewModel;
 import com.fishinwater.postcenter.model.viewmodel.UserPostsViewModel;
-import com.fishinwater.postcenter.ui.recycler.PostRecyclerViewAdapter;
+import com.fishinwater.postcenter.ui.recycler.adapter.PostsRecyclerViewAdapter;
 
 @Route(path = RouteUtils.UserFavoritePostsActivity)
-public class UserFavoritePostsActivity extends BaseActivity implements MyObjCallback<PostBean> {
+public class UserFavoritePostsActivity extends BaseActivity implements MyObjCallback<PostViewModel> {
 
     ActivityUserPostsBinding binding;
 
     UserPostsViewModel viewModel;
 
-    PostRecyclerViewAdapter adapter;
+    PostsRecyclerViewAdapter adapter;
 
-    private static String POST_ID = "post_id";
+    private static String USER_ID = "user_id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_user_posts);
-        String postId = getIntent().getStringExtra(POST_ID);
 
+        binding.pageTitle.setText(R.string.user_favorite);
         binding.recycler.setLayoutManager(new LinearLayoutManager(this));
         viewModel = new UserPostsViewModel(this);
-        adapter = new PostRecyclerViewAdapter();
+        adapter = new PostsRecyclerViewAdapter(this);
         binding.recycler.setAdapter(adapter);
-        viewModel.getUserFavoritePosts(postId, this);
+        String userId = SharedPreferencesUtil.getString(this, SharedPreferencesUtil.PRE_NAME_SITUP,SharedPreferencesUtil.USER_ID);
+        viewModel.getUserFavoritePosts(userId, this);
     }
 
     @Override
@@ -50,7 +51,7 @@ public class UserFavoritePostsActivity extends BaseActivity implements MyObjCall
     }
 
     @Override
-    public void onSucceed(PostBean bean) {
+    public void onSucceed(PostViewModel bean) {
         adapter.addData(bean);
     }
 
@@ -59,10 +60,10 @@ public class UserFavoritePostsActivity extends BaseActivity implements MyObjCall
         Toast.makeText(this, errMsg, Toast.LENGTH_SHORT).show();
     }
 
-    public static void actionStart(Context context, String postId) {
+    public static void actionStart(Context context, String user_id) {
         Intent intent = new Intent();
         intent.setClass(context, UserFavoritePostsActivity.class);
-        intent.putExtra(POST_ID, postId);
+        intent.putExtra(USER_ID, user_id);
         context.startActivity(intent);
     }
 }

@@ -3,4 +3,10 @@
 
     <string name="favorite">点赞</string>
     <string name="collect">收藏</string>
+
+    <string name="user_posts">我的动态</string>
+    <string name="user_favorite">我的点赞</string>
+    <string name="user_collect">我的收藏</string>
+
+    <string name="url">https://img-blog.csdnimg.cn/20191218205438766.jpg</string>
 </resources>

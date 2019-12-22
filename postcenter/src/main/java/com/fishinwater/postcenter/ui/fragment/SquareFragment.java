@@ -13,26 +13,22 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.bumptech.glide.Glide;
 import com.fishinwater.base.callback.IBaseCallback;
 import com.fishinwater.base.common.RouteUtils;
-import com.fishinwater.base.data.protocol.PostBean;
-import com.fishinwater.postcenter.R;
-import com.fishinwater.postcenter.databinding.ActivityUserPostsBinding;
 import com.fishinwater.postcenter.databinding.SquareFragmentBinding;
+import com.fishinwater.postcenter.model.viewmodel.PostViewModel;
 import com.fishinwater.postcenter.model.viewmodel.SquareViewModel;
-import com.fishinwater.postcenter.model.viewmodel.UserPostsViewModel;
-import com.fishinwater.postcenter.ui.recycler.PostRecyclerViewAdapter;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.fishinwater.postcenter.ui.recycler.adapter.PostsRecyclerViewAdapter;
 
-import okhttp3.Call;
 @Route(path = RouteUtils.SquareFragment)
-public class SquareFragment extends Fragment implements IBaseCallback<PostBean> {
+public class SquareFragment extends Fragment implements IBaseCallback<PostViewModel> {
 
     SquareFragmentBinding binding;
 
     private SquareViewModel mViewModel;
 
-    private PostRecyclerViewAdapter adapter;
+    private PostsRecyclerViewAdapter adapter;
 
     int page = 0;
 
@@ -46,10 +42,14 @@ public class SquareFragment extends Fragment implements IBaseCallback<PostBean> 
         binding = SquareFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         mViewModel = new SquareViewModel(getActivity());
+        binding.setSquareviewmodel(mViewModel);
+        Glide.with(this)
+                .load("https://img-blog.csdnimg.cn/20191218155949119.png")
+                .into(binding.floatButton);
 
         binding.recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         mViewModel = new SquareViewModel(getActivity());
-        adapter = new PostRecyclerViewAdapter();
+        adapter = new PostsRecyclerViewAdapter<PostViewModel>(getActivity());
         binding.recycler.setAdapter(adapter);
         mViewModel.getAllPosts(page, this);
         return view;
@@ -64,7 +64,7 @@ public class SquareFragment extends Fragment implements IBaseCallback<PostBean> 
 
 
     @Override
-    public void onSucceed(PostBean obj) {
+    public void onSucceed(PostViewModel obj) {
         adapter.addData(obj);
     }
 

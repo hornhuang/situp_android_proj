@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
 import com.fishinwater.base.callback.MyObjCallback;
 import com.fishinwater.base.common.JSONUtils;
 import com.fishinwater.base.data.protocol.FavoriteBean;
 import com.fishinwater.base.data.protocol.PostBean;
+import com.fishinwater.base.ui.adapter.ProfileViewModel;
 import com.fishinwater.postcenter.model.PostModel;
 import com.fishinwater.postcenter.model.UserPostsModel;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -26,7 +30,7 @@ import okhttp3.Call;
  * @author fishinwater-1999
  * @version 2019-12-12
  */
-public class UserPostsViewModel extends PostBean {
+public class UserPostsViewModel extends BaseObservable {
 
     private PostModel postModel;
 
@@ -34,13 +38,15 @@ public class UserPostsViewModel extends PostBean {
 
     private Activity mContext;
 
+    private ProfileViewModel profileViewModel;
+
     public UserPostsViewModel(Activity mContext) {
         this.model = new UserPostsModel();
         this.postModel = new PostModel();
         this.mContext = mContext;
     }
 
-    public void getUserPosts(String user_id, final MyObjCallback<PostBean> callback) {
+    public void getUserPosts(String user_id, final MyObjCallback<PostViewModel> callback) {
         model.getUserPosts(user_id,
                 new StringCallback() {
 
@@ -62,7 +68,9 @@ public class UserPostsViewModel extends PostBean {
 
                                     @Override
                                     public void onResponse(String response, int id) {
-                                        callback.onSucceed(JSONUtils.StringToObj(PostBean.class, response));
+                                        PostViewModel postsViewModel = new PostViewModel(mContext);
+                                        postsViewModel.setPostBean(JSONUtils.StringToObj(PostBean.class, response));
+                                        callback.onSucceed(postsViewModel);
                                     }
                                 });
                             }
@@ -76,7 +84,7 @@ public class UserPostsViewModel extends PostBean {
                 });
     }
 
-    public void getUserFavoritePosts(String user_id, final MyObjCallback<PostBean> callback) {
+    public void getUserFavoritePosts(String user_id, final MyObjCallback<PostViewModel> callback) {
         model.getUserFavorites(user_id,
                 new StringCallback() {
 
@@ -99,7 +107,9 @@ public class UserPostsViewModel extends PostBean {
 
                                     @Override
                                     public void onResponse(String response, int id) {
-                                        callback.onSucceed(JSONUtils.StringToObj(PostBean.class, response));
+                                        PostViewModel postsViewModel = new PostViewModel(mContext);
+                                        postsViewModel.setPostBean(JSONUtils.StringToObj(PostBean.class, response));
+                                        callback.onSucceed(postsViewModel);
                                     }
                                 });
                             }
@@ -119,7 +129,7 @@ public class UserPostsViewModel extends PostBean {
                 });
     }
 
-    public void getUserCollectPosts(String user_id, final MyObjCallback<PostBean> callback) {
+    public void getUserCollectPosts(String user_id, final MyObjCallback<PostViewModel> callback) {
         model.getUserCollections(user_id,
                 new StringCallback() {
 
@@ -142,7 +152,9 @@ public class UserPostsViewModel extends PostBean {
 
                                     @Override
                                     public void onResponse(String response, int id) {
-                                        callback.onSucceed(JSONUtils.StringToObj(PostBean.class, response));
+                                        PostViewModel postsViewModel = new PostViewModel(mContext);
+                                        postsViewModel.setPostBean(JSONUtils.StringToObj(PostBean.class, response));
+                                        callback.onSucceed(postsViewModel);
                                     }
                                 });
                             }
@@ -160,5 +172,14 @@ public class UserPostsViewModel extends PostBean {
                     }
 
                 });
+    }
+
+    @Bindable
+    public ProfileViewModel getProfileViewModel() {
+        return profileViewModel;
+    }
+
+    public void setProfileViewModel(ProfileViewModel profileViewModel) {
+        this.profileViewModel = profileViewModel;
     }
 }
