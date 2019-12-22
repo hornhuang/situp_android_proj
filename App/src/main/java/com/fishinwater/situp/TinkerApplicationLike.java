@@ -9,7 +9,6 @@ import android.os.Build;
 import androidx.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.fishinwater.base.common.SharedPreferencesUtil;
 import com.fishinwater.tinker.Log.MyLogImp;
 import com.fishinwater.tinker.util.SampleApplicationContext;
 import com.fishinwater.tinker.util.TinkerManager;

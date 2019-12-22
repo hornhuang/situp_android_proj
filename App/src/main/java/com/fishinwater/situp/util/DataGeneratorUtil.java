@@ -11,10 +11,8 @@ import androidx.fragment.app.Fragment;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.fishinwater.base.common.RouteUtils;
-import com.fishinwater.plan.fragment.Fragment.PlanFragment;
+import com.fishinwater.login.ui.fragment.ChartFragment;
 import com.fishinwater.situp.R;
-import com.fishinwater.situp.ui.fragment.ChartFragment;
-import com.fishinwater.situp.ui.fragment.MineFragment;
 
 /**
  * @author fishinwater-1999
@@ -30,10 +28,10 @@ public class DataGeneratorUtil {
 
     public static Fragment[] getFragments(String from) {
         Fragment[] fragments = new Fragment[4];
-        fragments[0] = PlanFragment.newInstance(from);
+        fragments[0] = (Fragment) ARouter.getInstance().build(RouteUtils.PlanFragment).navigation();
         fragments[1] = (Fragment) ARouter.getInstance().build(RouteUtils.SquareFragment).navigation();
         fragments[2] = ChartFragment.newInstance(from);
-        fragments[3] = MineFragment.newInstance(from);
+        fragments[3] = (Fragment) ARouter.getInstance().build(RouteUtils.MineFragment).navigation();
         return fragments;
     }
 

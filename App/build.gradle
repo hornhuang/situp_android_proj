@@ -74,22 +74,21 @@ dependencies {
         changing = true
     }
     compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
 
+    // 帖子模块 postcenter
+    if (!POST_IS_APPLICATION.toBoolean()) {
+        implementation project(path: ':postcenter')
+    }
     // 用户模块 login
     if (!LOGIN_IS_APPLICATION.toBoolean()) {
-        implementation project(':UserCenter')
+        implementation project(path: ':usercenter')
     }
-    // 帖子模块 login
-    if (!LOGIN_IS_APPLICATION.toBoolean()) {
-        implementation project(':postcenter')
+    // 用户模块 login
+    if (!PLAN_IS_APPLICATION.toBoolean()) {
+        implementation project(path: ':planCenter')
     }
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
-    implementation project(path: ':annotations')
-    annotationProcessor project(':annotations_complier')
     implementation project(path: ':Provider')
     implementation project(path: ':tinker')
-    implementation project(path: ':planCenter')
 
     // ARouter
     implementation 'com.alibaba:arouter-api:1.5.0'

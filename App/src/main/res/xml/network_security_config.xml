@@ -6,6 +6,7 @@
         </trust-anchors>
     </base-config>
     <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">hyh.hljdx.net</domain>
         <domain includeSubdomains="true">47.107.132.227</domain>
         <domain includeSubdomains="true">192.168.0.104</domain>
         <domain includeSubdomains="true">192.168.85.1</domain>

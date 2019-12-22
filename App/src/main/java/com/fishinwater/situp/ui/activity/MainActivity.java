@@ -13,33 +13,26 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.alibaba.android.arouter.launcher.ARouter;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.fishinwater.base.common.DateUtils;
-import com.fishinwater.base.common.RouteUtils;
-import com.fishinwater.base.common.SharedPreferencesUtil;
+import com.fishinwater.base.common.preferences.SharedPreferencesUtil;
 import com.fishinwater.base.model.DayModel;
 import com.fishinwater.situp.R;
 import com.fishinwater.situp.util.DataGeneratorUtil;
 import com.google.android.material.tabs.TabLayout;
-import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.io.IOException;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Response;
 
 /**
  * 主页
  * @author fishinwater-1999
  */
+@Route(path = "/app/main_activity")
 public class MainActivity extends BaseActivity {
 
     private Fragment[] fragments;
 
-    @BindView(R.id.bottom_tab_layout)
     public TabLayout mTabLayount;
 
     @Override
@@ -47,24 +40,23 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        mTabLayount = findViewById(R.id.bottom_tab_layout);
         iniDay();
         iniUser();
         iniView();
-        ARouter.getInstance().build(RouteUtils.LogActivity)
-                .navigation();
     }
 
     private void iniUser() {
-        if ("".equals(SharedPreferencesUtil.getString(this, SharedPreferencesUtil.USER_KEY))) {
-            SharedPreferencesUtil.putString(this, SharedPreferencesUtil.USER_KEY, "445417a0-560c-40c9-aeeb-bab98f501be1");
+        if ("".equals(SharedPreferencesUtil.getString(this, SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.USER_ID))) {
+            SharedPreferencesUtil.putString(this, SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.USER_ID, "445417a0-560c-40c9-aeeb-bab98f501be1");
         }
     }
 
     private void iniDay() {
         if (!DateUtils.getDayDateStr()
-                .equals(SharedPreferencesUtil.getString(this, SharedPreferencesUtil.CURRENT_DAY))) {
+                .equals(SharedPreferencesUtil.getString(this, SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.CURRENT_DAY))) {
             new DayModel().publishDay(
-                    SharedPreferencesUtil.getString(this, SharedPreferencesUtil.USER_KEY),this);
+                    SharedPreferencesUtil.getString(this, SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.USER_ID),this);
         }
 
     }

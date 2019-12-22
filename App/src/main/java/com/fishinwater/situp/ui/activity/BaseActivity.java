@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.fishinwater.base.callback.IBaseCallback;
 import com.fishinwater.base.common.DateUtils;
-import com.fishinwater.base.common.SharedPreferencesUtil;
+import com.fishinwater.base.common.preferences.SharedPreferencesUtil;
 
 /**
  * @author fishinwater-1999
@@ -27,7 +27,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseCallback<Str
     @Override
     public void onSucceed(String response) {
         Toast.makeText(this, response + "开启新的一天", Toast.LENGTH_SHORT).show();
-        SharedPreferencesUtil.putString(this, SharedPreferencesUtil.CURRENT_DAY, DateUtils.getDayDateStr());
+        SharedPreferencesUtil.putString(this, SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.CURRENT_DAY, DateUtils.getDayDateStr());
     }
 
     @Override
