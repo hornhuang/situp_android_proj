@@ -8,11 +8,21 @@ public class ApiUtils {
 
     private static final String IPv4 = "47.107.132.227";
 
+    public static final String BASE_URL = "http://"+ IPv4 +":8080/SitUpWebServer/";
+
     // ============  User ==============
 
     public static final String LOGIN_URL = "http://"+ IPv4 +":8080/SitUpWebServer/login";
 
     public static final String RESIST_URL = "http://"+ IPv4 +":8080/SitUpWebServer/adduser";
+
+    public static final String GET_USER = "http://"+ IPv4 +":8080/SitUpWebServer/getuser";
+
+    public static final String UPDATE_USER = "http://"+ IPv4 +":8080/SitUpWebServer/update";
+
+    public static final String UPDATE_USER_INTRODUCE = "http://"+ IPv4 +":8080/SitUpWebServer/UpdateUserIntroduceServlet";
+
+    public static final String UPDATE_USER_IMG = "http://"+ IPv4 +":8080/SitUpWebServer/updateuserheadimg";
 
     // ============  Plan ==============
 
@@ -44,5 +54,22 @@ public class ApiUtils {
 
     public static final String GET_DAY = "http://"+ IPv4 +":8080/SitUpWebServer/getday";
 
+    public static final String UPDATE_DAY = "http://"+ IPv4 +":8080/SitUpWebServer/updateday";
+
+    // ============  Collect  =============
+
+    public static final String JUDGE_COLLECT = "http://"+ IPv4 +":8080/SitUpWebServer/ispostusercolleted";
+
+    public static final String ADD_COLLECT = "http://"+ IPv4 +":8080/SitUpWebServer/addcollection";
+
+    // ============  Favorite =============
+
+    public static final String JUDGE_FAVORITE = "http://"+ IPv4 +":8080/SitUpWebServer/ispostuserfavorited";
+
+    public static final String ADD_FAVORITE = "http://"+ IPv4 +":8080/SitUpWebServer/addfavorite";
+
+    // ============  Favorite =============
+
+    public static final String GET_PICTURE = "http://"+ IPv4 +":8080/SitUpWebServer/GetPicturesByFlagServlet";
 
 }

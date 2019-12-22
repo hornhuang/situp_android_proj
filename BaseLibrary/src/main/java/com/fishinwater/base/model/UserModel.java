@@ -17,8 +17,67 @@ public class UserModel {
 
     public void getData(String userId, final IBaseCallback<String> callback) {
         OkHttpUtils.post()
-                //.url(ApiUtils.)
+                .url(ApiUtils.GET_USER)
                 .addParams("user_id", userId)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        callback.failed(e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        callback.onSucceed(response);
+                    }
+                });
+    }
+
+    public void update(String userId, String user_name, String user_intrduce, String user_password, final IBaseCallback<String> callback) {
+        OkHttpUtils.post()
+                .url(ApiUtils.UPDATE_USER)
+                .addParams("user_id", userId)
+                .addParams("user_name", user_name)
+                .addParams("user_password", user_password)
+                .addParams("user_introduction", user_intrduce)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        callback.failed(e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        callback.onSucceed(response);
+                    }
+                });
+    }
+
+    public void updateIntroduction(String userId, String user_intrduce, final IBaseCallback<String> callback) {
+        OkHttpUtils.post()
+                .url(ApiUtils.UPDATE_USER_INTRODUCE)
+                .addParams("user_id", userId)
+                .addParams("user_introduction", user_intrduce)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        callback.failed(e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        callback.onSucceed(response);
+                    }
+                });
+    }
+
+    public void updateHeadImg(String userId, String user_head_img, final IBaseCallback<String> callback) {
+        OkHttpUtils.post()
+                .url(ApiUtils.UPDATE_USER_IMG)
+                .addParams("user_id", userId)
+                .addParams("user_head_img", user_head_img)
                 .build()
                 .execute(new StringCallback() {
                     @Override

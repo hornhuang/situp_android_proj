@@ -14,6 +14,8 @@ public class UserBean {
 
     private String user_introduction;
 
+    private String user_head_img;
+
     public String getUser_id() {
         return user_id;
     }
@@ -46,10 +48,22 @@ public class UserBean {
         this.user_introduction = user_introduction;
     }
 
-    @Override
-    public String toString() {
-        return "UserBean [user_id=" + user_id + ", user_name=" + user_name + ", user_password=" + user_password
-                + ", user_introduction=" + user_introduction + "]";
+    public String getUser_head_img() {
+        return user_head_img;
     }
 
+    public void setUser_head_img(String user_head_img) {
+        this.user_head_img = user_head_img;
+    }
+
+    @Override
+    public String toString() {
+        return "UserBean{" +
+                "user_id='" + user_id + '\'' +
+                ", user_name='" + user_name + '\'' +
+                ", user_password='" + user_password + '\'' +
+                ", user_introduction='" + user_introduction + '\'' +
+                ", user_head_img='" + user_head_img + '\'' +
+                '}';
+    }
 }

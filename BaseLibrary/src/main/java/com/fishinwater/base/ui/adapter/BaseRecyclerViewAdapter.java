@@ -1,5 +1,7 @@
-package com.fishinwater.postcenter.ui.recycler;
+package com.fishinwater.base.ui.adapter;
 
+import android.app.Activity;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -7,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fishinwater.base.ui.base.BaseCustomViewModel;
 import com.fishinwater.base.ui.base.BaseViewHolder;
+import com.fishinwater.base.ui.base.ICustomView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +18,14 @@ import java.util.List;
  * @author fishinwater-1999
  * @date :2019/12/12 19:38
  */
-public class PostRecyclerViewAdapter<T extends BaseCustomViewModel> extends RecyclerView.Adapter<BaseViewHolder> {
+public class BaseRecyclerViewAdapter<T extends BaseCustomViewModel> extends RecyclerView.Adapter<BaseViewHolder> {
 
     private List<T> mItems;
 
-    public PostRecyclerViewAdapter() {
+    private Activity activity;
+
+    public BaseRecyclerViewAdapter(Activity activity) {
+        this.activity = activity;
         setData(new ArrayList<T>());
     }
 
@@ -29,6 +35,7 @@ public class PostRecyclerViewAdapter<T extends BaseCustomViewModel> extends Recy
     }
 
     public void addData(T obj) {
+        Log.d("123123", mItems.size() + "");
         mItems.add(obj);
         notifyDataSetChanged();
     }
@@ -36,8 +43,7 @@ public class PostRecyclerViewAdapter<T extends BaseCustomViewModel> extends Recy
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        PostView pictureTitleView = new PostView(parent.getContext());
-        return new BaseViewHolder(pictureTitleView);
+        return new BaseViewHolder(null);
     }
 
     @Override
@@ -51,5 +57,13 @@ public class PostRecyclerViewAdapter<T extends BaseCustomViewModel> extends Recy
             return mItems.size();
         }
         return 0;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 }

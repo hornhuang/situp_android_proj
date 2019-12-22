@@ -1,4 +1,4 @@
-package com.fishinwater.base.model;
+package com.fishinwater.base.model.view;
 
 import android.app.Application;
 

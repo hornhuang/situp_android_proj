@@ -46,6 +46,8 @@ dependencies {
 
     // material design
     api 'com.google.android.material:material:1.0.0'
+    // material design
+    api 'com.google.android.material:material:1.0.0'
     // Tinker 热修复
     api("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
     // Maven local cannot handle transist dependencies.
@@ -57,7 +59,7 @@ dependencies {
     api "com.android.support:multidex:1.0.1"
 
     // 权限申请辅助
-    api 'com.github.tbruyelle:rxpermissions:0.10.2'
+    // api 'com.github.tbruyelle:rxpermissions:0.10.2'
     // RxJava
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     api 'io.reactivex.rxjava2:rxjava:2.2.13'
@@ -66,16 +68,16 @@ dependencies {
     // OkHttp3
     api 'com.squareup.okhttp3:okhttp:3.10.0'
     api 'com.squareup.okio:okio:1.8.0'
+    // Retrofit
+    api 'com.squareup.retrofit2:retrofit:2.7.0'
     // Butter Knife
     api 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
     // Gson 服务器数据交互
     api 'com.alibaba:fastjson:1.2.61'
     api 'com.google.code.gson:gson:2.8.6'
+    api 'com.squareup.retrofit2:converter-gson:2.7.0'
     // Glide
     api "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
     annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
-    // ARouter
-    api 'com.alibaba:arouter-api:1.5.0'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 }
