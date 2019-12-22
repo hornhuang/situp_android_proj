@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="user_name">30sp</dimen>
+    <dimen name="user_introduce">15sp</dimen>
+    <dimen name="user_icon_padding">50sp</dimen>
+
+    <dimen name="function_item_size">17sp</dimen>
+    <dimen name="function_item_margin">13sp</dimen>
+    <dimen name="mine_item_width">400dp</dimen>
+
+    <!--    登录注册按钮间隙-->
+    <dimen name="btn_margin">5dp</dimen>
+    <!--    按钮字体大小-->
+    <dimen name="btn_text_size">18sp</dimen>
+
+    <dimen name="update_img_size">150sp</dimen>
+    <dimen name="update_img_margin">5sp</dimen>
+    <dimen name="update_img_radius">8sp</dimen>
+
+    <dimen name="mine_img_size">50sp</dimen>
+    <dimen name="mine_img_size_small">30sp</dimen>
+    <dimen name="mine_img_margin">15sp</dimen>
+
+    <dimen name="shape_drawable_radius">25sp</dimen>
+
+    <dimen name="post_item_divider">15sp</dimen>
+    <dimen name="post_page_content">24sp</dimen>
+
+</resources>

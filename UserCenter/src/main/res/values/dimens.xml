@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <!--    登录注册按钮间隙-->
-    <dimen name="btn_margin">5dp</dimen>
-    <!--    按钮字体大小-->
-    <dimen name="btn_text_size">18sp</dimen>
-
-</resources>

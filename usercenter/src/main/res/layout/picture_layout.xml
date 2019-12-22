@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="pictureviewmodel"
+            type="com.fishinwater.login.model.view.PictureViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/update_img_margin"
+        app:cardCornerRadius="@dimen/update_img_radius"
+        android:background="@color/black">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:background="@color/black"
+            imageUrl="@{pictureviewmodel.profileViewModel.imageUrl}"/>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

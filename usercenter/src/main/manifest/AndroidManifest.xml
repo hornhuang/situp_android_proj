@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fishinwater.login">
+
+    <application>
+        <activity android:name=".ui.activity.PictureSettingActivity"></activity>
+        <activity android:name=".ui.activity.PictureSelectorActivity" />
+        <activity android:name=".ui.activity.UpdateUserActivity" />
+        <activity android:name=".ui.activity.LogActivity" />
+    </application>
+
+</manifest>

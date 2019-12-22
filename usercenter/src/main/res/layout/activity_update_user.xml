@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="updateViewModel"
+            type="com.fishinwater.login.model.view.UpdateViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.activity.UpdateUserActivity">
+
+        <ImageView
+            android:id="@+id/bac_img"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/user_img"
+            android:layout_width="@dimen/update_img_size"
+            android:layout_height="@dimen/update_img_size"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="175dp"
+            circleImageUrl="@{updateViewModel.profileViewModel.imageUrl}"/>
+
+        <EditText
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/user_name"
+            app:layout_constraintTop_toTopOf="@id/user_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@null"
+            android:inputType="none"
+            android:layout_marginTop="175dp"
+            android:text="@={updateViewModel.userName}"/>
+
+        <EditText
+            android:id="@+id/user_introduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/user_introduce"
+            app:layout_constraintTop_toTopOf="@id/user_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@null"
+            android:inputType="none"
+            android:layout_marginTop="75dp"
+            android:text="@={updateViewModel.userIntroduction}"/>
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toTopOf="@id/user_introduce"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="75dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
