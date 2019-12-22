@@ -104,7 +104,8 @@ public class LoginFragment extends BaseFragment implements IOnResultListener {
         call.enqueue(new Callback<UserBean>() {
             @Override
             public void onResponse(Call<UserBean> call, Response<UserBean> response) {
-                Log.d("123123", "msg--" + response.body().toString());
+                Log.d("123123", "msg-" + response.body().toString());
+
             }
 
             @Override
