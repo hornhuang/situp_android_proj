@@ -18,7 +18,7 @@ import java.lang.ref.WeakReference;
  * @author fishinwater-1999
  * @version 2019-11-12
  */
-public abstract class BaseFragment<V extends IOnResultListener, P extends IBasePresenter<V>> extends Fragment {
+public abstract class BaseFragment<V , P extends IBasePresenter<V>> extends Fragment {
 
     /**
      * View 层

@@ -6,7 +6,7 @@ import com.fishinwater.login.ui.fragment.IOnResultListener;
  * @author fishinwater-1999
  * @version 2019-11-12
  */
-public interface IBasePresenter<V extends IOnResultListener> {
+public interface IBasePresenter<V> {
 
     /**
      * 绑定
@@ -16,9 +16,9 @@ public interface IBasePresenter<V extends IOnResultListener> {
 
     void detachView();
 
-    void resister(String userName, String userPassword, IOnResultListener resultListener);
+    void resister(String userName, String userPassword, V resultListener);
 
-    void login(String userName, String userPassword, IOnResultListener resultListener);
+    void login(String userName, String userPassword, V resultListener);
 
     V getLoginVew();
 

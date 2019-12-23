@@ -23,7 +23,7 @@ import com.fishinwater.login.presenter.LogPresenter;
  *
  * @author fishinwater-1999
  */
-public class ResistFragment extends BaseFragment implements IOnResultListener {
+public class ResistFragment extends BaseFragment implements ILoginView {
 
     private IBaseLog mViewModel;
 
@@ -61,7 +61,7 @@ public class ResistFragment extends BaseFragment implements IOnResultListener {
     }
 
     @Override
-    public IOnResultListener createView() {
+    public ILoginView createView() {
         return this;
     }
 
@@ -73,34 +73,40 @@ public class ResistFragment extends BaseFragment implements IOnResultListener {
         return new LogPresenter(mViewModel);
     }
 
-    @Override
-    public void onSucceed(String response) {
-        Toast.makeText(getActivity(), response + "注册成功，请登录", Toast.LENGTH_LONG).show();
-        getLogActivity().login(this.getView());
-    }
-
-    @Override
-    public void onFailed(Exception error) {
-        Toast.makeText(getActivity(), "失败，原因：" + error.getMessage(), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onNameWrong() {
-        Toast.makeText(getActivity(), "用户名错误", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onPasswordWrong() {
-        Toast.makeText(getActivity(), "密码错误", Toast.LENGTH_LONG).show();
-    }
-
     public void resist(View v) {
-        getPresenter().resister(mAccountEdit.getText().toString(), mPasswordEdit.getText().toString(), this);
+        getPresenter().resister(getUserName(),getUserPwd(), this);
     }
 
     @Override
     public void onDestroy() {
         onDetach();
         super.onDestroy();
+    }
+
+    @Override
+    public String getUserName() {
+        return mAccountEdit.getText().toString();
+    }
+
+    @Override
+    public String getUserPwd() {
+        return mPasswordEdit.getText().toString();
+    }
+
+    @Override
+    public void showLoginSuccess(String response) {
+        Toast.makeText(getActivity(), response + "注册成功，请登录", Toast.LENGTH_LONG).show();
+        getLogActivity().login(this.getView());
+    }
+
+    @Override
+    public void showLoginFailed(ErrCode errCode) {
+        if (errCode == ErrCode.WRONG_USER_NAME) {
+            Toast.makeText(getActivity(), "用户名错误", Toast.LENGTH_LONG).show();
+        }else if (errCode == ErrCode.WRONG_USER_PWD){
+            Toast.makeText(getActivity(), "密码错误", Toast.LENGTH_LONG).show();
+        }else if (errCode == ErrCode.WRONG_NET_WORK) {
+            Toast.makeText(getActivity(), "未知，请检查网络", Toast.LENGTH_LONG).show();
+        }
     }
 }

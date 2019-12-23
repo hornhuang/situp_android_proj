@@ -6,7 +6,7 @@ import com.fishinwater.login.ui.fragment.IOnResultListener;
  * @author fishinwater-1999
  * @version 2019-11-12
  */
-public abstract class BasePresenter<V extends IOnResultListener> implements IBasePresenter<V> {
+public abstract class BasePresenter<V> implements IBasePresenter<V> {
 
     private V view;
 
@@ -18,12 +18,6 @@ public abstract class BasePresenter<V extends IOnResultListener> implements IBas
     @Override
     public void detachView() {
         this.view = null;
-    }
-
-
-    @Override
-    public void login(String userName, String userPassword, IOnResultListener resultListener) {
-
     }
 
     @Override

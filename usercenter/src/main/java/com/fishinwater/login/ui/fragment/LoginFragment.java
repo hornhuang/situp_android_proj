@@ -36,7 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * @author fishinwater-1999
  */
-public class LoginFragment extends BaseFragment implements IOnResultListener {
+public class LoginFragment extends BaseFragment<ILoginView, LogPresenter> implements ILoginView {
 
     private static final String TAG = "LoginFragment";
 
@@ -71,85 +71,23 @@ public class LoginFragment extends BaseFragment implements IOnResultListener {
     }
 
     public void login(View v) {
-        // baseUrl() 设置路由地址
-        Retrofit retrofit = new Retrofit
-                .Builder()
-                .baseUrl(ApiUtils.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        // 设置参数
-        UserMgrService service = retrofit.create(UserMgrService.class);
-        Call<UserBean> call = service.login( mAccountEdit.getText().toString(),
-                mPasswordEdit.getText().toString());
-        // 回调
-        call.enqueue(new Callback<UserBean>() {
-            @Override
-            public void onResponse(Call<UserBean> call, Response<UserBean> response) {
-                Log.d(TAG, response.body().toString());
-                LoginFragment.this.onSucceed(JSONUtils.objToString(response.body()));
-            }
-
-            @Override
-            public void onFailure(Call<UserBean> call, Throwable t) {
-                // 失败时做处理
-            }
-        });
-
-
-        // 发送同步请求
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Response<UserBean> response = call.execute();
-//                    Log.d("123123", "msg--" + response.code() + response.body());
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).start();
-
-//        getPresenter().login(
-//                mAccountEdit.getText().toString(),
-//                mPasswordEdit.getText().toString(),
-//                this);
+        getPresenter().login(
+                mAccountEdit.getText().toString(),
+                mPasswordEdit.getText().toString(),
+                this);
     }
 
     @Override
-    public IOnResultListener createView() {
+    public ILoginView createView() {
         return this;
     }
 
     @Override
-    public IBasePresenter createProsenter() {
+    public LogPresenter createProsenter() {
         if (mLogViewModel == null) {
             mLogViewModel = new LogViewModel();
         }
         return new LogPresenter(mLogViewModel);
-    }
-
-    @Override
-    public void onSucceed(String response) {
-        Toast.makeText(getActivity(), response, Toast.LENGTH_LONG).show();
-        String user_id = JSONUtils.StringToObj(UserBean.class, response).getUser_id();
-        SharedPreferencesUtil.putString(getActivity(), SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.USER_ID, user_id);
-        ARouter.getInstance().build(RouteUtils.MainActivity).navigation();
-        getActivity().finish();
-    }
-
-    @Override
-    public void onFailed(Exception error) {
-        Toast.makeText(getActivity(), "onFailed" + error.toString(), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onNameWrong() {
-        Toast.makeText(getActivity(), "onNameWrong", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onPasswordWrong() {
-        Toast.makeText(getActivity(), "onPasswordWrong", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -158,4 +96,32 @@ public class LoginFragment extends BaseFragment implements IOnResultListener {
         super.onDestroy();
     }
 
+    @Override
+    public String getUserName() {
+        return null;
+    }
+
+    @Override
+    public String getUserPwd() {
+        return null;
+    }
+
+    @Override
+    public void showLoginSuccess(String response) {
+        Toast.makeText(getActivity(), "登录成功", Toast.LENGTH_LONG).show();
+        SharedPreferencesUtil.putString(getActivity(), SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.USER_ID, response);
+        ARouter.getInstance().build(RouteUtils.MainActivity).navigation();
+        getActivity().finish();
+    }
+
+    @Override
+    public void showLoginFailed(ErrCode errCode) {
+        if (errCode == ErrCode.WRONG_USER_NAME) {
+            Toast.makeText(getActivity(), "用户名错误", Toast.LENGTH_LONG).show();
+        }else if (errCode == ErrCode.WRONG_USER_PWD){
+            Toast.makeText(getActivity(), "密码错误", Toast.LENGTH_LONG).show();
+        }else if (errCode == ErrCode.WRONG_NET_WORK) {
+            Toast.makeText(getActivity(), "未知，请检查网络", Toast.LENGTH_LONG).show();
+        }
+    }
 }
