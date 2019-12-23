@@ -1,5 +1,13 @@
 # FIWKeepApp
-a app like keep
+
+![Version 1.0.2](https://img.shields.io/badge/SdkVersion-1.0.2-orange.svg?style=flat)
+![SdkVersion 28](https://img.shields.io/badge/SdkVersion-28-green.svg?style=flat)
+![rxjava2 2.2.3](https://img.shields.io/badge/rxjava2-2.2.3-red.svg?style=flat)
+![rxandroid 2.1.0](https://img.shields.io/badge/rxandroid-2.1.0-grown.svg?style=flat)
+![okhttp3 3.12.1](https://img.shields.io/badge/okhttp3-3.12.1-blue.svg?style=flat)
+![glide 4.9.0](https://img.shields.io/badge/glide-4.9.0-green.svg?style=flat)
+
+a app like keep, you can edit your plans here, and you can share your life to others by post, too.
 
 - Provider 依赖于 BaseLibrary
 - 其他模块依赖于 Provider
