@@ -77,13 +77,23 @@ public class LoginFragment extends BaseFragment implements IOnResultListener {
                 .baseUrl(ApiUtils.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        // 获取接口对象 - > UserMgrService
-        UserMgrService userMgrService = retrofit.create(UserMgrService.class);
-
-        // 请求 Login 方法
-        final Call<UserBean> call = userMgrService.login(
-                mAccountEdit.getText().toString(),
+        // 设置参数
+        UserMgrService service = retrofit.create(UserMgrService.class);
+        Call<UserBean> call = service.login( mAccountEdit.getText().toString(),
                 mPasswordEdit.getText().toString());
+        // 回调
+        call.enqueue(new Callback<UserBean>() {
+            @Override
+            public void onResponse(Call<UserBean> call, Response<UserBean> response) {
+                Log.d(TAG, response.body().toString());
+                LoginFragment.this.onSucceed(JSONUtils.objToString(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call<UserBean> call, Throwable t) {
+                // 失败时做处理
+            }
+        });
 
 
         // 发送同步请求
@@ -99,25 +109,10 @@ public class LoginFragment extends BaseFragment implements IOnResultListener {
 //            }
 //        }).start();
 
-        // 发送异步请求
-        // 系统自动创建线程池，以线程池方法处理
-        call.enqueue(new Callback<UserBean>() {
-            @Override
-            public void onResponse(Call<UserBean> call, Response<UserBean> response) {
-                Log.d("123123", "msg-" + response.body().toString());
-
-            }
-
-            @Override
-            public void onFailure(Call<UserBean> call, Throwable t) {
-
-            }
-        });
-
-        getPresenter().login(
-                mAccountEdit.getText().toString(),
-                mPasswordEdit.getText().toString(),
-                this);
+//        getPresenter().login(
+//                mAccountEdit.getText().toString(),
+//                mPasswordEdit.getText().toString(),
+//                this);
     }
 
     @Override
