@@ -27,6 +27,12 @@ Due to college students' free and flexible spare time, most of them use their ti
 ![排行](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/Dec-23-2019%2009-38-20.gif)
 ![数据统计](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/Dec-23-2019%2009-38-58.gif)</br>
 
+# DESIGN
+
+> Data requirements e-r diagram
+
+![数据 E-R 图](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/%E5%9B%BE%E7%89%871.png)
+
 # LICENSE
 MIT License
 
