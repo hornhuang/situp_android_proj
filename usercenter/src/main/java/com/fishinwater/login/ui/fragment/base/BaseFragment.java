@@ -1,4 +1,4 @@
-package com.fishinwater.login.ui.fragment;
+package com.fishinwater.login.ui.fragment.base;
 
 import android.content.Context;
 import android.os.Bundle;

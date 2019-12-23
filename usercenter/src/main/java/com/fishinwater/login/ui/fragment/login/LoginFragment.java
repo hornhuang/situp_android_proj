@@ -1,4 +1,4 @@
-package com.fishinwater.login.ui.fragment;
+package com.fishinwater.login.ui.fragment.login;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,39 +11,37 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.fishinwater.base.common.RouteUtils;
+import com.fishinwater.base.common.preferences.SharedPreferencesUtil;
 import com.fishinwater.login.R;
-import com.fishinwater.login.databinding.ResistFragmentBinding;
-import com.fishinwater.login.model.IBaseLog;
+import com.fishinwater.login.databinding.LoginFragmentBinding;
 import com.fishinwater.login.model.LogViewModel;
-import com.fishinwater.login.presenter.IBasePresenter;
 import com.fishinwater.login.presenter.LogPresenter;
+import com.fishinwater.login.ui.fragment.ILoginView;
+import com.fishinwater.login.ui.fragment.base.BaseFragment;
 
 /**
- * 注册界面
- *
  * @author fishinwater-1999
  */
-public class ResistFragment extends BaseFragment implements ILoginView {
+public class LoginFragment extends BaseFragment<ILoginView, LogPresenter> implements ILoginView {
 
-    private IBaseLog mViewModel;
+    private static final String TAG = "LoginFragment";
 
-    private EditText mAccountEdit;
+    EditText mAccountEdit;
 
-    private EditText mPasswordEdit;
+    EditText mPasswordEdit;
+
+    private LogViewModel mLogViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        ResistFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.resist_fragment, container, false);
-        binding.setLogCallback(getLogActivity());
+        LoginFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.login_fragment, container, false);
         View view = binding.getRoot();
+        binding.setLogCallback(getLogActivity());
+        binding.setFragment(this);
         iniView(view);
-        binding.resist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resist(v);
-            }
-        });
         return view;
     }
 
@@ -55,9 +53,16 @@ public class ResistFragment extends BaseFragment implements ILoginView {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (mViewModel == null) {
-            mViewModel = new LogViewModel();
+        if (mLogViewModel == null) {
+            mLogViewModel = new LogViewModel();
         }
+    }
+
+    public void login(View v) {
+        getPresenter().login(
+                mAccountEdit.getText().toString(),
+                mPasswordEdit.getText().toString(),
+                this);
     }
 
     @Override
@@ -66,15 +71,11 @@ public class ResistFragment extends BaseFragment implements ILoginView {
     }
 
     @Override
-    public IBasePresenter createProsenter() {
-        if (mViewModel == null) {
-            mViewModel = new LogViewModel();
+    public LogPresenter createProsenter() {
+        if (mLogViewModel == null) {
+            mLogViewModel = new LogViewModel();
         }
-        return new LogPresenter(mViewModel);
-    }
-
-    public void resist(View v) {
-        getPresenter().resister(getUserName(),getUserPwd(), this);
+        return new LogPresenter(mLogViewModel);
     }
 
     @Override
@@ -85,18 +86,20 @@ public class ResistFragment extends BaseFragment implements ILoginView {
 
     @Override
     public String getUserName() {
-        return mAccountEdit.getText().toString();
+        return null;
     }
 
     @Override
     public String getUserPwd() {
-        return mPasswordEdit.getText().toString();
+        return null;
     }
 
     @Override
     public void showLoginSuccess(String response) {
-        Toast.makeText(getActivity(), response + "注册成功，请登录", Toast.LENGTH_LONG).show();
-        getLogActivity().login(this.getView());
+        Toast.makeText(getActivity(), "登录成功", Toast.LENGTH_LONG).show();
+        SharedPreferencesUtil.putString(getActivity(), SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.USER_ID, response);
+        ARouter.getInstance().build(RouteUtils.MainActivity).navigation();
+        getActivity().finish();
     }
 
     @Override

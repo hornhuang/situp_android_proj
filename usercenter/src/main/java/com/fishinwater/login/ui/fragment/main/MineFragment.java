@@ -1,4 +1,4 @@
-package com.fishinwater.login.ui.fragment;
+package com.fishinwater.login.ui.fragment.main;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.fishinwater.base.common.RouteUtils;
 import com.fishinwater.base.common.preferences.SharedPreferencesUtil;
 import com.fishinwater.login.databinding.MineFragmentBinding;

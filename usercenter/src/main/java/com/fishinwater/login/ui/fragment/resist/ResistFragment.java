@@ -1,7 +1,6 @@
-package com.fishinwater.login.ui.fragment;
+package com.fishinwater.login.ui.fragment.resist;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,48 +11,41 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.fishinwater.base.callback.UserMgrService;
-import com.fishinwater.base.common.ApiUtils;
-import com.fishinwater.base.common.JSONUtils;
-import com.fishinwater.base.common.RouteUtils;
-import com.fishinwater.base.common.preferences.SharedPreferencesUtil;
-import com.fishinwater.base.data.protocol.UserBean;
 import com.fishinwater.login.R;
-import com.fishinwater.login.databinding.LoginFragmentBinding;
+import com.fishinwater.login.databinding.ResistFragmentBinding;
+import com.fishinwater.login.model.IBaseLog;
 import com.fishinwater.login.model.LogViewModel;
 import com.fishinwater.login.presenter.IBasePresenter;
 import com.fishinwater.login.presenter.LogPresenter;
-
-import java.io.IOException;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import com.fishinwater.login.ui.fragment.ILoginView;
+import com.fishinwater.login.ui.fragment.base.BaseFragment;
 
 /**
+ * 注册界面
+ *
  * @author fishinwater-1999
  */
-public class LoginFragment extends BaseFragment<ILoginView, LogPresenter> implements ILoginView {
+public class ResistFragment extends BaseFragment implements ILoginView {
 
-    private static final String TAG = "LoginFragment";
+    private IBaseLog mViewModel;
 
-    EditText mAccountEdit;
+    private EditText mAccountEdit;
 
-    EditText mPasswordEdit;
-
-    private LogViewModel mLogViewModel;
+    private EditText mPasswordEdit;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        LoginFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.login_fragment, container, false);
-        View view = binding.getRoot();
+        ResistFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.resist_fragment, container, false);
         binding.setLogCallback(getLogActivity());
-        binding.setFragment(this);
+        View view = binding.getRoot();
         iniView(view);
+        binding.resist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resist(v);
+            }
+        });
         return view;
     }
 
@@ -65,16 +57,9 @@ public class LoginFragment extends BaseFragment<ILoginView, LogPresenter> implem
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (mLogViewModel == null) {
-            mLogViewModel = new LogViewModel();
+        if (mViewModel == null) {
+            mViewModel = new LogViewModel();
         }
-    }
-
-    public void login(View v) {
-        getPresenter().login(
-                mAccountEdit.getText().toString(),
-                mPasswordEdit.getText().toString(),
-                this);
     }
 
     @Override
@@ -83,11 +68,15 @@ public class LoginFragment extends BaseFragment<ILoginView, LogPresenter> implem
     }
 
     @Override
-    public LogPresenter createProsenter() {
-        if (mLogViewModel == null) {
-            mLogViewModel = new LogViewModel();
+    public IBasePresenter createProsenter() {
+        if (mViewModel == null) {
+            mViewModel = new LogViewModel();
         }
-        return new LogPresenter(mLogViewModel);
+        return new LogPresenter(mViewModel);
+    }
+
+    public void resist(View v) {
+        getPresenter().resister(getUserName(),getUserPwd(), this);
     }
 
     @Override
@@ -98,20 +87,18 @@ public class LoginFragment extends BaseFragment<ILoginView, LogPresenter> implem
 
     @Override
     public String getUserName() {
-        return null;
+        return mAccountEdit.getText().toString();
     }
 
     @Override
     public String getUserPwd() {
-        return null;
+        return mPasswordEdit.getText().toString();
     }
 
     @Override
     public void showLoginSuccess(String response) {
-        Toast.makeText(getActivity(), "登录成功", Toast.LENGTH_LONG).show();
-        SharedPreferencesUtil.putString(getActivity(), SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.USER_ID, response);
-        ARouter.getInstance().build(RouteUtils.MainActivity).navigation();
-        getActivity().finish();
+        Toast.makeText(getActivity(), response + "注册成功，请登录", Toast.LENGTH_LONG).show();
+        getLogActivity().login(this.getView());
     }
 
     @Override

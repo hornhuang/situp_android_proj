@@ -1,4 +1,4 @@
-package com.fishinwater.login.ui.fragment;
+package com.fishinwater.login.ui.fragment.chart;
 
 import androidx.annotation.StringDef;
 import androidx.databinding.DataBindingUtil;
