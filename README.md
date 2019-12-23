@@ -7,6 +7,8 @@
 ![okhttp3 3.12.1](https://img.shields.io/badge/okhttp3-3.12.1-blue.svg?style=flat)
 ![glide 4.9.0](https://img.shields.io/badge/glide-4.9.0-green.svg?style=flat)
 
+![中文文档](https://github.com/FishInWater-1999/FIWKeepApp/blob/master/README_cn.md)
+
 a app like keep, you can edit your plans here, and you can share your life to others by post, too.
 
 With the progress of science and technology and the popularity of the Internet, greatly changed the way and speed of information dissemination, effectively improved the efficiency of learning and work, so that people's pace of life is getting faster and faster, coupled with high density of learning and high pressure work, college students generally lack of exercise, leading to a decline in health.The health problem of college students has become a social problem, more and more college students realize the importance of fitness, which makes college students pay more and more attention to fitness.
