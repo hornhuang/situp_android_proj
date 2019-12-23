@@ -24,9 +24,10 @@ public interface UserMgrService {
     Call<UserBean> login(@Field("username") String username, @Field("password") String password);
 
     /**
-     * GET 用 Query
+     * POST 用 Field
      */
-//    @GET("login")
-//    Call<UserBean> login(@Query("username") String username, @Query("password") String password);
+    @POST("adduser")
+    @FormUrlEncoded
+    Call<String> resist(@Field("username") String username, @Field("password") String password);
 
 }
