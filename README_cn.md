@@ -7,7 +7,7 @@
 ![okhttp3 3.12.1](https://img.shields.io/badge/okhttp3-3.12.1-blue.svg?style=flat)
 ![glide 4.9.0](https://img.shields.io/badge/glide-4.9.0-green.svg?style=flat)
 
-![中文文档](https://github.com/FishInWater-1999/FIWKeepApp/edit/master/README.md)
+[中文文档](https://github.com/FishInWater-1999/FIWKeepApp/edit/master/README.md)
 
 a app like keep, you can edit your plans here, and you can share your life to others by post, too.
 
