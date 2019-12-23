@@ -9,8 +9,9 @@
 
 a app like keep, you can edit your plans here, and you can share your life to others by post, too.
 
-- Provider 依赖于 BaseLibrary
-- 其他模块依赖于 Provider
+With the progress of science and technology and the popularity of the Internet, greatly changed the way and speed of information dissemination, effectively improved the efficiency of learning and work, so that people's pace of life is getting faster and faster, coupled with high density of learning and high pressure work, college students generally lack of exercise, leading to a decline in health.The health problem of college students has become a social problem, more and more college students realize the importance of fitness, which makes college students pay more and more attention to fitness.
+
+Due to college students' free and flexible spare time, most of them use their time mainly in the aspects of associations, organizations, games or learning, which makes the time arrangement not reasonable and scientific and ignores the improvement of their physical quality.Therefore, based on the current situation, SitUp implements the calendar punch plan to train users to form good fitness habits.
 
 # Effect sgraphic
 #### Fingerprints and check-in
