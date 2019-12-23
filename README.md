@@ -15,17 +15,17 @@ a app like keep, you can edit your plans here, and you can share your life to ot
 # Effect sgraphic
 #### Fingerprints and check-in
 ![指纹](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/Dec-23-2019%2009-24-30.gif)
-![签到](https://github.com/FishInWater-1999/PictureRepository/blob/master/WikiFiles/Dec-23-2019%2009-25-13.gif)
-![论坛](https://github.com/FishInWater-1999/PictureRepository/blob/master/WikiFiles/Dec-23-2019%2009-27-03.gif)</br>
+![签到](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/Dec-23-2019%2009-25-13.gif)
+![论坛](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/Dec-23-2019%2009-27-03.gif)</br>
 
-![发文](https://github.com/FishInWater-1999/PictureRepository/blob/master/WikiFiles/Dec-23-2019%2009-27-53.gif)
-![数据统计](https://github.com/FishInWater-1999/PictureRepository/blob/master/WikiFiles/Dec-23-2019%2009-29-57.gif)
-![排行](https://github.com/FishInWater-1999/PictureRepository/blob/master/WikiFiles/Dec-23-2019%2009-36-53.gif)</br>
+![发文](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/Dec-23-2019%2009-27-53.gif)
+![数据统计](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/Dec-23-2019%2009-29-57.gif)
+![排行](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/Dec-23-2019%2009-36-53.gif)</br>
 
-![数据统计](https://github.com/FishInWater-1999/PictureRepository/blob/master/WikiFiles/Dec-23-2019%2009-37-48.gif)
-![排行](https://github.com/FishInWater-1999/PictureRepository/blob/master/WikiFiles/Dec-23-2019%2009-38-20.gif)
-![数据统计](https://github.com/FishInWater-1999/PictureRepository/blob/master/WikiFiles/Dec-23-2019%2009-38-58.gif)</br>
-![排行](https://github.com/FishInWater-1999/PictureRepository/blob/master/WikiFiles/)</br>
+![数据统计](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/Dec-23-2019%2009-37-48.gif)
+![排行](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/Dec-23-2019%2009-38-20.gif)
+![数据统计](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/Dec-23-2019%2009-38-58.gif)</br>
+![排行](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/)</br>
 
 # LICENSE
 MIT License
