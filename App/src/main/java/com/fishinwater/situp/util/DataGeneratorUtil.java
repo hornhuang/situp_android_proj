@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.fishinwater.base.common.RouteUtils;
-import com.fishinwater.login.ui.fragment.ChartFragment;
+import com.fishinwater.login.ui.fragment.chart.ChartFragment;
 import com.fishinwater.situp.R;
 
 /**
