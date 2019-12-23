@@ -9,13 +9,13 @@
             type="com.fishinwater.login.model.MineViewModel" />
         <variable
             name="my_fragment"
-            type="com.fishinwater.login.ui.fragment.MineFragment" />
+            type="com.fishinwater.login.ui.fragment.main.MineFragment" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.MineFragment">
+        tools:context=".ui.fragment.main.MineFragment">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,22 +1,12 @@
 package com.fishinwater.login.model;
 
-import android.util.Log;
-
 import androidx.lifecycle.ViewModel;
 
 import com.fishinwater.base.callback.IBaseRetCallback;
 import com.fishinwater.base.callback.UserMgrService;
-import com.fishinwater.base.common.JSONUtils;
-import com.fishinwater.base.common.ResponseUtil;
 import com.fishinwater.base.common.ApiUtils;
 import com.fishinwater.base.data.protocol.UserBean;
-import com.fishinwater.login.ui.fragment.ILoginView;
-import com.fishinwater.login.ui.fragment.IOnResultListener;
-import com.fishinwater.login.ui.fragment.LoginFragment;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
-import okhttp3.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;

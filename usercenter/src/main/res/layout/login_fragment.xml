@@ -8,7 +8,7 @@
             type="com.fishinwater.login.ui.activity.LogActivity" />
         <variable
             name="fragment"
-            type="com.fishinwater.login.ui.fragment.LoginFragment" />
+            type="com.fishinwater.login.ui.fragment.login.LoginFragment" />
     </data>
 
     <LinearLayout
