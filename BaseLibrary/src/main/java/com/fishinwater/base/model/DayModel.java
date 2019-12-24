@@ -23,6 +23,7 @@ public class DayModel {
 
 
     public void publishDay(String user_id, final IBaseCallback<String> callback) {
+        Log.d("123123", user_id + "=========DayModel");
         OkHttpUtils.post()
                 .url(ApiUtils.PUBLISH_DAY)
                 .addParams("user_id", user_id)
@@ -41,6 +42,10 @@ public class DayModel {
     }
 
     public void getDay(String user_id, String day_date, final StringCallback callback) {
+        if (user_id == null || user_id.length() == 0 || day_date == null || day_date.length() == 0) {
+            return;
+        }
+        Log.d("123123", user_id + "||||||||||||" + day_date);
         OkHttpUtils.post()
                 .url(ApiUtils.GET_DAY)
                 .addParams("user_id", user_id)
@@ -49,17 +54,21 @@ public class DayModel {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+                        Log.d("123123", e.getMessage() + "-------------------err-------------------");
                         callback.onError(call, e, id);
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.d("123123", "--------------------------------------");
+                        Log.d("123123", response + "------------------response--------------------");
                         callback.onResponse(response, id);
                     }
                 });
     }
 
     public void updateDay(String user_id, String day_date, final List<PlanBean> planList, final StringCallback callback) {
+        Log.d("123123", user_id + "+++++++++++++++++++++++++++" + day_date);
         getDay(user_id, day_date, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -68,9 +77,10 @@ public class DayModel {
 
             @Override
             public void onResponse(String response, int id) {
-                if (planList == null) {
+                if (planList == null || response == null || response.length() == 0) {
                     return;
                 }
+                Log.d("123123", response + "+++++++++++++++++++++++++++");
                 DayBean dayBean = JSONUtils.StringToObj(DayBean.class, response);
                 List<String> list = new ArrayList<>();
                 for (PlanBean bean : planList) {
