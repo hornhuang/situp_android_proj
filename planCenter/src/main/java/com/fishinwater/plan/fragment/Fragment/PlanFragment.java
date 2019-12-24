@@ -142,7 +142,7 @@ public class PlanFragment extends BaseFragment implements View.OnClickListener, 
      */
     private void load() {
         presenter.getPlans(SharedPreferencesUtil.getString(getActivity(), SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.USER_ID),
-             SharedPreferencesUtil.getString(getActivity(), SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.TODAY_DATE ),
+             SharedPreferencesUtil.getString(getActivity(), SharedPreferencesUtil.PRE_NAME_SITUP, SharedPreferencesUtil.CURRENT_DAY ),
              this);
     }
 

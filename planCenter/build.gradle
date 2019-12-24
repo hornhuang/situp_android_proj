@@ -1,4 +1,4 @@
-if (PLAN_IS_APPLICATION.toBoolean()) {
+if (PLAN_IS_APPLICATION) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
@@ -14,7 +14,7 @@ android {
 
 
     defaultConfig {
-        if (PLAN_IS_APPLICATION.toBoolean()) {
+        if (PLAN_IS_APPLICATION) {
             applicationId appId["plan"]
         }
         minSdkVersion cfg.MIN_SDK_VERSION
@@ -48,7 +48,7 @@ android {
     // 配置 Manifest
     sourceSets {
         main {
-            if (PLAN_IS_APPLICATION.toBoolean()) {
+            if (PLAN_IS_APPLICATION) {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
