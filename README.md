@@ -7,7 +7,7 @@
 ![okhttp3 3.12.1](https://img.shields.io/badge/okhttp3-3.12.1-blue.svg?style=flat)
 ![glide 4.9.0](https://img.shields.io/badge/glide-4.9.0-green.svg?style=flat)
 
-![中文文档](https://github.com/FishInWater-1999/FIWKeepApp/blob/master/README_cn.md)
+[中文文档](https://github.com/FishInWater-1999/FIWKeepApp/blob/master/README_cn.md)
 
 a app like keep, you can edit your plans here, and you can share your life to others by post, too.
 
@@ -42,7 +42,16 @@ Due to college students' free and flexible spare time, most of them use their ti
 
 ![](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/MVP_MVVM/mvp.png)
 
+- The view
+- A view component in MVP contains a visual part of the application.
 
+It contains only the UI and it does not contain any logic or knowledge of the data displayed. In typical implementations the view components in MVP exports an interface that is used by the Presenter. The presenter uses these interface methods to manipulate the view. Example method names would be: showProgressBar, updateData.
+
+- The presenter
+- The presenter triggers the business logic and tells the view when to update. It therefore interacts with the model and fetches and transforms data from the model to update the view. The presenter should not have, if possible, a dependency to the Android SDK.
+
+- The model
+- Contains a data provider and the code to fetch and update the data. This part of MVP updates the database or communicate with a webserver.
 
 - and the other build with MVVM architecture
 - so with is MVP？ Jsut like
