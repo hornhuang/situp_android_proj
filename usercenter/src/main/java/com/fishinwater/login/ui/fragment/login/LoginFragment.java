@@ -28,26 +28,18 @@ public class LoginFragment extends BaseFragment<ILoginView, LogPresenter> implem
 
     private static final String TAG = "LoginFragment";
 
-    EditText mAccountEdit;
-
-    EditText mPasswordEdit;
-
     private LogViewModel mLogViewModel;
+
+    private LoginFragmentBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        LoginFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.login_fragment, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.login_fragment, container, false);
         View view = binding.getRoot();
         binding.setLogCallback(getLogActivity());
         binding.setFragment(this);
-        iniView(view);
         return view;
-    }
-
-    private void iniView(View view) {
-        mAccountEdit = view.findViewById(R.id.user_account);
-        mPasswordEdit = view.findViewById(R.id.user_password);
     }
 
     @Override
@@ -60,18 +52,13 @@ public class LoginFragment extends BaseFragment<ILoginView, LogPresenter> implem
 
     public void login(View v) {
         getPresenter().login(
-                mAccountEdit.getText().toString(),
-                mPasswordEdit.getText().toString(),
+                getUserName(),
+                getUserPwd(),
                 this);
     }
 
     @Override
-    public ILoginView createView() {
-        return this;
-    }
-
-    @Override
-    public LogPresenter createProsenter() {
+    public LogPresenter createPresenter() {
         if (mLogViewModel == null) {
             mLogViewModel = new LogViewModel();
         }
@@ -79,19 +66,13 @@ public class LoginFragment extends BaseFragment<ILoginView, LogPresenter> implem
     }
 
     @Override
-    public void onDestroy() {
-        onDetach();
-        super.onDestroy();
-    }
-
-    @Override
     public String getUserName() {
-        return null;
+        return binding.userAccount.getText().toString();
     }
 
     @Override
     public String getUserPwd() {
-        return null;
+        return binding.userPassword.getText().toString();
     }
 
     @Override
