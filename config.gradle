@@ -10,9 +10,9 @@ ext {
     appId = [
 
             "app" : "com.fishinwater.situp",
-            "plan" : "",
-            "post" : "",
-            "user" : ""
+            "plan" : "com.fishinwater.plan",
+            "post" : "com.fishinwater.postcenter",
+            "user" : "com.fishinwater.login"
 
     ]
 
