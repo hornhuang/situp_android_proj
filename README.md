@@ -35,6 +35,47 @@ Due to college students' free and flexible spare time, most of them use their ti
 
 ![数据 E-R 图](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/%E5%9B%BE%E7%89%871.png)
 
+# ARCHITECTURE
+
+- some module like userCenter build with MVP architecture
+- so with is MVP？ Jsut like
+
+![](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/MVP_MVVM/mvp.png)
+
+
+
+- and the other build with MVVM architecture
+- so with is MVP？ Jsut like
+
+![](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/MVP_MVVM/MVVM.png)
+
+> MVVM stands for Model, View, ViewModel.
+
+> Model: This holds the data of the application. It cannot directly talk to the View. Generally, it’s recommended to expose the data to the ViewModel through Observables.
+> View: It represents the UI of the application devoid of any Application Logic. It observes the ViewModel.
+> ViewModel: It acts as a link between the Model and the View. It’s responsible for transforming the data from the Model. It provides data streams to the View. It also uses hooks or callbacks to update the View. It’ll ask for the data from the Model.
+> The following flow illustrates the core MVVM Pattern.
+
+## DIFFERENCE
+
+> ViewModel replaces the Presenter in the Middle Layer.
+- The Presenter holds references to the View. The ViewModel doesn’t.
+- The Presenter updates the View using the classical way (triggering methods).
+- The ViewModel sends data streams.
+- The Presenter and View are in a 1 to 1 relationship.
+- The View and the ViewModel are in a 1 to many relationship.
+- The ViewModel does not know that the View is listening to it.
+
+> There are two ways to implement MVVM in Android:
+
+- Data Binding
+- RXJava
+
+> In this tutorial, we’ll be using Data Binding only.
+> Data Binding Library was introduced by Google in order to bind data directly in the xml layout. For more info on Data Binding, refer this tutorial.
+
+- We’ll be creating a simple Login Page Example Application that asks for user inputs. We’ll see how the ViewModel notifies the View when to show a Toast Message without keeping a reference of the View.
+
 # LICENSE
 MIT License
 
