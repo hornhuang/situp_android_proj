@@ -6,7 +6,7 @@ package com.fishinwater.base.common;
  */
 public class ApiUtils {
 
-    private static final String IPv4 = "47.107.132.227";
+    private static final String IPv4 = "hyh.hljdx.net";
 
     public static final String BASE_URL = "http://"+ IPv4 +":8080/SitUpWebServer/";
 
