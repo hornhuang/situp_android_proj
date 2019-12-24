@@ -63,12 +63,7 @@ public class ResistFragment extends BaseFragment implements ILoginView {
     }
 
     @Override
-    public ILoginView createView() {
-        return this;
-    }
-
-    @Override
-    public IBasePresenter createProsenter() {
+    public IBasePresenter createPresenter() {
         if (mViewModel == null) {
             mViewModel = new LogViewModel();
         }
