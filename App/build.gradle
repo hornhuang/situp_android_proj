@@ -78,15 +78,15 @@ dependencies {
     compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
 
     // 帖子模块 postcenter
-    if (!POST_IS_APPLICATION.toBoolean()) {
+    if (!POST_IS_APPLICATION) {
         implementation project(path: ':postcenter')
     }
     // 用户模块 login
-    if (!LOGIN_IS_APPLICATION.toBoolean()) {
+    if (!LOGIN_IS_APPLICATION) {
         implementation project(path: ':usercenter')
     }
     // 用户模块 login
-    if (!PLAN_IS_APPLICATION.toBoolean()) {
+    if (!PLAN_IS_APPLICATION) {
         implementation project(path: ':planCenter')
     }
     implementation project(path: ':Provider')
