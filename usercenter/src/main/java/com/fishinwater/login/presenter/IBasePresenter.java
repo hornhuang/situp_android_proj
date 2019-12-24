@@ -14,12 +14,25 @@ public interface IBasePresenter<V> {
      */
     void attachView(V mLogView);
 
+    /**
+     * 解绑
+     */
     void detachView();
 
+    /**
+     * 注册
+     * @param userName
+     * @param userPassword
+     * @param resultListener
+     */
     void resister(String userName, String userPassword, V resultListener);
 
+    /**
+     * 登录
+     * @param userName
+     * @param userPassword
+     * @param resultListener
+     */
     void login(String userName, String userPassword, V resultListener);
-
-    V getLoginVew();
 
 }

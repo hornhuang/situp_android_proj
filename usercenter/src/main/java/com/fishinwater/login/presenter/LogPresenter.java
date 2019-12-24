@@ -69,7 +69,7 @@ public class LogPresenter extends BasePresenter<ILoginView> {
 
             @Override
             public void onFailed(Throwable t) {
-
+                iLoginView.showLoginFailed(ILoginView.ErrCode.WRONG_NET_WORK);
             }
         });
 

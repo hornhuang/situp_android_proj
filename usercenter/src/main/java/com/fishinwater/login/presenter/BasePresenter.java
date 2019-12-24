@@ -1,5 +1,7 @@
 package com.fishinwater.login.presenter;
 
+import androidx.annotation.NonNull;
+
 import com.fishinwater.login.ui.fragment.IOnResultListener;
 
 /**
@@ -11,18 +13,15 @@ public abstract class BasePresenter<V> implements IBasePresenter<V> {
     private V view;
 
     @Override
-    public void attachView(V mLogView) {
-        this.view = mLogView;
+    public void attachView(@NonNull V mLogView) {
+        view = mLogView;
     }
 
     @Override
     public void detachView() {
-        this.view = null;
-    }
-
-    @Override
-    public V getLoginVew() {
-        return this.view;
+        if (view != null) {
+            view = null;
+        }
     }
 
 }
