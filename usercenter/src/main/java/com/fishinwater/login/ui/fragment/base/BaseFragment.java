@@ -5,14 +5,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.Bindable;
 import androidx.fragment.app.Fragment;
 
-import com.fishinwater.login.callback.ILogCallback;
 import com.fishinwater.login.presenter.IBasePresenter;
 import com.fishinwater.login.ui.activity.LogActivity;
-
-import java.lang.ref.WeakReference;
 
 /**
  * @author fishinwater-1999
@@ -21,51 +17,70 @@ import java.lang.ref.WeakReference;
 public abstract class BaseFragment<V , P extends IBasePresenter<V>> extends Fragment {
 
     /**
-     * View 层
-     */
-    private V mActivityView;
-
-    /**
      * Presenter 层
      */
     private P mBaseResister;
 
+    /**
+     * 暴露 Activity 接口，用于绑定
+     */
     private LogActivity logActivity;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (mActivityView == null) {
-            mActivityView = createView();
-        }
+        // 自动绑定
         if (mBaseResister == null) {
-            mBaseResister = createProsenter();
+            mBaseResister = createPresenter();
         }
     }
 
+    /**
+     * 跟 Activity 的接口绑定
+     * @param context
+     */
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         logActivity = (LogActivity) context;
     }
 
+    /**
+     * 获得 Activity 接口
+     * @return
+     */
     public LogActivity getLogActivity() {
         return logActivity;
     }
 
-    public void setLogActivity(LogActivity logActivity) {
-        this.logActivity = logActivity;
-    }
+    /**
+     * 在这里确定要生成的 Presenter 对象类型
+     * @return
+     */
+    public abstract P createPresenter();
 
-    public abstract V createView();
-
-    public abstract P createProsenter();
-
+    /**
+     * 获得 Presenter 对象
+     * @return
+     */
     public P getPresenter() {
         if (mBaseResister == null) {
-            createProsenter();
+            createPresenter();
         }
         return mBaseResister;
     }
 
+    /**
+     * 碎片销毁时解绑
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mBaseResister = null;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 }
