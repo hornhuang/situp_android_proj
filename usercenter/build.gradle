@@ -1,22 +1,27 @@
-if (LOGIN_IS_APPLICATION.toBoolean()) {
+if (LOGIN_IS_APPLICATION) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
 }
 
+def cfg    = rootProject.ext.android
+def appId  = rootProject.ext.appId
+def java_8 = JavaVersion.VERSION_1_8
+
 android {
-    compileSdkVersion 29
-    buildToolsVersion BUILD_TOOLS_VERSION
+    compileSdkVersion cfg.COMLIER_SDK_VERSION
+    buildToolsVersion cfg.BUILD_TOOLS_VERSION
 
     defaultConfig {
-        if (LOGIN_IS_APPLICATION.toBoolean()) {
-            applicationId "com.fishinwater.login"
+        if (LOGIN_IS_APPLICATION) {
+            applicationId appId["user"]
         }
-        minSdkVersion MIN_SDK_VERSION.toInteger()
-        targetSdkVersion TAR_SDK_VERSION.toInteger()
-        versionCode 1
-        versionName "1.0.3"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        minSdkVersion cfg.MIN_SDK_VERSION
+        targetSdkVersion cfg.TAR_SDK_VERSION
+        versionCode cfg.VERSION_CODE
+        versionName cfg.VERSION_NAME
+
+        testInstrumentationRunner cfg.testInstrumentationRunner
 
         // ARouter
         javaCompileOptions {
@@ -36,7 +41,7 @@ android {
     // 配置 Manifest
     sourceSets {
         main {
-            if (LOGIN_IS_APPLICATION.toBoolean()) {
+            if (LOGIN_IS_APPLICATION) {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
