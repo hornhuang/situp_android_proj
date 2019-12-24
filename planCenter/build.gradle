@@ -4,23 +4,25 @@ if (PLAN_IS_APPLICATION.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 
+def cfg    = rootProject.ext.android
+def appId  = rootProject.ext.appId
 def java_8 = JavaVersion.VERSION_1_8
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion cfg.COMLIER_SDK_VERSION
+    buildToolsVersion cfg.BUILD_TOOLS_VERSION
 
 
     defaultConfig {
         if (PLAN_IS_APPLICATION.toBoolean()) {
-            applicationId "com.fishinwater.plan"
+            applicationId appId["plan"]
         }
-        minSdkVersion MIN_SDK_VERSION.toInteger()
-        targetSdkVersion TAR_SDK_VERSION.toInteger()
-        versionCode 1
-        versionName "1.0.2"
+        minSdkVersion cfg.MIN_SDK_VERSION
+        targetSdkVersion cfg.TAR_SDK_VERSION
+        versionCode cfg.VERSION_CODE
+        versionName cfg.VERSION_NAME
+        testInstrumentationRunner cfg.testInstrumentationRunner
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
 
         // ARouter
