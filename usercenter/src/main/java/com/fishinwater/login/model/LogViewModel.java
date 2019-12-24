@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author fishinwater-1999
  * @version 2019-11-12
  */
-public class LogViewModel extends ViewModel implements IBaseLog<IBaseRetCallback<UserBean>, IBaseRetCallback<String>> {
+public class LogViewModel implements IBaseLog<IBaseRetCallback<UserBean>, IBaseRetCallback<String>> {
 
     private final String TAG = "LogViewModel";
 
