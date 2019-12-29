@@ -7,7 +7,7 @@
 ![okhttp3 3.12.1](https://img.shields.io/badge/okhttp3-3.12.1-blue.svg?style=flat)
 ![glide 4.9.0](https://img.shields.io/badge/glide-4.9.0-green.svg?style=flat)
 
-[中文文档](https://github.com/FishInWater-1999/FIWKeepApp/edit/master/README.md)
+[English Document](https://github.com/FishInWater-1999/FIWKeepApp/edit/master/README.md)
 
 Situp 是一个计划日志 App，它不仅拥有完整的计划制定、发布、打分功能，同时还拥有自己的社区。用户既可以制定自己的日程，还可以向世界分享自己的感受。
 
