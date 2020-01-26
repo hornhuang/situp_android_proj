@@ -15,7 +15,7 @@ With the progress of science and technology and the popularity of the Internet, 
 
 Due to college students' free and flexible spare time, most of them use their time mainly in the aspects of associations, organizations, games or learning, which makes the time arrangement not reasonable and scientific and ignores the improvement of their physical quality.Therefore, based on the current situation, SitUp implements the calendar punch plan to train users to form good fitness habits.
 
-# Effect sgraphic
+# Effect sgraphic 
 #### Fingerprints and check-in
 ![指纹](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/Dec-23-2019%2009-24-30.gif)
 ![签到](https://github.com/FishInWater-1999/PictureRepository/blob/master/FIWKeepApp/Dec-23-2019%2009-25-13.gif)
