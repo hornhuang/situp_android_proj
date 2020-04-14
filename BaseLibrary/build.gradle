@@ -50,8 +50,6 @@ dependencies {
 
     // material design
     api 'com.google.android.material:material:1.0.0'
-    // material design
-    api 'com.google.android.material:material:1.0.0'
     // Tinker 热修复
     api("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
     // Maven local cannot handle transist dependencies.

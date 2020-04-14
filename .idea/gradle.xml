@@ -13,8 +13,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/App" />
             <option value="$PROJECT_DIR$/BaseLibrary" />
+            <option value="$PROJECT_DIR$/PlanCenter" />
             <option value="$PROJECT_DIR$/Provider" />
-            <option value="$PROJECT_DIR$/planCenter" />
             <option value="$PROJECT_DIR$/postcenter" />
             <option value="$PROJECT_DIR$/tinker" />
             <option value="$PROJECT_DIR$/usercenter" />

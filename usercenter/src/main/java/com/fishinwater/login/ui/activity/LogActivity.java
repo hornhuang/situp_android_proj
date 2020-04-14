@@ -14,6 +14,12 @@ import com.fishinwater.login.callback.ILogCallback;
 import com.fishinwater.login.ui.fragment.login.LoginFragment;
 import com.fishinwater.login.ui.fragment.resist.ResistFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
+
 /**
  * 登录注册功能
  *
